@@ -24,4 +24,35 @@
 
 
 
-})
+    
+drawMap = function() {
+
+        for (let index = 0; index < map.length; index +=1) {
+            buffer.fillStyle = (map[index] == 1)?"#000000":"#ffffff";
+            buffer.fillRect((index % 16) * size, Math.floor(index/16) * size, size, size);
+        }
+
+        context.drawImage(buffer.canvas, 0, 0, buffer.canvas.width, buffer.canvas.height, 0, 0, context.canvas.width, context.canvas.height);
+
+    };
+
+resize = function(event) {
+    context.canvas.width = Math.floor(document.documentElement.clientWidth - 32);
+
+    if (context.canvas.width > document.documentElement.clientHeight) {
+
+        context.canvas.width = Math.floor(document.documentElement.clientHeight);
+
+    }
+
+    context.canvas.height = Math.floor(context.canvas.width * 0.5625);
+
+    drawMap();
+};
+
+window.addEventListener("resize", resize, {passive:true});
+
+resize();
+
+
+})();
