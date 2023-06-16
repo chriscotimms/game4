@@ -28,6 +28,12 @@
   
   }
   
+  p{
+    padding:0;
+    height:100px;
+    font-size:1.25em;
+  }
+
   canvas {
   
     background-color:#ffffff;
