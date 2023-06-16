@@ -16,42 +16,22 @@ class Overworld {
         image.src = "./images/maps/DemoLower.png" //map src
 
         //odVar
-        const x = 5;
-        const y = 6;
+        const odVar = new GameObject({
+            x:5,
+            y:6,
+        })
 
-        const shadow = new Image();
-        shadow.onload = () => {
-            this.ctx.drawImage(
-                shadow, //variable name
-                0, //starting points of left and top cut
-                0, //starting points of left and top cut
-                32,//pixel width of cut
-                32,//pixel height of cut
-                x * 16 -8,//position to draw image
-                y * 16 -18, //position to draw image
-                32,//width of image, change to skew
-                32 //height of image
-                );
-        }
-        shadow.src = "./images/characters/shadow.png";
+        //test other char
+        const npc1 = new GameObject({
+            x:7,
+            y:4,
+            src:"./images/characters/people/npc1.png"
+        })
 
-        const odVar = new Image();
-        odVar.onload = () => {
-            this.ctx.drawImage(
-                odVar, //variable name
-                0, //starting points of left and top cut
-                0, //starting points of left and top cut
-                32,//pixel width of cut
-                32,//pixel height of cut
-                x * 16 -8,//position to draw image
-                y * 16 -18, //position to draw image
-                32,//width of image, change to skew
-                32 //height of image
-                );
-        }
-        odVar.src = "./images/characters/people/hero.png"; //odVar src
-
-
+    setTimeout(() => {
+    odVar.sprite.draw(this.ctx);
+    npc1.sprite.draw(this.ctx);
+}, 200);
 
     }//end of Init
 
