@@ -1,10 +1,10 @@
 ///working speech synthesis
 var phrase = "NO TRACE ANYWHERE OF LIFE, you say, pah, no difficulty there, imagination not dead yet, yes, dead, good, imagination dead imagine.";
-var phrase2 = "Islands, waters, azure, verdure, one glimpse and vanished, endlessly, omit. Till all white in the whiteness the rotunda. ";
+var phrase2 = "and remember....I am not a free, I am not man, a number!";
 
    function speakPhrase() {
    
-        var speech = new SpeechSynthesisUtterance(phrase);
+        var speech = new SpeechSynthesisUtterance(phrase2);
         var voices = window.speechSynthesis.getVoices();
         speech.default = false;
         speech.pitch = 0.2;
