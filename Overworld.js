@@ -50,7 +50,7 @@ startGameLoop(){
 init() {
 
     this.map = new OverWorldMap(window.OverWorldMaps.DemoRoom);
-    console.log(this.map.walls);
+    this.map.mountObjects();
 
     this.directionInput = new DirectionInput();
     this.directionInput.init();

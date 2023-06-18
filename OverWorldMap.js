@@ -32,6 +32,38 @@ class OverWorldMap {
         return this.walls[`${x},${y}`] || false;
     }
 
+
+    mountObjects() {
+        Object.values(this.gameObject).forEach(o => {
+
+            //todo: determine if object should mount
+
+            o.mount(this);
+
+        })
+    }
+
+
+
+    //if gameObject (say npc) enters scene, create a wall object for them
+    addWall(x,y){
+        this.walls[`${x},${y}`] = true;
+    }
+
+    //or remove if they go
+    removeWall(x,y){
+        delete this.walls[`${x},${y}`]
+    }
+
+    //or move if they move
+    moveWall(wasX, wasY, direction) {
+        this.removeWall(wasX, wasY);
+        const {x, y} = utils.nextPosition(wasX, wasY, direction);
+        this.addWall(x,y);
+    }
+
+
+
 }// end of OverWorldMap class
 
 window.OverWorldMaps = {
