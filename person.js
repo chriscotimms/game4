@@ -16,43 +16,66 @@ class Person extends GameObject {
 
 
     update(state){
+        if (this.movingProgressRemaining > 0) {
         this.updatePosition();
-        this.updateSprite(state);
+        } else { 
 
-        if (this.isPlayerControlled && this.movingProgressRemaining === 0 && state.arrow) {
-            this.direction = state.arrow;
-            console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
-            this.movingProgressRemaining = 16;
+            //more cases for starting to walk will come here
+            //
+            //
+
+
+
+            // Case: we're keyboard ready and have an arrow pressed
+            if (this.isPlayerControlled && state.arrow) {
+                this.startBehaviour(state, {
+                    type: "walk",
+                    direction: state.arrow
+                });
+            }
+            this.updateSprite(state);
         }
+        
+
+
     }//end of update
 
 
+    startBehaviour(state, behaviour) {
+        // Set character direction to whatever behaviour paths
+        this.direction = behaviour.direction;
+
+        if (behaviour.type === "walk") {
+
+            //Stope here if space not free
+            if (state.map.isSpaceTaken(this.x, this.y, this.direction)){
+                return;
+            }
+            //ready to walk
+            this.movingProgressRemaining = 16;
+        }
+    }
+
+
     updatePosition(){
-        if (this.movingProgressRemaining > 0) {
+        
             const [property, change] = this.directionUpdate[this.direction];
             this[property] += change;
             this.movingProgressRemaining -= 1;
-        }
+        
     }//end of updatePosition
 
 
-    updateSprite(state){
-
-        if (this.isPlayerControlled && this.movingProgressRemaining === 0 && !state.arrow){
-        this.sprite.setAnimation("idle-"+this.direction);
-        return;
-        }
+    updateSprite(){
 
         if (this.movingProgressRemaining > 0){
             this.sprite.setAnimation("walk-"+this.direction);
+            return;
         }
-        
+        this.sprite.setAnimation("idle-"+this.direction);
+
     }//end of updateSprite
    
-
-
-
-
 
 
 }//end of person class
