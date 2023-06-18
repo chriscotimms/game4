@@ -15,19 +15,27 @@ startGameLoop(){
         //clear canvas
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
 
-        //draw lower layer
-        this.map.drawLowerImage(this.ctx);
+        //Establish a camera person to follow
+        const cameraPerson = this.map.gameObject.odVar;
 
-        //Draw game objects
+        //Update all objects
         Object.values(this.map.gameObject).forEach(object => {
             object.update({
                 arrow: this.directionInput.direction,
-            });
-            object.sprite.draw(this.ctx);
+                map: this.map,
+            })
+        })
+
+        //draw lower layer
+        this.map.drawLowerImage(this.ctx, cameraPerson);
+
+        //Draw game objects
+        Object.values(this.map.gameObject).forEach(object => {
+            object.sprite.draw(this.ctx, cameraPerson);
         })
 
         //draw upper layer
-        this.map.drawUpperImage(this.ctx);
+        this.map.drawUpperImage(this.ctx, cameraPerson);
 
         requestAnimationFrame(() => {
             step();
@@ -37,9 +45,12 @@ startGameLoop(){
 }//end of game loop
 
 
+
+//this loads everything! map, walls, direction, gameloop
 init() {
 
     this.map = new OverWorldMap(window.OverWorldMaps.DemoRoom);
+    console.log(this.map.walls);
 
     this.directionInput = new DirectionInput();
     this.directionInput.init();
