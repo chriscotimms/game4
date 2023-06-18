@@ -48,7 +48,13 @@ class Sprite {
 
 
 
-    
+    setAnimation(key){
+        if (this.currentAnimation !== key) {
+            this.currentAnimation = key;//interupt animation to overide with new input key
+            this.currentAnimationFrame = 0;//reset animation progress to 0
+            this.animationFrameProgress = this.animationFrameLimit;
+        }
+    }// end setAnimation
 
 
 
