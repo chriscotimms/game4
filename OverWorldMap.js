@@ -25,15 +25,16 @@ window.OverWorldMaps = {
         lowerSrc: "./images/maps/DemoLower.png",
         upperSrc: "./images/maps/DemoUpper.png",
         gameObjects: { //is called in Overworld.js Init game loop
-        odVar: new GameObject({
-            x: 5,
-            y: 6,
+        odVar: new Person({
+            isPlayerControlled: true,
+            x: utils.withGrid(5),
+            y: utils.withGrid(6),
         }),
-        npc1: new GameObject({
-            x: 0,
-            y: 0,
+         npc1: new Person({
+            x: utils.withGrid(8),
+            y: utils.withGrid(9),
             src: "./images/characters/people/npc1.png"
-        })
+        }) 
         }//end of gameObjects
     },//end of DemoRoom
 
