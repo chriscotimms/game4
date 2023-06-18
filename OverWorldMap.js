@@ -30,11 +30,12 @@ window.OverWorldMaps = {
             x: utils.withGrid(5),
             y: utils.withGrid(6),
         }),
-        /*  npc1: new Person({
+          npc1: new Person({
+            isPlayerControlled: false,
             x: utils.withGrid(8),
             y: utils.withGrid(9),
             src: "./images/characters/people/npc1.png"
-        })  */
+        })  
         }//end of gameObjects
     },//end of DemoRoom
 

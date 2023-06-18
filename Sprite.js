@@ -21,9 +21,9 @@ class Sprite {
         //configure animations and inital state
         this.animations = config.animations || {
             "idle-down":[ [0,0] ],
-            "idle-down":[ [0,1] ],
-            "idle-down":[ [0,2] ],
-            "idle-down":[ [0,3] ],
+            "idle-right":[ [0,1] ],
+            "idle-up":[ [0,2] ],
+            "idle-left":[ [0,3] ],
             "walk-down": [ [1,0],[0,0],[3,0],[0,0] ],
             "walk-right": [ [1,1],[0,1],[3,1],[0,1] ],
             "walk-up": [ [1,2],[0,2],[3,2],[0,2] ],
@@ -31,10 +31,10 @@ class Sprite {
         }//end this.animations
 
         //var config.currentAnimation or else default to idledown
-        this.currentAnimation = config.currentAnimation || "walk-up";
+        this.currentAnimation = config.currentAnimation || "idle-down";
         this.currentAnimationFrame = 0;
 
-        this.animationFrameLimit = config.animationFrameLimit || 16;
+        this.animationFrameLimit = config.animationFrameLimit || 4;//set speed of animationg sprite
         this.animationFrameProgress = this.animationFrameLimit;
 
         //reference the game object
@@ -43,7 +43,7 @@ class Sprite {
 
 
     get frame() {
-        return this.animations[this.currentAnimation][this.currentAnimationFrame];
+        return this.animations[this.currentAnimation][this.currentAnimationFrame]
     }
 
 
