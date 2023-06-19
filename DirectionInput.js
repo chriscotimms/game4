@@ -15,7 +15,7 @@ class DirectionInput {
 
     }//end constructor
 
-
+    
     //retrieve direction being held - might be useful for increasing accessibility!
     get direction() {
         return this.heldDirections[0];

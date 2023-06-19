@@ -16,10 +16,10 @@ startGameLoop(){
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
 
         //Establish a camera person to follow
-        const cameraPerson = this.map.gameObject.odVar;
+        const cameraPerson = this.map.gameObjects.odVar;
 
         //Update all objects
-        Object.values(this.map.gameObject).forEach(object => {
+        Object.values(this.map.gameObjects).forEach(object => {
             object.update({
                 arrow: this.directionInput.direction,
                 map: this.map,
@@ -30,7 +30,7 @@ startGameLoop(){
         this.map.drawLowerImage(this.ctx, cameraPerson);
 
         //Draw game objects
-        Object.values(this.map.gameObject).forEach(object => {
+        Object.values(this.map.gameObjects).forEach(object => {
             object.sprite.draw(this.ctx, cameraPerson);
         })
 

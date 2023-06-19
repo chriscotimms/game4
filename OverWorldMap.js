@@ -1,7 +1,10 @@
+//gameobjects.js objects are created here, the actual data which calls on class objects to construct
+
 class OverWorldMap {
 
     constructor(config) {
-        this.gameObject = config.gameObjects;
+
+        this.gameObjects = config.gameObjects;
         this.walls = config.walls || {};
 
         this.lowerImage = new Image();
@@ -9,36 +12,47 @@ class OverWorldMap {
 
         this.upperImage = new Image();
         this.upperImage.src = config.upperSrc;
-    }// end of cronstructor
 
-    drawLowerImage(ctx, cameraPerson) { // this is called in Init game loop
+        this.isCutscenePlaying = false;
+
+    }// end of constructor
+
+
+
+    // this is called in Init game loop
+    drawLowerImage(ctx, cameraPerson) { 
         ctx.drawImage(
             this.lowerImage, 
+            //offset map to follow central characters movements
             utils.withGrid(10.5) - cameraPerson.x, 
             utils.withGrid(6) - cameraPerson.y
             )
     }
 
-    drawUpperImage(ctx, cameraPerson) { // this is called in Init game loop
+    // this is called in Init game loop
+    drawUpperImage(ctx, cameraPerson) { 
         ctx.drawImage(
             this.upperImage, 
+            //offset map to follow central characters movements
             utils.withGrid(10.5) - cameraPerson.x, 
             utils.withGrid(6) - cameraPerson.y
             )
     }
 
+    //collision detection establishing function
     isSpaceTaken(currentX, currentY, direction){
         const {x,y} = utils.nextPosition(currentX, currentY, direction);
         return this.walls[`${x},${y}`] || false;
     }
 
-
+    //loads collisions conditionals to all objects
     mountObjects() {
-        Object.values(this.gameObject).forEach(o => {
+        Object.keys(this.gameObjects).forEach(key => {
 
-            //todo: determine if object should mount
+            let object = this.gameObjects[key];
+            object.id = key;
 
-            o.mount(this);
+            object.mount(this);
 
         })
     }
@@ -58,14 +72,17 @@ class OverWorldMap {
     //or move if they move
     moveWall(wasX, wasY, direction) {
         this.removeWall(wasX, wasY);
-        const {x, y} = utils.nextPosition(wasX, wasY, direction);
+        const {x,y} = utils.nextPosition(wasX, wasY, direction);
         this.addWall(x,y);
     }
 
 
-
 }// end of OverWorldMap class
 
+
+
+
+//actual map objects, ie this.map.gameObjects.odVar.x
 window.OverWorldMaps = {
     DemoRoom: {
         lowerSrc: "./images/maps/DemoLower.png",
@@ -76,12 +93,35 @@ window.OverWorldMaps = {
             x: utils.withGrid(5),
             y: utils.withGrid(6),
         }),
-          npc1: new Person({
+        npcA: new Person({
             isPlayerControlled: false,
             x: utils.withGrid(8),
             y: utils.withGrid(9),
-            src: "./images/characters/people/npc1.png"
-        })  
+            src: "./images/characters/people/npc1.png",
+            behaviourLoop: [
+                { type:"stand", direction:"left", time:800 },
+                { type:"walk", direction:"left" },
+                { type:"stand", direction:"down", time:800 },
+                { type:"walk", direction:"up" },
+                { type:"walk", direction:"right" },
+                { type:"stand", direction:"right", time:800 },
+                { type:"walk", direction:"down" },
+            ]
+        }),  
+        npcB: new Person({
+            isPlayerControlled: false,
+            x: utils.withGrid(3),
+            y: utils.withGrid(6),
+            src: "./images/characters/people/npc2.png",
+            behaviourLoop: [
+                { type:"walk", direction:"left" },
+                { type:"stand", direction:"down", time:800 },
+                { type:"walk", direction:"up" },
+                { type:"walk", direction:"right" },
+                { type:"walk", direction:"down" },
+            ]
+        }), 
+
         },//end of gameObjects
         walls:{
             [utils.asGridCoord(7,6)]:true,
