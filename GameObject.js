@@ -1,83 +1,63 @@
-//the overall class game object. 
-//When sprites get initiaialised they call this class.
-
 class GameObject {
-    constructor(config) {//can pass variable info if needed via config.x, config.src, etc
-        this.id = null;//so every significant object can be called
-        this.isMounted = false;//add empty boolean for collision check
-        this.x = config.x || 0;//start co-ordinates
-        this.y = config.y || 0;//start co-ordinates
-        this.direction = config.direction || "down";//start direction
-        this.sprite = new Sprite({
-            gameObject: this,
-            src:config.src || "./images/characters/people/hero.png",
-        });
-        this.behaviourLoop = config.behaviourLoop || [];
-        this.behaviourLoopIndex = 0;
-
-        this.talking = config.talking || [];
-
-
-    }//end of constructor
-
-
-
-
-
-
-
-    //adds collisons
-    mount(map){
-        console.log("mounting");
-        this.isMounted = true;
-        map.addWall(this.x, this.y);
-
-
-        //If we have a behaviour, kick off after a short delay
-        setTimeout(() => {
-            this.doBehaviourEvent(map);
-        }, 10)
-
-
-    }//end of mount
-
-
- 
-
+    constructor(config) {
+      this.id = null;
+      this.isMounted = false;
+      this.x = config.x || 0;
+      this.y = config.y || 0;
+      this.direction = config.direction || "down";
+      this.sprite = new Sprite({
+        gameObject: this,
+        src: config.src || "./images/characters/people/hero.png",
+      });
+  
+      this.behaviorLoop = config.behaviorLoop || [];
+      this.behaviorLoopIndex = 0;
+  
+      this.talking = config.talking || [];
+  
+    }
+  
+    mount(map) {
+      console.log("mounting!")
+      this.isMounted = true;
+      map.addWall(this.x, this.y);
+  
+      //If we have a behavior, kick off after a short delay
+      setTimeout(() => {
+        this.doBehaviorEvent(map);
+      }, 10)
+    }
+  
     update() {
     }
-
-    //first asynchronous function!! instantiated by "async" id before function name
-    //"await" below will pause rest of function until "init()" has completed
-    async doBehaviourEvent(map) {
-
-        if (map.isCutscenePlaying || this.behaviourLoop.length === 0 || this.isStanding) {
-            return;
-        }
-
-        //setting up info
-        let eventConfig = this.behaviourLoop[this.behaviourLoopIndex];
-        //dynamically establish id assiging behaviour
-        eventConfig.who = this.id;
-
-        //call OverworldEvent class for game events
-        const eventHandler = new OverworldEvent({ map, event: eventConfig });
-        await eventHandler.init();
-
-        //progress behaviour index
-        this.behaviourLoopIndex += 1;
-
-        //looping through index of behaviour
-        if (this.behaviourLoopIndex === this.behaviourLoop.length){
-            this.behaviourLoopIndex = 0;
-        }
-
-        //call next round of function / loop
-        this.doBehaviourEvent(map);
-
-    }//end doBehaviourEvent
-
-
-
-
-}//end of game object
+  
+    async doBehaviorEvent(map) { 
+  
+      //Don't do anything if there is a more important cutscene or I don't have config to do anything
+      //anyway.
+      if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
+        return;
+      }
+  
+      //Setting up our event with relevant info
+      let eventConfig = this.behaviorLoop[this.behaviorLoopIndex];
+      eventConfig.who = this.id;
+  
+      //Create an event instance out of our next event config
+      const eventHandler = new OverworldEvent({ map, event: eventConfig });
+      await eventHandler.init(); 
+  
+      //Setting the next event to fire
+      this.behaviorLoopIndex += 1;
+      if (this.behaviorLoopIndex === this.behaviorLoop.length) {
+        this.behaviorLoopIndex = 0;
+      } 
+  
+      //Do it again!
+      this.doBehaviorEvent(map);
+      
+  
+    }
+  
+  
+  }
