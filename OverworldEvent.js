@@ -26,7 +26,6 @@ class OverworldEvent {
     }
 
 
-
     walk(resolve){
         const who = this.map.gameObjects[ this.event.who ];
         who.startBehaviour({
@@ -50,11 +49,10 @@ class OverworldEvent {
     }//end walk
 
 
-
     textMessage(resolve) {
 
         if (this.event.faceHero) {
-            const obj = this.gameObjects[this.event.faceHero];
+            const obj = this.map.gameObjects[this.event.faceHero];
             obj.direction = utils.oppositeDirection(this.map.gameObjects["odVar"].direction);
         }
 
@@ -66,6 +64,10 @@ class OverworldEvent {
     }
 
 
+    changeMap(resolve) {
+        this.map.overworld.startMap( window.OverworldMaps[this.event.map] );
+        resolve();
+    }
 
     init() {
         return new Promise(resolve => {

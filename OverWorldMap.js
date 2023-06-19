@@ -1,9 +1,9 @@
 //gameobjects.js objects are created here, the actual data which calls on class objects to construct
 
-class OverWorldMap {
+class OverworldMap {
 
     constructor(config) {
-
+        this.overworld = null;
         this.gameObjects = config.gameObjects;
         this.cutsceneSpaces = config.cutsceneSpaces || {};
         this.walls = config.walls || {};
@@ -136,7 +136,7 @@ checkForFootstepCutscene() {
 
 
 //actual map objects, ie this.map.gameObjects.odVar.x
-window.OverWorldMaps = {
+window.OverworldMaps = {
     DemoRoom: {
         lowerSrc: "./images/maps/DemoLower.png",
         upperSrc: "./images/maps/DemoUpper.png",
@@ -163,8 +163,8 @@ window.OverWorldMaps = {
             talking: [
                 {
                    events: [
-                    {type: "textMessage", text:"what do you want?", faceOdVar:"npc1"},
-                    {type: "textMessage", text:"I'm busy with my toil, go away!"},
+                    { type: "textMessage", text: "what do you want?", faceHero: "npcA" },
+                    { type: "textMessage", text: "I'm busy with my toil, go away!" },
                     { who:"odVar", type:"walk", direction:"left" },
                    ] 
                 }
@@ -185,6 +185,7 @@ window.OverWorldMaps = {
         }), 
 
         },//end of gameObjects
+        //wall co-ordinates in this map
         walls:{
             [utils.asGridCoord(7,6)]:true,
             [utils.asGridCoord(8,6)]:true,
@@ -197,35 +198,46 @@ window.OverWorldMaps = {
                 events:[
                     { who:"npcB", type:"walk", direction:"left" },
                     { who:"npcB", type:"stand", direction:"up", time:500 },
-                    { type:"textMessage", text:"You can't be in there!"},
+                    { type:"textMessage", text:"You can't be in there!", faceHero:"npcA"},
                     { who:"npcB", type:"stand", direction:"up", time:500 },
                     { who:"npcB", type:"walk", direction:"right" },
                     { who:"odVar", type:"walk", direction:"down" },
                 
-                ]
+                    ]
+                }
+            ],
+            [utils.asGridCoord(5,10)]:[
+                {
+                    events:[
+                        { type:"changeMap", map:"Kitchen" }
+                    ]
                 }
             ]
-        }
+        }//end cutsceneSpaces 
     },//end of DemoRoom
 
     Kitchen: {
         lowerSrc: "./images/maps/KitchenLower.png",
         upperSrc: "./images/maps/KitchenUpper.png",
         gameObjects: {
-        odVar: new GameObject({
-            x: 3,
-            y: 1,
+        odVar: new Person({
+            isPlayerControlled: true,
+            x: utils.withGrid(5),
+            y: utils.withGrid(5),
         }),
-        npc2: new GameObject({
-            x: 9,
-            y: 9,
-            src: "./images/characters/people/npc2.png"
-        }),
-        npc3: new GameObject({
-            x: 4,
-            y: 10,
-            src: "./images/characters/people/npc3.png"
-        })
+        npcB: new Person({
+            isPlayerControlled: false,
+            x: utils.withGrid(10),
+            y: utils.withGrid(8),
+            src: "./images/characters/people/npc3.png",
+            talking:[
+                {
+                    events:[
+                        { type: "textMessage", text:"You Made it!", faceHero:"npcB"},
+                    ]
+                }
+            ]
+        })//end npcB
         }//end of gameObjects
     },//end of DemoRoom
 

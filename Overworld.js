@@ -66,12 +66,17 @@ bindHeroPositionCheck() {
 };
 
 
+startMap(mapConfig) {
+    this.map = new OverworldMap(mapConfig);
+    this.map.overworld = this;
+    this.map.mountObjects();
+}
+
 
 //this loads everything! map, walls, direction, gameloop
 init() {
 
-    this.map = new OverWorldMap(window.OverWorldMaps.DemoRoom);
-    this.map.mountObjects();
+    this.startMap(window.OverworldMaps.DemoRoom);
 
     this.bindActionInput();
     this.bindHeroPositionCheck();
