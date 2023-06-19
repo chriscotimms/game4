@@ -49,19 +49,39 @@ startGameLoop(){
 
 
 
+bindActionInput() {
+    new KeyPressListener("Enter", () => {
+        //is there someone to talk to?
+        this.map.checkForActionCutscene()
+    })
+}
+
+
+bindHeroPositionCheck() {
+    document.addEventListener("PersonWalkingComplete", e => {
+        if (e.detail.whoId === "odVar") {
+            this.map.checkForFootstepCutscene();
+        }
+    })
+};
+
+
+
 //this loads everything! map, walls, direction, gameloop
 init() {
 
     this.map = new OverWorldMap(window.OverWorldMaps.DemoRoom);
     this.map.mountObjects();
 
+    this.bindActionInput();
+    this.bindHeroPositionCheck();
+
     this.directionInput = new DirectionInput();
     this.directionInput.init();
 
     this.startGameLoop();
 
-    this.map.startCutscene([
-        
+    /* this.map.startCutscene([
         { who:"odVar", type:"walk", direction:"down" },
         { who:"odVar", type:"walk", direction:"down" },
         { who:"odVar", type:"walk", direction:"left" },
@@ -70,9 +90,8 @@ init() {
         { who:"npcA", type:"walk", direction:"left" },
         { who:"npcA", type:"walk", direction:"left" },
         { who:"odVar", type:"stand", direction:"right", time: 100 },
-        {type: "textMessage", text:"Hello There!"},
-         
-    ]);
+        {type: "textMessage", text:"Hello There!"}, 
+    ]); */
         
     }//end of Init
 

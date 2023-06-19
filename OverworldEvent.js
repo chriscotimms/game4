@@ -50,7 +50,14 @@ class OverworldEvent {
     }//end walk
 
 
+
     textMessage(resolve) {
+
+        if (this.event.faceHero) {
+            const obj = this.gameObjects[this.event.faceHero];
+            obj.direction = utils.oppositeDirection(this.map.gameObjects["odVar"].direction);
+        }
+
         const message = new TextMessage({
             text: this.event.text,
             onComplete: () => resolve()
@@ -59,12 +66,10 @@ class OverworldEvent {
     }
 
 
+
     init() {
         return new Promise(resolve => {
             this[this.event.type](resolve)
         })
     }
-
-
-
 }//end of OverworldEvent

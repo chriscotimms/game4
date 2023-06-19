@@ -5,6 +5,7 @@ class OverWorldMap {
     constructor(config) {
 
         this.gameObjects = config.gameObjects;
+        this.cutsceneSpaces = config.cutsceneSpaces || {};
         this.walls = config.walls || {};
 
         this.lowerImage = new Image();
@@ -13,7 +14,7 @@ class OverWorldMap {
         this.upperImage = new Image();
         this.upperImage.src = config.upperSrc;
 
-        this.isCutscenePlaying = true;
+        this.isCutscenePlaying = false;
 
     }// end of constructor
 
@@ -60,7 +61,7 @@ class OverWorldMap {
 
 
 async startCutscene(events) {
-        this.isCutscenePLaying = true;
+        this.isCutscenePlaying = true;
 
         for (let i = 0; i<events.length; i += 1) {
             const eventHandler = new OverworldEvent({
@@ -76,8 +77,38 @@ async startCutscene(events) {
         // reset npc's to do their idle behaviour
         Object.values(this.gameObjects).forEach(object => object.doBehaviourEvent(this))
 
-
     }//end of startCutscene
+
+
+
+
+
+//checking for actionCutscenes
+checkForActionCutscene() {
+    const odVar = this.gameObjects["odVar"];
+    const nextCoords = utils.nextPosition(odVar.x, odVar.y, odVar.direction);
+    const match = Object.values(this.gameObjects).find(object => {
+        return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`;
+    });
+    if (!this.isCutscenePLaying && match && match.talking.length) {
+        this.startCutscene(match.talking[0].events);
+    }
+}
+
+
+//checking for if character steps into area intiating cutscene
+checkForFootstepCutscene() {
+    const odVar = this.gameObjects["odVar"];
+    const match = this.cutsceneSpaces[ `${odVar.x},${odVar.y}` ];
+    console.log({match});
+    if (!this.isCutscenePlaying && match){ 
+        this.startCutscene(match[0].events);
+    }
+}
+
+
+
+
 
 
 
@@ -128,20 +159,29 @@ window.OverWorldMaps = {
                 { type:"walk", direction:"right" },
                 { type:"stand", direction:"right", time:800 },
                 { type:"walk", direction:"down" },
+            ],
+            talking: [
+                {
+                   events: [
+                    {type: "textMessage", text:"what do you want?", faceOdVar:"npc1"},
+                    {type: "textMessage", text:"I'm busy with my toil, go away!"},
+                    { who:"odVar", type:"walk", direction:"left" },
+                   ] 
+                }
             ]
         }),  
         npcB: new Person({
             isPlayerControlled: false,
-            x: utils.withGrid(3),
-            y: utils.withGrid(6),
+            x: utils.withGrid(8),
+            y: utils.withGrid(5),
             src: "./images/characters/people/npc2.png",
-            behaviourLoop: [
+            /* behaviourLoop: [
                 { type:"walk", direction:"left" },
                 { type:"stand", direction:"down", time:800 },
                 { type:"walk", direction:"up" },
                 { type:"walk", direction:"right" },
                 { type:"walk", direction:"down" },
-            ]
+            ] */
         }), 
 
         },//end of gameObjects
@@ -150,6 +190,21 @@ window.OverWorldMaps = {
             [utils.asGridCoord(8,6)]:true,
             [utils.asGridCoord(7,7)]:true,
             [utils.asGridCoord(8,7)]:true,
+        },
+        cutsceneSpaces:{
+            [utils.asGridCoord(7,4)]: [
+                {
+                events:[
+                    { who:"npcB", type:"walk", direction:"left" },
+                    { who:"npcB", type:"stand", direction:"up", time:500 },
+                    { type:"textMessage", text:"You can't be in there!"},
+                    { who:"npcB", type:"stand", direction:"up", time:500 },
+                    { who:"npcB", type:"walk", direction:"right" },
+                    { who:"odVar", type:"walk", direction:"down" },
+                
+                ]
+                }
+            ]
         }
     },//end of DemoRoom
 
