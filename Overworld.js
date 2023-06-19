@@ -61,6 +61,7 @@ init() {
     this.startGameLoop();
 
     this.map.startCutscene([
+        
         { who:"odVar", type:"walk", direction:"down" },
         { who:"odVar", type:"walk", direction:"down" },
         { who:"odVar", type:"walk", direction:"left" },
@@ -68,11 +69,11 @@ init() {
         { who:"npcA", type:"walk", direction:"left" },
         { who:"npcA", type:"walk", direction:"left" },
         { who:"npcA", type:"walk", direction:"left" },
-        { who:"odVar", type:"stand", direction:"right" },
-    ])
+        { who:"odVar", type:"stand", direction:"right", time: 100 },
+        {type: "textMessage", text:"Hello There!"},
+         
+    ]);
         
     }//end of Init
-
-
 
 }//end of Overworld class

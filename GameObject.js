@@ -42,7 +42,7 @@ class GameObject {
     //"await" below will pause rest of function until "init()" has completed
     async doBehaviourEvent(map) {
 
-        if (map.isCutscenePlaying || this.behaviourLoop.length === 0) {
+        if (map.isCutscenePlaying || this.behaviourLoop.length === 0 || this.isStanding) {
             return;
         }
 

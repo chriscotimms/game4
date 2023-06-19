@@ -3,6 +3,7 @@ class Person extends GameObject {
     constructor(config) {
         super(config);
         this.movingProgressRemaining = 0;//hard coded values here if needed
+        this.isStanding = false;//to handle a bug to not double stand actions
 
         this.isPlayerControlled = config.isPlayerControlled || false;
         
@@ -66,10 +67,12 @@ class Person extends GameObject {
         }
 
         if (behaviour.type === "stand") {
+            this.isStanding = true;
             setTimeout(() => {
                 utils.emitEvent("PersonStandComplete", {
                     whoId: this.id
                 });
+                this.isStanding = false;
             }, behaviour.time)
         }
 

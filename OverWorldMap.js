@@ -70,7 +70,7 @@ async startCutscene(events) {
             await eventHandler.init();
         }
 
-
+        //switch cutscene boolean to allow other behaviours to continue
         this.isCutscenePlaying = false;
 
         // reset npc's to do their idle behaviour
