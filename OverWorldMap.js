@@ -71,8 +71,13 @@ async startCutscene(events) {
         }
 
 
-        this.isCutscenePLaying = false;
-    }
+        this.isCutscenePlaying = false;
+
+        // reset npc's to do their idle behaviour
+        Object.values(this.gameObjects).forEach(object => object.doBehaviourEvent(this))
+
+
+    }//end of startCutscene
 
 
 
