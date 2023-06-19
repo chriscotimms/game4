@@ -25,6 +25,8 @@ class OverworldEvent {
         document.addEventListener("PersonStandComplete", completeHandler) 
     }
 
+
+
     walk(resolve){
         const who = this.map.gameObjects[ this.event.who ];
         who.startBehaviour({
@@ -32,6 +34,7 @@ class OverworldEvent {
         }, {
             type: "walk",
             direction: this.event.direction,
+            retry: true
         })
 
         //set up a custom eventHandler to resolve event when unique character is finished their animation

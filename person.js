@@ -27,7 +27,7 @@ class Person extends GameObject {
 
 
             // Case: we're keyboard ready and have an arrow pressed
-            if (this.isPlayerControlled && state.arrow) {
+            if (!state.map.isCutscenePlaying && this.isPlayerControlled && state.arrow) {
                 this.startBehaviour(state, {
                     type: "walk",
                     direction: state.arrow
@@ -50,9 +50,11 @@ class Person extends GameObject {
             //Stop here if space not free
             if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
 
-                behavior.retry && setTimeout(() => {
-                    this.startBehavior(state, behavior)
-                  }, 10);
+
+                //timeout length for retrying behaviour. Could be longer?
+                behaviour.retry && setTimeout(() => {
+                    this.startBehaviour(state, behaviour)
+                  }, 100);
 
                 return;
             }

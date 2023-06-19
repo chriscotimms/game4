@@ -13,7 +13,7 @@ class OverWorldMap {
         this.upperImage = new Image();
         this.upperImage.src = config.upperSrc;
 
-        this.isCutscenePlaying = false;
+        this.isCutscenePlaying = true;
 
     }// end of constructor
 
@@ -55,6 +55,23 @@ class OverWorldMap {
             object.mount(this);
 
         })
+    }
+
+
+
+async startCutscene(events) {
+        this.isCutscenePLaying = true;
+
+        for (let i = 0; i<events.length; i += 1) {
+            const eventHandler = new OverworldEvent({
+                event: events[i],
+                map:this,
+            });
+            await eventHandler.init();
+        }
+
+
+        this.isCutscenePLaying = false;
     }
 
 
