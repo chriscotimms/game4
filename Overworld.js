@@ -60,10 +60,10 @@ bindActionInput() {
 bindHeroPositionCheck() {
     document.addEventListener("PersonWalkingComplete", e => {
         if (e.detail.whoId === "odVar") {
-            this.map.checkForFootstepCutscene();
+            this.map.checkForFootstepCutscene()
         }
     })
-};
+}
 
 
 startMap(mapConfig) {

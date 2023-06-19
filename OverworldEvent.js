@@ -4,70 +4,68 @@ class OverworldEvent {
         this.event = event;
     }
 
-    stand(resolve){
+    stand(resolve) {
         const who = this.map.gameObjects[ this.event.who ];
-        who.startBehaviour({
-            map: this.map
+        who.startBehavior({
+          map: this.map
         }, {
-            type: "stand",
-            direction: this.event.direction,
-            time: this.event.time
+          type: "stand",
+          direction: this.event.direction,
+          time: this.event.time
         })
-
-         //set up a custom eventHandler to resolve event when unique character is finished their animation
+        
+        //Set up a handler to complete when correct person is done walking, then resolve the event
         const completeHandler = e => {
-            if (e.detail.whoId === this.event.who) {
-                document.removeEventListener("PersonStandComplete", completeHandler);
-                resolve();
-            }
+          if (e.detail.whoId === this.event.who) {
+            document.removeEventListener("PersonStandComplete", completeHandler);
+            resolve();
+          }
         }
-        //custom eventListener established in Person.js
-        document.addEventListener("PersonStandComplete", completeHandler) 
-    }
+        document.addEventListener("PersonStandComplete", completeHandler)
+      }
 
 
-    walk(resolve){
+      walk(resolve) {
         const who = this.map.gameObjects[ this.event.who ];
-        who.startBehaviour({
-            map: this.map
+        who.startBehavior({
+          map: this.map
         }, {
-            type: "walk",
-            direction: this.event.direction,
-            retry: true
+          type: "walk",
+          direction: this.event.direction,
+          retry: true
         })
-
-        //set up a custom eventHandler to resolve event when unique character is finished their animation
+    
+        //Set up a handler to complete when correct person is done walking, then resolve the event
         const completeHandler = e => {
-            if (e.detail.whoId === this.event.who) {
-                document.removeEventListener("PersonWalkingComplete", completeHandler);
-                resolve();
-            }
-        }
-        //custom eventListener established in Person.js
+          if (e.detail.whoId === this.event.who) {
+            document.removeEventListener("PersonWalkingComplete", completeHandler);
+            resolve();
+          }
+        };
         document.addEventListener("PersonWalkingComplete", completeHandler)
+    
+      }
 
-    }//end walk
 
-
-    textMessage(resolve) {
+      textMessage(resolve) {
 
         if (this.event.faceHero) {
-            const obj = this.map.gameObjects[this.event.faceHero];
-            obj.direction = utils.oppositeDirection(this.map.gameObjects["odVar"].direction);
+          const obj = this.map.gameObjects[this.event.faceHero];
+          obj.direction = utils.oppositeDirection(this.map.gameObjects["odVar"].direction);
         }
-
+    
         const message = new TextMessage({
-            text: this.event.text,
-            onComplete: () => resolve()
+          text: this.event.text,
+          onComplete: () => resolve()
         })
-        message.init( document.querySelector(".game-container"))
-    }
+        message.init( document.querySelector(".game-container") )
+      }
 
 
-    changeMap(resolve) {
+      changeMap(resolve) {
         this.map.overworld.startMap( window.OverworldMaps[this.event.map] );
         resolve();
-    }
+      }
 
     init() {
         return new Promise(resolve => {
