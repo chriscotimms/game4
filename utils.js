@@ -3,6 +3,10 @@ const utils = {
       return n * 16;
     },
     
+    withoutGrid(n) {
+      return n / 16;
+    },
+
     asGridCoord(x,y) {
       return `${x*16},${y*16}`
     },
@@ -22,6 +26,8 @@ const utils = {
       }
       return {x,y};
     },
+
+  
 
     oppositeDirection(direction) {
       if (direction === "left") { return "right" }

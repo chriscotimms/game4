@@ -14,13 +14,14 @@ class GameObject {
       this.behaviorLoopIndex = 0;
   
       this.talking = config.talking || [];
+      this.retryTimeout = null;
   
     }
   
     mount(map) {
       console.log("mounting!")
       this.isMounted = true;
-      map.addWall(this.x, this.y);
+      //map.addWall(this.x, this.y);
   
       //If we have a behavior, kick off after a short delay
       setTimeout(() => {
@@ -35,7 +36,18 @@ class GameObject {
   
       //Don't do anything if there is a more important cutscene or I don't have config to do anything
       //anyway.
-      if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
+      if (this.behaviorLoop.length === 0 || this.isStanding) {
+        return;
+      }
+
+      if (map.isCutscenePlaying) {
+
+        if (this.retryTimeout) {
+          clearTimeout(this.retryTimeout);
+        }
+        this.retryTimeout = setTimeout(() => {
+          this.doBehaviour(map);
+        }, 1000)
         return;
       }
   

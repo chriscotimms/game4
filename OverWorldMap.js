@@ -1,7 +1,10 @@
 class OverworldMap {
   constructor(config) {
     this.overworld = null;
-    this.gameObjects = config.gameObjects;
+    this.gameObjects = {}; //where live objects are
+    this.configObjects = config.configObjects;// config content
+
+
     this.cutsceneSpaces = config.cutsceneSpaces || {};
     this.walls = config.walls || {};
 
@@ -32,17 +35,32 @@ class OverworldMap {
 
   isSpaceTaken(currentX, currentY, direction) {
     const {x,y} = utils.nextPosition(currentX, currentY, direction);
-    return this.walls[`${x},${y}`] || false;
+    if (this.walls[`${x},${y}`]) {
+        return true;
+    }
+
+    //check for game objects at this position
+    return Object.values(this.gameObjects).find(obj => {
+      if (obj.x === x && obj.y === y) { return true; }
+      if (obj.intentPosition && obj.intentPosition[0] === x && obj.intentPosition && obj.intentPosition[1] === y)
+      return false;
+    })
   }
 
   mountObjects() {
-    Object.keys(this.gameObjects).forEach(key => {
+    Object.keys(this.configObjects).forEach(key => {
 
-      let object = this.gameObjects[key];
+      let object = this.configObjects[key];
       object.id = key;
 
-      //TODO: determine if this object should actually mount
-      object.mount(this);
+      let instance;
+      if (object.type === "Person") {
+        instance = new Person(object);
+      }
+      this.gameObjects[key] = instance;
+      this.gameObjects[key].id = key;
+      instance.mount(this);
+
 
     })
   }
@@ -77,45 +95,80 @@ class OverworldMap {
 
   checkForFootstepCutscene() {
     const hero = this.gameObjects["hero"];
+    if (!this.isCutscenePlaying) {
+    }
     const match = this.cutsceneSpaces[ `${hero.x},${hero.y}` ];
     if (!this.isCutscenePlaying && match) {
       this.startCutscene( match[0].events )
     }
   }
 
-  addWall(x,y) {
-    this.walls[`${x},${y}`] = true;
-  }
-  removeWall(x,y) {
-    delete this.walls[`${x},${y}`]
-  }
-  moveWall(wasX, wasY, direction) {
-    this.removeWall(wasX, wasY);
-    const {x,y} = utils.nextPosition(wasX, wasY, direction);
-    this.addWall(x,y);
-  }
+//my new code
+  checkPositionForAccess(){
+    if (!this.isCutscenePlaying) {
+    const hero = this.gameObjects["hero"];
+    console.log(hero.x, hero.y, hero.direction);
+    const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
+    console.log(nextCoords.x, nextCoords.y);
+    const wallFinder = Object.keys(this.walls).find(element => {
+      return element === String(nextCoords.x+","+nextCoords.y);
+    })
+    //console.log(nextCoords.x, nextCoords.y, );
 
-}
+    //function to lookup what main character is colliding with
+    if (wallFinder!==undefined){
+
+      const extra = Object.values(this.gameObjects);
+      const extra2 = Object.keys(this.walls);
+
+  for (let i=0;i<extra.length;i+=1){
+      if (extra[i].x === nextCoords.x && extra[i].y === nextCoords.y) {
+      console.log(extra[i].id, extra[i].x, extra[i].y);
+      return;
+        } 
+      }
+  for (let i=0;i<extra2.length;i+=1) { 
+
+    if (extra2[i] === nextCoords.x+","+nextCoords.y) {
+      console.log("it's a wall!", extra2[i]);
+      return;
+    }//end if
+    }//end for loop
+ 
+    }
+  }//end if isCutscenePlaying
+  }//end checkPositionForAccess
+
+
+}//end OverworldMap
+
 
 window.OverworldMaps = {
   DemoRoom: {
+    id: "DemoRoom",
     lowerSrc: "./images/maps/DemoLower.png",
     upperSrc: "./images/maps/DemoUpper.png",
-    gameObjects: {
-      hero: new Person({
+    configObjects: {
+      hero: {
+        type: "Person",
         isPlayerControlled: true,
         x: utils.withGrid(5),
         y: utils.withGrid(6),
-      }),
-      npcA: new Person({
+      },
+      npcA: {
+        type: "Person",
         x: utils.withGrid(7),
         y: utils.withGrid(9),
         src: "./images/characters/people/npc1.png",
         behaviorLoop: [
           { type: "stand",  direction: "left", time: 800 },
+          { type: "walk",  direction: "left"},
           { type: "stand",  direction: "up", time: 800 },
+          { type: "walk",  direction: "up"},
           { type: "stand",  direction: "right", time: 1200 },
+          { type: "walk",  direction: "right"},
           { type: "stand",  direction: "up", time: 300 },
+          { type: "walk",  direction: "down"},
         ],
         talking: [
           {
@@ -126,8 +179,9 @@ window.OverworldMaps = {
             ]
           }
         ]
-      }),
-      npcB: new Person({
+      },
+      npcB: {
+        type: "Person",
         x: utils.withGrid(8),
         y: utils.withGrid(5),
         src: "./images/characters/people/npc2.png",
@@ -138,9 +192,16 @@ window.OverworldMaps = {
         //   { type: "walk",  direction: "right" },
         //   { type: "walk",  direction: "down" },
         // ]
-      }),
+      },
     },
     walls: {
+      [utils.asGridCoord(0,4)] : true,
+      [utils.asGridCoord(0,5)] : true,
+      [utils.asGridCoord(0,6)] : true,
+      [utils.asGridCoord(0,7)] : true,
+      [utils.asGridCoord(0,8)] : true,
+      [utils.asGridCoord(0,9)] : true,
+      [utils.asGridCoord(1,10)] : true,
       [utils.asGridCoord(7,6)] : true,
       [utils.asGridCoord(8,6)] : true,
       [utils.asGridCoord(7,7)] : true,
@@ -162,7 +223,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(5,10)]: [
         {
           events: [
-            { type: "changeMap", map: "Kitchen" }
+            { type: "changeMap", map: "Kitchen"}
           ]
         }
       ]
@@ -172,13 +233,15 @@ window.OverworldMaps = {
   Kitchen: {
     lowerSrc: "./images/maps/KitchenLower.png",
     upperSrc: "./images/maps/KitchenUpper.png",
-    gameObjects: {
-      hero: new Person({
+    configObjects: {
+      hero: {
+        type: "Person",
         isPlayerControlled: true,
         x: utils.withGrid(5),
         y: utils.withGrid(5),
-      }),
-      npcB: new Person({
+      },
+      npcB: {
+        type: "Person",
         x: utils.withGrid(10),
         y: utils.withGrid(8),
         src: "./images/characters/people/npc3.png",
@@ -189,7 +252,7 @@ window.OverworldMaps = {
             ]
           }
         ]
-      })
+      }
     }
   },
 }
