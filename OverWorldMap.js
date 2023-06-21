@@ -33,19 +33,34 @@ class OverworldMap {
     )
   } 
 
+  
+
+  //checking for collisions - triggered in Person.js
   isSpaceTaken(currentX, currentY, direction) {
     const {x,y} = utils.nextPosition(currentX, currentY, direction);
     if (this.walls[`${x},${y}`]) {
-        return true;
+      //console.log("wall!");
+      let coll = {
+        first: true,
+        second: "wall",
+      }
+        return coll;
     }
+
+    
 
     //check for game objects at this position
     return Object.values(this.gameObjects).find(obj => {
-      if (obj.x === x && obj.y === y) { return true; }
-      if (obj.intentPosition && obj.intentPosition[0] === x && obj.intentPosition && obj.intentPosition[1] === y)
-      return false;
+      if (obj.x === x && obj.y === y) {
+          return true; 
+      }
+      if (obj.intentPosition && obj.intentPosition[0] === x && obj.intentPosition && obj.intentPosition[1] === y) {
+        return false;
+    }
     })
-  }
+  }//end isSpaceTaken
+
+ 
 
   mountObjects() {
     Object.keys(this.configObjects).forEach(key => {
@@ -65,6 +80,9 @@ class OverworldMap {
     })
   }
 
+  
+
+
   async startCutscene(events) {
     this.isCutscenePlaying = true;
 
@@ -77,10 +95,11 @@ class OverworldMap {
     }
 
     this.isCutscenePlaying = false;
-
     //Reset NPCs to do their idle behavior
-    Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this))
+    //Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this))
   }
+
+
 
   checkForActionCutscene() {
     const hero = this.gameObjects["hero"];
@@ -104,12 +123,25 @@ class OverworldMap {
   }
 
 //my new code
-  checkPositionForAccess(){
+
+/* checkPositionForAccess(){
+  if (!this.isCutscenePlaying) {
+
+  }
+} */
+
+
+
+
+
+
+
+/*   checkPositionForAccess(){
     if (!this.isCutscenePlaying) {
     const hero = this.gameObjects["hero"];
-    console.log(hero.x, hero.y, hero.direction);
+    //console.log(hero.x, hero.y, hero.direction);
     const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
-    console.log(nextCoords.x, nextCoords.y);
+    //console.log(nextCoords.x, nextCoords.y);
     const wallFinder = Object.keys(this.walls).find(element => {
       return element === String(nextCoords.x+","+nextCoords.y);
     })
@@ -123,21 +155,21 @@ class OverworldMap {
 
   for (let i=0;i<extra.length;i+=1){
       if (extra[i].x === nextCoords.x && extra[i].y === nextCoords.y) {
-      console.log(extra[i].id, extra[i].x, extra[i].y);
+      //console.log(extra[i].id, extra[i].x, extra[i].y);
       return;
         } 
       }
   for (let i=0;i<extra2.length;i+=1) { 
 
     if (extra2[i] === nextCoords.x+","+nextCoords.y) {
-      console.log("it's a wall!", extra2[i]);
+      //console.log("it's a wall!", extra2[i]);
       return;
     }//end if
     }//end for loop
  
     }
   }//end if isCutscenePlaying
-  }//end checkPositionForAccess
+  }//end checkPositionForAccess */
 
 
 }//end OverworldMap

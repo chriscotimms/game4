@@ -20,6 +20,20 @@ body {
     overflow: hidden;
 }
 
+.AccessMessage-container {
+    position:relative;
+    width:352px;
+    height:20px;
+    margin:0 auto;
+    outline: 1px dashed #ffffff;
+
+    background: var(--menu-background);
+    border-top: 1px solid var(--menu-border-color);
+    color:var(--menu-font-color);
+
+    transform: scale(3) translateY(40%); 
+}
+
 .game-container {
     position:relative;
     width:352px;
@@ -27,7 +41,7 @@ body {
     margin:0 auto;
     outline: 1px solid #ffffff;
 
-    transform: scale(3) translateY(50%); 
+    transform: scale(3) translateY(43%); 
 }
 
 .game-container canvas {

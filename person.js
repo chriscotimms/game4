@@ -44,13 +44,28 @@ class Person extends GameObject {
       //Stop here if space is not free
 
       /* console.log(state.map.checkPositionForAccess(this.x, this.y, this.direction)); */
-
+      
+      
       if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-
+        
+        if (this.isPlayerControlled) {
+        const aa = state.map.isSpaceTaken(this.x, this.y, this.direction);
+        if (aa.second === "wall"){
+          AccessMessage(aa.second);
+        console.log("Person.js ",aa.second);
+          return aa.second;
+        } else {
+          AccessMessage(aa.id);
+          console.log("Person.js ", aa.id);
+          return aa.id;
+        }
+        
+      }
+        
 
         behavior.retry && setTimeout(() => {
           this.startBehavior(state, behavior)
-        }, 200);
+        }, 20);
 
         return;
       }
@@ -62,7 +77,8 @@ class Person extends GameObject {
       this.intentPosition = [
         intentPosition.x,
         intentPosition.y,
-      ]
+      ];
+
 
       this.updateSprite(state);
     }

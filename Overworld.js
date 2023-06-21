@@ -58,7 +58,7 @@ class Overworld {
     })
   }
 
- //my new code
+ /* //my new code
   returnAccessInfo(){
     document.addEventListener("PersonWalkingComplete", e => {
       if (e.detail.whoId === "hero") {
@@ -66,7 +66,7 @@ class Overworld {
         this.map.checkPositionForAccess()
       }
     })
-  } 
+  }  */
  
   startMap(mapConfig) {
    this.map = new OverworldMap(mapConfig);
@@ -80,7 +80,7 @@ class Overworld {
  
    this.bindActionInput();
    this.bindHeroPositionCheck();
-   this.returnAccessInfo();
+   //this.returnAccessInfo();
  
    this.directionInput = new DirectionInput();
    this.directionInput.init();
