@@ -67,6 +67,8 @@ class Overworld {
       }
     })
   }  */
+
+ 
  
   startMap(mapConfig) {
    this.map = new OverworldMap(mapConfig);

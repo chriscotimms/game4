@@ -52,15 +52,13 @@ class Person extends GameObject {
         const aa = state.map.isSpaceTaken(this.x, this.y, this.direction);
         if (aa.second === "wall"){
           AccessMessage(aa.second);
-        console.log("Person.js ",aa.second);
           return aa.second;
         } else {
           AccessMessage(aa.id);
-          console.log("Person.js ", aa.id);
           return aa.id;
         }
         
-      }
+      } 
         
 
         behavior.retry && setTimeout(() => {
@@ -68,7 +66,7 @@ class Person extends GameObject {
         }, 20);
 
         return;
-      }
+      } 
 
       //Ready to walk!
       //state.map.moveWall(this.x, this.y, this.direction);
@@ -102,6 +100,7 @@ class Person extends GameObject {
 
       if (this.movingProgressRemaining === 0) {
         //We finished the walk!
+        
         this.intentPosition = null;
         utils.emitEvent("PersonWalkingComplete", {
           whoId: this.id
