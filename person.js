@@ -13,6 +13,7 @@ class Person extends GameObject {
       "left": ["x", -1],
       "right": ["x", 1],
     }
+    this.standBehaviorTimeout;//not sure about this
   }
 
   update(state) {
@@ -52,13 +53,13 @@ class Person extends GameObject {
         const aa = state.map.isSpaceTaken(this.x, this.y, this.direction);
         if (aa.second === "wall"){
           AccessMessage(aa.second);
-          return aa.second;
+  
         } else {
           AccessMessage(aa.id);
-          return aa.id;
+    
         }
         
-      } 
+      }; 
         
 
         behavior.retry && setTimeout(() => {
@@ -77,6 +78,9 @@ class Person extends GameObject {
         intentPosition.y,
       ];
 
+      if (!state.map.isCutscenePlaying && this.isPlayerControlled && state.arrow) {
+      AccessMessageWalk(utils.withoutGrid(this.x)+","+utils.withoutGrid(this.y));
+    }
 
       this.updateSprite(state);
     }

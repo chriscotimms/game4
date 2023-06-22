@@ -39,14 +39,14 @@ class GameObject {
       if (this.behaviorLoop.length === 0 || this.isStanding) {
         return;
       }
-
       if (map.isCutscenePlaying) {
 
+        //console.log("will retry", this.id)
         if (this.retryTimeout) {
           clearTimeout(this.retryTimeout);
         }
         this.retryTimeout = setTimeout(() => {
-          this.doBehaviour(map);
+          this.doBehaviorEvent(map);
         }, 1000)
         return;
       }

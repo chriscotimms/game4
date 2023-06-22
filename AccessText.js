@@ -1,6 +1,6 @@
-let textContent = "";
 
-function throttle(callback, delay = 1000) {
+
+function throttle(callback, delay) {
   let shouldWait = false;
   return (...args) => {
     if (shouldWait) return;
@@ -15,9 +15,12 @@ function throttle(callback, delay = 1000) {
 
 
 const AccessMessage = throttle(function(text){
-  textContent = text;
-  console.log(textContent);
-})
+  document.getElementById("Access_p").textContent = text;
+}, 1000)
+
+const AccessMessageWalk = throttle(function(text){
+  document.getElementById("Access_p").textContent = text;
+}, 50)
 
 /* function AccessMessage(text){
   console.log(text);
