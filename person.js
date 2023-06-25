@@ -52,7 +52,7 @@ class Person extends GameObject {
         if (this.isPlayerControlled) {
         const aa = state.map.isSpaceTaken(this.x, this.y, this.direction);
         if (aa.second === "wall"){
-          AccessMessage(aa.second);
+          AccessMessage("a " + aa.second);
   
         } else {
           AccessMessage(aa.id);
@@ -79,7 +79,7 @@ class Person extends GameObject {
       ];
 
       if (!state.map.isCutscenePlaying && this.isPlayerControlled && state.arrow) {
-      AccessMessageWalk(utils.withoutGrid(this.x)+","+utils.withoutGrid(this.y));
+      AccessMessageWalk("tile x:"+utils.withoutGrid(this.x)+", y:"+utils.withoutGrid(this.y));
     }
 
       this.updateSprite(state);

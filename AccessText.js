@@ -1,4 +1,4 @@
-
+//is called in Person.js
 
 function throttle(callback, delay) {
   let shouldWait = false;

@@ -77,7 +77,7 @@ class Overworld {
   }
  
   init() {
-   this.startMap(window.OverworldMaps.DemoRoom);
+   this.startMap(window.OverworldMaps.Bedroom);
  
  
    this.bindActionInput();

@@ -225,7 +225,7 @@ window.OverworldMaps = {
         //   { type: "walk",  direction: "down" },
         // ]
       },
-    },
+    },//end of configObjects
     walls: {
       [utils.asGridCoord(0,4)] : true,
       [utils.asGridCoord(0,5)] : true,
@@ -262,6 +262,7 @@ window.OverworldMaps = {
     }
     
   },
+
   Kitchen: {
     lowerSrc: "./images/maps/KitchenLower.png",
     upperSrc: "./images/maps/KitchenUpper.png",
@@ -287,4 +288,47 @@ window.OverworldMaps = {
       }
     }
   },
+
+  Bedroom: {
+    lowerSrc: "./images/maps/bedroom.png",
+    upperSrc: "",
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(0),
+        y: utils.withGrid(1),
+      },
+      /* npcB: {
+        type: "Person",
+        x: utils.withGrid(10),
+        y: utils.withGrid(8),
+        src: "./images/characters/people/npc3.png",
+        talking: [
+          {
+            events: [
+              { type: "textMessage", text: "You made it!", faceHero:"npcB" },
+            ]
+          }
+        ]
+      } */
+    },//end of config objects
+    walls: {
+      [utils.asGridCoord(0,0)] : true,
+      [utils.asGridCoord(1,0)] : true,
+      [utils.asGridCoord(2,0)] : true,
+      [utils.asGridCoord(-1,1)] : true,
+      [utils.asGridCoord(-1,2)] : true,
+      [utils.asGridCoord(0,3)] : true,
+      [utils.asGridCoord(0,4)] : true,
+      [utils.asGridCoord(1,5)] : true,
+      [utils.asGridCoord(2,4)] : true,
+      [utils.asGridCoord(2,3)] : true,
+      [utils.asGridCoord(3,2)] : true,
+      [utils.asGridCoord(3,1)] : true,
+      [utils.asGridCoord(1,1)] : true,
+
+    },
+  },
+
 }
