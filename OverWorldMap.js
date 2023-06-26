@@ -7,6 +7,7 @@ class OverworldMap {
 
     this.cutsceneSpaces = config.cutsceneSpaces || {};
     this.walls = config.walls || {};
+    this.roomDescription = config.roomDescription || {};
 
     this.lowerImage = new Image();
     this.lowerImage.src = config.lowerSrc;
@@ -122,61 +123,20 @@ class OverworldMap {
     }
   }
 
-//my new code
+  //scene description
+  sceneDescription() {
+      this.startCutscene( this.roomDescription.events)
+}
 
-/* checkPositionForAccess(){
-  if (!this.isCutscenePlaying) {
-
-  }
-} */
-
-
-
-
-
-
-
-/*   checkPositionForAccess(){
-    if (!this.isCutscenePlaying) {
-    const hero = this.gameObjects["hero"];
-    //console.log(hero.x, hero.y, hero.direction);
-    const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
-    //console.log(nextCoords.x, nextCoords.y);
-    const wallFinder = Object.keys(this.walls).find(element => {
-      return element === String(nextCoords.x+","+nextCoords.y);
-    })
-    //console.log(nextCoords.x, nextCoords.y, );
-
-    //function to lookup what main character is colliding with
-    if (wallFinder!==undefined){
-
-      const extra = Object.values(this.gameObjects);
-      const extra2 = Object.keys(this.walls);
-
-  for (let i=0;i<extra.length;i+=1){
-      if (extra[i].x === nextCoords.x && extra[i].y === nextCoords.y) {
-      //console.log(extra[i].id, extra[i].x, extra[i].y);
-      return;
-        } 
-      }
-  for (let i=0;i<extra2.length;i+=1) { 
-
-    if (extra2[i] === nextCoords.x+","+nextCoords.y) {
-      //console.log("it's a wall!", extra2[i]);
-      return;
-    }//end if
-    }//end for loop
- 
-    }
-  }//end if isCutscenePlaying
-  }//end checkPositionForAccess */
 
 
 }//end OverworldMap
 
 
 window.OverworldMaps = {
-  DemoRoom: {
+
+
+  /* DemoRoom: {
     id: "DemoRoom",
     lowerSrc: "./images/maps/DemoLower.png",
     upperSrc: "./images/maps/DemoUpper.png",
@@ -287,7 +247,7 @@ window.OverworldMaps = {
         ]
       }
     }
-  },
+  }, */
 
   Bedroom: {
     lowerSrc: "./images/maps/bedroom.png",
@@ -295,28 +255,58 @@ window.OverworldMaps = {
     configObjects: {
       hero: {
         type: "Person",
+        useShadow: true,
         isPlayerControlled: true,
         x: utils.withGrid(0),
         y: utils.withGrid(1),
       },
-      /* npcB: {
+       Bed: {
         type: "Person",
-        x: utils.withGrid(10),
-        y: utils.withGrid(8),
-        src: "./images/characters/people/npc3.png",
+        useShadow: false,
+        x: utils.withGrid(1),
+        y: utils.withGrid(1),
+        src: "./images/objects/empty.png",
         talking: [
           {
             events: [
-              { type: "textMessage", text: "You made it!", faceHero:"npcB" },
+              { type: "textMessage", text: "My consoling log...soon, soon, I'll get to sleep again..." },
             ]
           }
         ]
-      } */
+      },
+      Window: {
+        type: "Person",
+        useShadow: false,
+        x: utils.withGrid(0),
+        y: utils.withGrid(0),
+        src: "./images/objects/empty.png",
+        talking: [
+          {
+            events: [
+              { type: "textMessage", text: "Ah, another glorious summer day in the city. I see the rats have found a dead pigeon. They'll sleep well tonight!" },
+            ]
+          }
+        ]
+      },
+      Computer: {
+        type: "Person",
+        x: utils.withGrid(2),
+        y: utils.withGrid(0),
+        src: "./images/objects/empty.png",
+        talking: [
+          {
+            events: [
+              { type: "textMessage", text: "No time to work on my projects now unfortunately. Perhaps after my daily toil... " },
+            ]
+          }
+        ]
+      }
+
+
     },//end of config objects
+
     walls: {
-      [utils.asGridCoord(0,0)] : true,
       [utils.asGridCoord(1,0)] : true,
-      [utils.asGridCoord(2,0)] : true,
       [utils.asGridCoord(-1,1)] : true,
       [utils.asGridCoord(-1,2)] : true,
       [utils.asGridCoord(0,3)] : true,
@@ -326,9 +316,121 @@ window.OverworldMaps = {
       [utils.asGridCoord(2,3)] : true,
       [utils.asGridCoord(3,2)] : true,
       [utils.asGridCoord(3,1)] : true,
-      [utils.asGridCoord(1,1)] : true,
 
+    },//end of walls
+
+    roomDescription: {
+          events: [
+            { type: "textMessage", text:"Odvar awakes in their small bedroom. There is a bed in the center, a desk to the right, and Odvar stands on the left by a window."},
+            { type: "textMessage", text:"The bed is unmade, there are clothes on the floor, and there is an exit at the bottom of the room"},
+            { type: "textMessage", text:"Odvar: Hey!...that seems a little ...rude... to call it \"small\" !"},
+            { type: "textMessage", text:"Odvar: ...it's...modest...what did the estate agent call it?...\"neat\" !"},
+            { type: "textMessage", text:"Odvar: ...and it's not really that messy! Just..."},
+            { type: "textMessage", text:"Odvar: ...um..."},
+            { type: "textMessage", text:"Odvar: ...lived in!"},
+            { type: "textMessage", text:"Odvar: ...besides, I didn't know I'd be having guests!"},
+          ]
+    },//end of roomDescription
+
+    cutsceneSpaces: {
+      [utils.asGridCoord(1,4)]: [
+        {
+          events: [
+            { type: "changeMap", map: "Livingroom"}
+          ]
+        }
+      ],
     },
-  },
 
-}
+},//end of Bedroom
+
+
+Livingroom: {
+  lowerSrc: "./images/maps/livingroom.png",
+  upperSrc: "",
+  configObjects: {
+    hero: {
+      type: "Person",
+      isPlayerControlled: true,
+      useShadow: true,
+      x: utils.withGrid(0),
+      y: utils.withGrid(1),
+    },
+     Bed: {
+      type: "Person",
+      x: utils.withGrid(1),
+      y: utils.withGrid(1),
+      src: "./images/objects/empty.png",
+      talking: [
+        {
+          events: [
+            { type: "textMessage", text: "My consoling log...soon, soon, I'll get to sleep again..." },
+          ]
+        }
+      ]
+    },
+    Window: {
+      type: "Person",
+      x: utils.withGrid(0),
+      y: utils.withGrid(0),
+      src: "./images/objects/empty.png",
+      talking: [
+        {
+          events: [
+            { type: "textMessage", text: "Ah, another glorious summer day in the city. I see the rats have found a dead pigeon. They'll sleep well tonight!" },
+          ]
+        }
+      ]
+    },
+    Computer: {
+      type: "Person",
+      x: utils.withGrid(2),
+      y: utils.withGrid(0),
+      src: "./images/objects/empty.png",
+      talking: [
+        {
+          events: [
+            { type: "textMessage", text: "No time to work on my projects now unfortunately. Perhaps after my daily toil... " },
+          ]
+        }
+      ]
+    }
+
+
+  },//end of config objects
+
+  walls: {
+    /* [utils.asGridCoord(1,0)] : true,
+    [utils.asGridCoord(-1,1)] : true,
+    [utils.asGridCoord(-1,2)] : true,
+    [utils.asGridCoord(0,3)] : true,
+    [utils.asGridCoord(0,4)] : true,
+    [utils.asGridCoord(1,5)] : true,
+    [utils.asGridCoord(2,4)] : true,
+    [utils.asGridCoord(2,3)] : true,
+    [utils.asGridCoord(3,2)] : true,
+    [utils.asGridCoord(3,1)] : true, */
+
+  },//end of walls
+
+  roomDescription: {
+        events: [
+          { type: "textMessage", text:"The Living Room and Kitchen and Workspace"},
+        ]
+  },//end of roomDescription
+
+  cutsceneSpaces: {
+    [utils.asGridCoord(1,4)]: [
+      {
+        events: [
+          { type: "changeMap", map: "Kitchen"}
+        ]
+      }
+    ],
+  },//end of cutsceneSpaces
+
+},//end of Bedroom
+
+
+
+}//end of window.OverworldMaps

@@ -4,7 +4,6 @@ class Person extends GameObject {
     this.movingProgressRemaining = 0;
     this.isStanding = false;
     this.intentPosition = null; //[x,y];
-
     this.isPlayerControlled = config.isPlayerControlled || false;
 
     this.directionUpdate = {
@@ -79,7 +78,7 @@ class Person extends GameObject {
       ];
 
       if (!state.map.isCutscenePlaying && this.isPlayerControlled && state.arrow) {
-      AccessMessageWalk("tile x:"+utils.withoutGrid(this.x)+", y:"+utils.withoutGrid(this.y));
+      AccessMessageWalk("tile x:"+utils.withoutGrid(this.intentPosition[0])+", y:"+utils.withoutGrid(this.intentPosition[1]) );
     }
 
       this.updateSprite(state);

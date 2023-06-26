@@ -58,15 +58,10 @@ class Overworld {
     })
   }
 
- /* //my new code
-  returnAccessInfo(){
-    document.addEventListener("PersonWalkingComplete", e => {
-      if (e.detail.whoId === "hero") {
-        //Hero's position has changed
-        this.map.checkPositionForAccess()
-      }
-    })
-  }  */
+  initDescription() {
+    // /console.log(this.roomDescription.events[0]);
+    this.map.sceneDescription();
+    }
 
  
  
@@ -82,12 +77,15 @@ class Overworld {
  
    this.bindActionInput();
    this.bindHeroPositionCheck();
-   //this.returnAccessInfo();
+   //my code
+   this.initDescription();
  
    this.directionInput = new DirectionInput();
    this.directionInput.init();
  
    this.startGameLoop();
+
+   
  
  
    // this.map.startCutscene([
