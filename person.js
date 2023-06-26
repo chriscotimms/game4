@@ -5,6 +5,8 @@ class Person extends GameObject {
     this.isStanding = false;
     this.intentPosition = null; //[x,y];
     this.isPlayerControlled = config.isPlayerControlled || false;
+    this.useShadow = config.useShadow || false;
+    //console.log("Person.js"+this.useShadow, this);
 
     this.directionUpdate = {
       "up": ["y", -1],

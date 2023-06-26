@@ -3,6 +3,7 @@ class OverworldMap {
     this.overworld = null;
     this.gameObjects = {}; //where live objects are
     this.configObjects = config.configObjects;// config content
+    console.log(this.gameObjects);
 
 
     this.cutsceneSpaces = config.cutsceneSpaces || {};
@@ -40,7 +41,6 @@ class OverworldMap {
   isSpaceTaken(currentX, currentY, direction) {
     const {x,y} = utils.nextPosition(currentX, currentY, direction);
     if (this.walls[`${x},${y}`]) {
-      //console.log("wall!");
       let coll = {
         first: true,
         second: "wall",
@@ -262,10 +262,10 @@ window.OverworldMaps = {
       },
        Bed: {
         type: "Person",
-        useShadow: false,
         x: utils.withGrid(1),
         y: utils.withGrid(1),
         src: "./images/objects/empty.png",
+        useShadow: false,
         talking: [
           {
             events: [
@@ -276,10 +276,10 @@ window.OverworldMaps = {
       },
       Window: {
         type: "Person",
-        useShadow: false,
         x: utils.withGrid(0),
         y: utils.withGrid(0),
         src: "./images/objects/empty.png",
+        useShadow: false,
         talking: [
           {
             events: [
@@ -322,13 +322,13 @@ window.OverworldMaps = {
     roomDescription: {
           events: [
             { type: "textMessage", text:"Odvar awakes in their small bedroom. There is a bed in the center, a desk to the right, and Odvar stands on the left by a window."},
-            { type: "textMessage", text:"The bed is unmade, there are clothes on the floor, and there is an exit at the bottom of the room"},
+            /* { type: "textMessage", text:"The bed is unmade, there are clothes on the floor, and there is an exit at the bottom of the room"},
             { type: "textMessage", text:"Odvar: Hey!...that seems a little ...rude... to call it \"small\" !"},
             { type: "textMessage", text:"Odvar: ...it's...modest...what did the estate agent call it?...\"neat\" !"},
             { type: "textMessage", text:"Odvar: ...and it's not really that messy! Just..."},
             { type: "textMessage", text:"Odvar: ...um..."},
             { type: "textMessage", text:"Odvar: ...lived in!"},
-            { type: "textMessage", text:"Odvar: ...besides, I didn't know I'd be having guests!"},
+            { type: "textMessage", text:"Odvar: ...besides, I didn't know I'd be having guests!"}, */
           ]
     },//end of roomDescription
 
@@ -353,13 +353,13 @@ Livingroom: {
       type: "Person",
       isPlayerControlled: true,
       useShadow: true,
-      x: utils.withGrid(0),
+      x: utils.withGrid(1),
       y: utils.withGrid(1),
     },
      Bed: {
       type: "Person",
-      x: utils.withGrid(1),
-      y: utils.withGrid(1),
+      x: utils.withGrid(0),
+      y: utils.withGrid(0),
       src: "./images/objects/empty.png",
       talking: [
         {
@@ -384,7 +384,7 @@ Livingroom: {
     },
     Computer: {
       type: "Person",
-      x: utils.withGrid(2),
+      x: utils.withGrid(0),
       y: utils.withGrid(0),
       src: "./images/objects/empty.png",
       talking: [

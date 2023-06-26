@@ -8,8 +8,9 @@ class GameObject {
       this.sprite = new Sprite({
         gameObject: this,
         src: config.src || "./images/characters/people/hero.png",
+        useShadow: config.useShadow || false,
       });
-  
+    
       this.behaviorLoop = config.behaviorLoop || [];
       this.behaviorLoopIndex = 0;
   
@@ -17,9 +18,10 @@ class GameObject {
       this.retryTimeout = null;
   
     }
-  
+    
+
     mount(map) {
-      console.log("mounting!")
+    
       this.isMounted = true;
       //map.addWall(this.x, this.y);
   
@@ -71,5 +73,7 @@ class GameObject {
   
     }
   
-  
+    
   }
+
+  
