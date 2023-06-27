@@ -368,11 +368,14 @@ Livingroom: {
       talking: [
         {
           events: [
-            { type: "textMessage", text: "Const: ..." },
+            { type: "textMessage", text: " [tapping sounds]" },
             { type: "textMessage", text: "Odvar: ...morning...?" },
             { type: "textMessage", text: "Const: urgh, almost ready to go to bed, just one last line of code to solve..." },
-            { type: "textMessage", text: "Odvar: Anything a noob can help with?" },
-            { type: "textMessage", text: "Const: I'm close to tearing my hair out, I wouldn't want to get you involved!" },
+            { type: "textMessage", text: "Odvar: It's quite a push to offer help, but anything a noob can help with?" },
+            { type: "textMessage", text: "Const: I'm close to tearing my hair out! I'm stuck on a \"for\" loop...but...it keeps returning undefined..." },
+            { type: "textMessage", text: " [awkward silence as Odvar leans in pretending to scrutinise code]" },
+            { type: "textMessage", text: "Const: Don't worry, I'll...figure...something..." },
+            { type: "textMessage", text: "Const: ...aha! Odvar you genius! The Push function!" },
             { type: "textMessage", text: "Odvar: What a relief! I'm headed out. Good luck!" },
           ]
         }
@@ -402,8 +405,8 @@ Livingroom: {
       talking: [
         {
           events: [
-            { type: "textMessage", text: "...jenga pile of dishes again! Someday I'll say something...for now I'll just quietly seethe..." },
-            { type: "textMessage", text: " *quiet seething* " },
+            { type: "textMessage", text: "...if it isn't old Mount Jenga! Someday I'll say something...for now I'll just quietly seethe..." },
+            { type: "textMessage", text: " [quiet seething]" },
           ]
         }
       ]
@@ -454,6 +457,7 @@ Livingroom: {
           { type: "textMessage", text:"The Living Room and Kitchen"},
           { type: "textMessage", text:"...and Workspace"},
           { type: "textMessage", text:"...and sometimes Dancefloor..."},
+          { type: "textMessage", text:"Odvar: ...it's not a Hub though. Everything else might be becoming a Hub, but this is definitely NOT a Hub!"},
           { type: "textMessage", text:"Odvar stands at the top left of the space. At the top of the room is a kitchenette. At the bottom left is a set of couches."},
           { type: "textMessage", text:"In the center of the room is a kitchen table, with a person sat facing up toward a laptop. There is an exit at the bottom of the room."},
         ]
@@ -467,10 +471,229 @@ Livingroom: {
         ]
       }
     ],
+    [utils.asGridCoord(5,9)]: [
+      {
+        events: [
+          { type: "changeMap", map: "outsideFlat"}
+        ]
+      }
+    ],
   },//end of cutsceneSpaces
 
-},//end of Bedroom
+},//end of Livingroom
 
 
+outsideFlat: {
+  lowerSrc: "./images/maps/outsideFlat_lower.png",
+  upperSrc: "./images/maps/outsideFlat_upper.png",
+
+  configObjects: {
+
+    hero: {
+      type: "Person",
+      useShadow: true,
+      isPlayerControlled: true,
+      x: utils.withGrid(5),
+      y: utils.withGrid(1),
+    },
+    NaN: {
+      type: "Person",
+      useShadow: false,
+      isPlayerControlled: false,
+      x: utils.withGrid(23),
+      y: utils.withGrid(0),
+      src: "./images/objects/empty.png",
+      talking: [
+        {
+          events: [
+            { type: "textMessage", text: " [knocking]" },
+            { type: "textMessage", text: " [indeterminate noises, loud crashing]" },
+            { type: "textMessage", text: "NaN: ...hello?" },
+            { type: "textMessage", text: "NaN: ...who is it and what do you want!?" },
+            { type: "textMessage", text: "Odvar: It's me NaN!" },
+            { type: "textMessage", text: "NaN: ...Ah Odvar! Why didn't you say!" },
+            { type: "textMessage", text: " [more indeterminate noises, more loud crashing]" },
+            { type: "textMessage", text: "NaN: ...come on in!" },
+            { type: "changeMap", map: "NaN" }
+          ]
+        }
+      ]
+    },
+
+  },//end of config objects
+
+  walls: {
+    [utils.asGridCoord(0,0)] : true,
+    [utils.asGridCoord(-1,1)] : true,
+    [utils.asGridCoord(-1,2)] : true,
+    [utils.asGridCoord(-1,3)] : true,
+    [utils.asGridCoord(1,0)] : true,
+    [utils.asGridCoord(2,0)] : true,
+    [utils.asGridCoord(4,0)] : true,
+    [utils.asGridCoord(5,0)] : true,
+    [utils.asGridCoord(6,0)] : true,
+    [utils.asGridCoord(7,0)] : true,
+    [utils.asGridCoord(8,0)] : true,
+    [utils.asGridCoord(9,-1)] : true,
+    [utils.asGridCoord(10,-1)] : true,
+    [utils.asGridCoord(11,-1)] : true,
+    [utils.asGridCoord(12,-1)] : true,
+    [utils.asGridCoord(13,-1)] : true,
+    [utils.asGridCoord(14,-1)] : true,
+    [utils.asGridCoord(15,0)] : true,
+    [utils.asGridCoord(15,1)] : true,
+    [utils.asGridCoord(16,1)] : true,
+    [utils.asGridCoord(17,1)] : true,
+    [utils.asGridCoord(18,1)] : true,
+    [utils.asGridCoord(19,1)] : true,
+    [utils.asGridCoord(20,1)] : true,
+    [utils.asGridCoord(21,1)] : true,
+    [utils.asGridCoord(22,1)] : true,
+    [utils.asGridCoord(24,1)] : true,
+    [utils.asGridCoord(25,1)] : true,
+    [utils.asGridCoord(26,2)] : true,
+    [utils.asGridCoord(26,3)] : true,
+    [utils.asGridCoord(0,4)] : true,
+    [utils.asGridCoord(1,4)] : true,
+    [utils.asGridCoord(2,4)] : true, 
+    [utils.asGridCoord(3,4)] : true,
+    [utils.asGridCoord(4,4)] : true,
+    [utils.asGridCoord(5,4)] : true,
+    [utils.asGridCoord(6,4)] : true,
+    [utils.asGridCoord(7,4)] : true,
+    [utils.asGridCoord(8,4)] : true,
+    [utils.asGridCoord(9,4)] : true, 
+    [utils.asGridCoord(10,4)] : true,
+    [utils.asGridCoord(11,4)] : true,
+    [utils.asGridCoord(12,4)] : true,
+    [utils.asGridCoord(13,4)] : true,
+    [utils.asGridCoord(14,4)] : true,
+    [utils.asGridCoord(15,4)] : true,
+    [utils.asGridCoord(16,4)] : true,
+    [utils.asGridCoord(17,4)] : true,
+    [utils.asGridCoord(18,4)] : true, 
+    [utils.asGridCoord(19,4)] : true,
+    [utils.asGridCoord(20,4)] : true,
+    [utils.asGridCoord(21,4)] : true,
+    [utils.asGridCoord(22,4)] : true,
+    [utils.asGridCoord(23,4)] : true,
+    [utils.asGridCoord(24,4)] : true,
+    [utils.asGridCoord(25,4)] : true,
+
+  },//end of walls
+
+  roomDescription: {
+        events: [
+          { type: "textMessage", text:"Odvar exits via steps onto a desolate concrete city path leading left to work or right to NaN's."},
+          { type: "textMessage", text:"Odvar: Its pretty grim alright..!"},
+          { type: "textMessage", text: "I could get to work early..."},
+          { type: "textMessage", text: "...or I could use the extra time to check up on NaN?"},
+        ]
+  },//end of roomDescription
+
+  cutsceneSpaces: {
+    [utils.asGridCoord(0,2)]: [
+      {
+        events: [
+          { type: "textMessage", text: "I guess it'll be good to get in early for work. I'll have a chance to get ahead on those iterations!" },
+          { type: "textMessage", text: "Although now that I think of it, I do hate my job!" },
+          
+        ]
+      }
+    ],
+    [utils.asGridCoord(6,2)]: [
+      {
+        events: [
+          { type: "textMessage", text: "I haven't seen NaN in a while. This is a much better idea than going to work early!" },
+          { type: "textMessage", text: "She always has some sage advice for me too" },
+          
+        ]
+      }
+    ],
+    /* [utils.asGridCoord(6,2)]: [
+      {
+        events: [
+          { type: "changeMap", map: "NaN" },
+          
+        ]
+      }
+    ], */
+  },
+
+},//end of outsideFlat
+
+
+NaN: {
+  lowerSrc: "./images/maps/NaN.png",
+  upperSrc: "",
+
+  configObjects: {
+
+    hero: {
+      type: "Person",
+      useShadow: true,
+      isPlayerControlled: true,
+      x: utils.withGrid(3),
+      y: utils.withGrid(1),
+    },
+
+  },//end of config objects
+
+  walls: {
+    /* [utils.asGridCoord(0,0)] : true,
+    [utils.asGridCoord(-1,1)] : true,
+    [utils.asGridCoord(-1,2)] : true,
+    [utils.asGridCoord(-1,3)] : true,
+    [utils.asGridCoord(1,0)] : true,
+    [utils.asGridCoord(2,0)] : true,
+    [utils.asGridCoord(4,0)] : true,
+    [utils.asGridCoord(5,0)] : true,
+    [utils.asGridCoord(6,0)] : true,
+    [utils.asGridCoord(0,4)] : true,
+    [utils.asGridCoord(1,4)] : true,
+    [utils.asGridCoord(2,4)] : true, 
+    [utils.asGridCoord(3,4)] : true,
+    [utils.asGridCoord(4,4)] : true,
+    [utils.asGridCoord(5,4)] : true,
+    [utils.asGridCoord(6,4)] : true, */
+
+  },//end of walls
+
+  roomDescription: {
+        events: [
+          { type: "textMessage", text:"Odvar exits via steps onto a desolate concrete city path leading left to work or right to NaN's."},
+        ]
+  },//end of roomDescription
+
+  cutsceneSpaces: {
+    [utils.asGridCoord(0,2)]: [
+      {
+        events: [
+          { type: "textMessage", text: "I guess it'll be good to get in early for work. I'll have a chance to get ahead on those iterations!" },
+          { type: "textMessage", text: "Although now that I think of it, I do hate my job!" },
+          
+        ]
+      }
+    ],
+    [utils.asGridCoord(4,2)]: [
+      {
+        events: [
+          { type: "textMessage", text: "I haven't seen NaN in a while. This is a much better idea than going to work early!" },
+          { type: "textMessage", text: "She always has some sage advice for me too" },
+          
+        ]
+      }
+    ],
+    [utils.asGridCoord(6,2)]: [
+      {
+        events: [
+          { type: "changeMap", map: "NaN" },
+          
+        ]
+      }
+    ],
+  },
+
+},//end of NaN
 
 }//end of window.OverworldMaps

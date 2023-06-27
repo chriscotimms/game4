@@ -1,6 +1,6 @@
 class Battle {
-    constructor() {
-
+    constructor({ onComplete }) {
+        this.onComplete = onComplete;
     }//end constructor
 
     createElement() {
@@ -8,7 +8,7 @@ class Battle {
 
         this.element = document.createElement("div");
         this.element.classList.add("Battle");
-        this.element.innerHTML = "";
+        this.element.innerHTML = "Hi There";
     }
 
     init(container) {
@@ -20,10 +20,8 @@ class Battle {
             console.log("finish");
             this.element.remove();
             this.onComplete();
-          }, "4000");
+          }, "1500");
 
-
-       
     }
 
 

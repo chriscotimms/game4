@@ -23,7 +23,7 @@ body {
 .AccessMessage-container {
     position:relative;
     width:352px;
-    height:20px;
+    height:16px;
     margin:0 auto;
     outline: 1px dashed #ffffff;
 
@@ -31,17 +31,18 @@ body {
     border-top: 1px solid var(--menu-border-color);
     color:var(--menu-font-color);
 
-    transform: scale(3) translateY(40%); 
+    transform: scale(3.5) translateY(40%); 
 }
 
 .game-container {
     position:relative;
     width:352px;
-    height:198px;
+    height:200px;
     margin:0 auto;
     outline: 1px solid #ffffff;
+    overflow: hidden;
 
-    transform: scale(3) translateY(43%); 
+    transform: scale(3.5) translateY(43%); 
 }
 
 .game-container canvas {
