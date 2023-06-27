@@ -42,7 +42,6 @@ class OverworldEvent {
       }
     }
     document.addEventListener("PersonWalkingComplete", completeHandler)
-
   }
 
   textMessage(resolve) {
@@ -59,19 +58,21 @@ class OverworldEvent {
     message.init( document.querySelector(".game-container") )
   }
 
-  /* AccessMessage(resolve) {
-
-    const message = new AccessMessage({
-      text: this.event.text,
-      onComplete: () => resolve()
-    })
-    message.init( document.querySelector(".game-container") )
-  } */
-
   changeMap(resolve) {
     this.map.overworld.startMap( window.OverworldMaps[this.event.map] );
+    this.map.overworld.initDescription();
     resolve();
   }
+
+  battle(resolve) {
+    const battle = new Battle({
+      onComplete: () => {
+        resolve();
+      }
+    })
+    battle.init(document.querySelector(".game-container"));
+  }
+
 
   init() {
     return new Promise(resolve => {

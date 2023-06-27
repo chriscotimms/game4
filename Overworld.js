@@ -77,7 +77,8 @@ class Overworld {
  
    this.bindActionInput();
    this.bindHeroPositionCheck();
-   //my code
+   
+   //inital Audio Description of room
    this.initDescription();
  
    this.directionInput = new DirectionInput();
@@ -86,7 +87,10 @@ class Overworld {
    this.startGameLoop();
 
    
- 
+   this.map.startCutscene([
+    { type: "battle" }
+   ])
+
  
    // this.map.startCutscene([
    //   { who: "hero", type: "walk",  direction: "down" },

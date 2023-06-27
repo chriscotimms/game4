@@ -3,10 +3,10 @@ class Person extends GameObject {
     super(config);
     this.movingProgressRemaining = 0;
     this.isStanding = false;
+    this.isSpecial = false;
     this.intentPosition = null; //[x,y];
     this.isPlayerControlled = config.isPlayerControlled || false;
     this.useShadow = config.useShadow || false;
-    //console.log("Person.js"+this.useShadow, this);
 
     this.directionUpdate = {
       "up": ["y", -1],
@@ -52,8 +52,8 @@ class Person extends GameObject {
         
         if (this.isPlayerControlled) {
         const aa = state.map.isSpaceTaken(this.x, this.y, this.direction);
-        if (aa.second === "wall"){
-          AccessMessage("a " + aa.second);
+        if (aa.second === "blocked"){
+          AccessMessage(aa.second);
   
         } else {
           AccessMessage(aa.id);
@@ -96,6 +96,7 @@ class Person extends GameObject {
       }, behavior.time)
     }
 
+
   }
 
   updatePosition() {
@@ -115,6 +116,8 @@ class Person extends GameObject {
   }
 
   updateSprite() {
+
+
     if (this.movingProgressRemaining > 0) {
       this.sprite.setAnimation("walk-"+this.direction);
       return;

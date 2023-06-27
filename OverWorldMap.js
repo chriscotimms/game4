@@ -43,7 +43,7 @@ class OverworldMap {
     if (this.walls[`${x},${y}`]) {
       let coll = {
         first: true,
-        second: "wall",
+        second: "blocked",
       }
         return coll;
     }
@@ -283,7 +283,7 @@ window.OverworldMaps = {
         talking: [
           {
             events: [
-              { type: "textMessage", text: "Ah, another glorious summer day in the city. I see the rats have found a dead pigeon. They'll sleep well tonight!" },
+              { type: "textMessage", text: "Ah, another glorious summer day in the city. I see the rats have found a dead pigeon. They'll eat well tonight!" },
             ]
           }
         ]
@@ -346,9 +346,11 @@ window.OverworldMaps = {
 
 
 Livingroom: {
-  lowerSrc: "./images/maps/livingroom.png",
-  upperSrc: "",
+  lowerSrc: "./images/maps/livingroom_lower.png",
+  upperSrc: "./images/maps/livingroom_upper.png",
+
   configObjects: {
+
     hero: {
       type: "Person",
       isPlayerControlled: true,
@@ -356,74 +358,112 @@ Livingroom: {
       x: utils.withGrid(1),
       y: utils.withGrid(1),
     },
-     Bed: {
+
+    Const: {
       type: "Person",
-      x: utils.withGrid(0),
-      y: utils.withGrid(0),
+      useShadow: true,
+      x: utils.withGrid(4),
+      y: utils.withGrid(6),
+      src: "./images/characters/people/constsit.png",
+      talking: [
+        {
+          events: [
+            { type: "textMessage", text: "Const: ..." },
+            { type: "textMessage", text: "Odvar: ...morning...?" },
+            { type: "textMessage", text: "Const: urgh, almost ready to go to bed, just one last line of code to solve..." },
+            { type: "textMessage", text: "Odvar: Anything a noob can help with?" },
+            { type: "textMessage", text: "Const: I'm close to tearing my hair out, I wouldn't want to get you involved!" },
+            { type: "textMessage", text: "Odvar: What a relief! I'm headed out. Good luck!" },
+          ]
+        }
+      ],
+    },
+
+    //Objects
+    Coffee_table: {
+      type: "Person",
+      x: utils.withGrid(2),
+      y: utils.withGrid(5),
       src: "./images/objects/empty.png",
       talking: [
         {
           events: [
-            { type: "textMessage", text: "My consoling log...soon, soon, I'll get to sleep again..." },
+            { type: "textMessage", text: "...the finest in Swedish mass-produced craftsmenship..." },
           ]
         }
       ]
     },
-    Window: {
+
+    Sink: {
       type: "Person",
-      x: utils.withGrid(0),
-      y: utils.withGrid(0),
+      x: utils.withGrid(5),
+      y: utils.withGrid(2),
       src: "./images/objects/empty.png",
       talking: [
         {
           events: [
-            { type: "textMessage", text: "Ah, another glorious summer day in the city. I see the rats have found a dead pigeon. They'll sleep well tonight!" },
+            { type: "textMessage", text: "...jenga pile of dishes again! Someday I'll say something...for now I'll just quietly seethe..." },
+            { type: "textMessage", text: " *quiet seething* " },
           ]
         }
       ]
     },
-    Computer: {
-      type: "Person",
-      x: utils.withGrid(0),
-      y: utils.withGrid(0),
-      src: "./images/objects/empty.png",
-      talking: [
-        {
-          events: [
-            { type: "textMessage", text: "No time to work on my projects now unfortunately. Perhaps after my daily toil... " },
-          ]
-        }
-      ]
-    }
-
-
+    
   },//end of config objects
 
   walls: {
-    /* [utils.asGridCoord(1,0)] : true,
-    [utils.asGridCoord(-1,1)] : true,
-    [utils.asGridCoord(-1,2)] : true,
-    [utils.asGridCoord(0,3)] : true,
-    [utils.asGridCoord(0,4)] : true,
-    [utils.asGridCoord(1,5)] : true,
-    [utils.asGridCoord(2,4)] : true,
-    [utils.asGridCoord(2,3)] : true,
+    //perimeter
+    [utils.asGridCoord(0,1)] : true,
+    [utils.asGridCoord(0,2)] : true,
+    [utils.asGridCoord(-1,3)] : true,
+    [utils.asGridCoord(-1,4)] : true,
+    [utils.asGridCoord(0,5)] : true,
+    [utils.asGridCoord(0,6)] : true,
+    [utils.asGridCoord(1,7)] : true,
+    [utils.asGridCoord(2,7)] : true,
+    [utils.asGridCoord(3,8)] : true,
+    [utils.asGridCoord(4,8)] : true,
+    [utils.asGridCoord(4,9)] : true,
+    [utils.asGridCoord(6,9)] : true, 
+    [utils.asGridCoord(6,8)] : true, 
+    [utils.asGridCoord(7,8)] : true, 
+    [utils.asGridCoord(8,8)] : true, 
+    [utils.asGridCoord(9,7)] : true,
+    [utils.asGridCoord(9,6)] : true,
+    [utils.asGridCoord(9,5)] : true,
+    [utils.asGridCoord(9,4)] : true,
+    [utils.asGridCoord(9,3)] : true,
+    [utils.asGridCoord(9,2)] : true,
+    [utils.asGridCoord(8,1)] : true,
+    [utils.asGridCoord(7,2)] : true,
+    [utils.asGridCoord(6,2)] : true,
+    //[utils.asGridCoord(5,2)] : true,
+    [utils.asGridCoord(4,2)] : true,
     [utils.asGridCoord(3,2)] : true,
-    [utils.asGridCoord(3,1)] : true, */
+    [utils.asGridCoord(2,2)] : true,
+    [utils.asGridCoord(2,1)] : true,
+    //objects in room
+    [utils.asGridCoord(4,5)] : true,
+    [utils.asGridCoord(5,5)] : true,
+
 
   },//end of walls
 
   roomDescription: {
         events: [
-          { type: "textMessage", text:"The Living Room and Kitchen and Workspace"},
+          { type: "textMessage", text:"The Living Room and Kitchen"},
+          { type: "textMessage", text:"...and Workspace"},
+          { type: "textMessage", text:"...and sometimes Dancefloor..."},
+          { type: "textMessage", text:"Odvar stands at the top left of the space. At the top of the room is a kitchenette. At the bottom left is a set of couches."},
+          { type: "textMessage", text:"In the center of the room is a kitchen table, with a person sat facing up toward a laptop. There is an exit at the bottom of the room."},
         ]
   },//end of roomDescription
 
   cutsceneSpaces: {
-    [utils.asGridCoord(1,4)]: [
+    [utils.asGridCoord(1,0)]: [
       {
         events: [
-          { type: "changeMap", map: "Kitchen"}
+          { type: "changeMap", map: "Bedroom"}
         ]
       }
     ],
