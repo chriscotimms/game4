@@ -109,7 +109,14 @@ class OverworldMap {
       return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
     });
     if (!this.isCutscenePlaying && match && match.talking.length) {
-      this.startCutscene(match.talking[0].events)
+
+      const relevantScenario = match.talking.find(scenario => {
+        return(scenario.required || []).every(sf => {
+          return  playerState.storyFlags[sf];
+        })
+      })
+
+      relevantScenario && this.startCutscene(relevantScenario.events)
     }
   }
 
@@ -366,6 +373,14 @@ Livingroom: {
       y: utils.withGrid(6),
       src: "./images/characters/people/constsit.png",
       talking: [
+
+        {
+          required:["OUTSIDE_FIRST"],
+          events:[ 
+            { type: "textMessage", text: "Const: back so soon?" },
+          ]
+        },
+
         {
           events: [
             { type: "textMessage", text: " [tapping sounds]" },
