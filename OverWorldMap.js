@@ -514,7 +514,7 @@ outsideFlat: {
             { type: "textMessage", text: "NaN: ...Ah Odvar! Why didn't you say!" },
             { type: "textMessage", text: " [more indeterminate noises, more loud crashing]" },
             { type: "textMessage", text: "NaN: ...come on in!" },
-            { type: "changeMap", map: "NaN" }
+            { type: "changeMap", map: "Nan" }
           ]
         }
       ]
@@ -623,7 +623,7 @@ outsideFlat: {
 },//end of outsideFlat
 
 
-NaN: {
+Nan: {
   lowerSrc: "./images/maps/NaN.png",
   upperSrc: "",
 
@@ -633,8 +633,8 @@ NaN: {
       type: "Person",
       useShadow: true,
       isPlayerControlled: true,
-      x: utils.withGrid(3),
-      y: utils.withGrid(1),
+      x: utils.withGrid(0),
+      y: utils.withGrid(0),
     },
 
   },//end of config objects
@@ -661,7 +661,7 @@ NaN: {
 
   roomDescription: {
         events: [
-          { type: "textMessage", text:"Odvar exits via steps onto a desolate concrete city path leading left to work or right to NaN's."},
+          { type: "textMessage", text:""},
         ]
   },//end of roomDescription
 
@@ -684,14 +684,14 @@ NaN: {
         ]
       }
     ],
-    [utils.asGridCoord(6,2)]: [
+    /* [utils.asGridCoord(6,2)]: [
       {
         events: [
           { type: "changeMap", map: "NaN" },
           
         ]
       }
-    ],
+    ], */
   },
 
 },//end of NaN
