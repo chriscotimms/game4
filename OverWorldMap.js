@@ -364,7 +364,7 @@ Livingroom: {
       useShadow: true,
       x: utils.withGrid(4),
       y: utils.withGrid(6),
-      src: "./images/characters/people/constSit.png",
+      src: "./images/characters/people/constsit.png",
       talking: [
         {
           events: [
