@@ -725,7 +725,7 @@ outsideFlat: {
             { type: "textMessage", text: "NaN: ...Ah Odvar! Why didn't you say!" },
             { type: "textMessage", text: " [more indeterminate noises, more loud crashing]" },
             { type: "textMessage", text: "NaN: ...come on in!" },
-            { type: "changeMap", map: "Nan" }
+            { type: "changeMap", map: "Nans" }
           ]
         }
       ]
@@ -843,9 +843,9 @@ outsideFlat: {
 },//end of outsideFlat
 
 
-Nan: {
-  lowerSrc: "./images/maps/NaN.png",
-  upperSrc: "",
+Nans: {
+  lowerSrc: "./images/maps/NaN_lower.png",
+  upperSrc: "./images/maps/NaN_upper.png",
 
   configObjects: {
 
@@ -860,6 +860,7 @@ Nan: {
   },//end of config objects
 
   walls: {
+    [utils.asGridCoord(-1,0)] : true,
     /* [utils.asGridCoord(0,0)] : true,
     [utils.asGridCoord(-1,1)] : true,
     [utils.asGridCoord(-1,2)] : true,
@@ -879,27 +880,20 @@ Nan: {
 
   },//end of walls
 
-  roomDescription: {
+  roomDescription: [
+    {
         events: [
-          { type: "textMessage", text:""},
+          { type: "textMessage", text:"nans"},
         ]
-  },//end of roomDescription
+  },
+],//end of roomDescription
 
   cutsceneSpaces: {
     [utils.asGridCoord(0,2)]: [
       {
         events: [
-          { type: "textMessage", text: "I guess it'll be good to get in early for work. I'll have a chance to get ahead on those iterations!" },
-          { type: "textMessage", text: "Although now that I think of it, I do hate my job!" },
-          
-        ]
-      }
-    ],
-    [utils.asGridCoord(4,2)]: [
-      {
-        events: [
-          { type: "textMessage", text: "I haven't seen NaN in a while. This is a much better idea than going to work early!" },
-          { type: "textMessage", text: "She always has some sage advice for me too" },
+          { type: "textMessage", text: "begin the battle scene" },
+          { type: "battle"},
           
         ]
       }
