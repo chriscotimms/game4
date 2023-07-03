@@ -1,34 +1,39 @@
+//Overworld Event
 class Battle {
     constructor({ onComplete }) {
-        this.element = config.element;
-        this.battlecanvas = document.querySelector(".game-canvas");
-        this.battlectx = this.canvas.getContext("2d");
+        console.log(onComplete);
         this.onComplete = onComplete;
     }//end constructor
 
     createElement() {
+
         //POssibly create canvas element for game here
         
         /* this.element = document.createElement("div");
         this.element.classList.add("Battle");
-        this.element.innerHTML = "Battle time"; */
-        
-        this.battlectx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.element.innerHTML = "Battle time";  */
+        this.battleCanvas = document.createElement("canvas");
+        this.battleCanvas.classList.add("Battle");
+        this.ctx = this.battleCanvas.getContext("2d");
+        this.ctx.fillRect(25, 25, 100, 100);
+        this.ctx.clearRect(45, 45, 60, 60);
+        this.ctx.strokeRect(50, 50, 50, 50);
 
-
-
+      
     }
 
     init(container) {
         this.createElement();
-        container.appendChild(this.element);
+        container.appendChild(this.battleCanvas);
+
+        
 
 
         setTimeout(() => {
             console.log("finish");
-            this.element.remove();
+            this.battleCanvas.remove();
             this.onComplete();
-          }, "1500");
+          }, "4000");
 
     }
 
