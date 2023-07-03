@@ -132,8 +132,24 @@ class OverworldMap {
 
   //scene description
   sceneDescription() {
-      this.startCutscene( this.roomDescription.events)
-}
+
+    if (!this.isCutscenePlaying) {
+
+      console.log(this.roomDescription);
+
+      const relevantRoomDescription = this.roomDescription.find(scenario => {
+        return(scenario.required || []).every(sf => {
+          return  playerState.storyFlags[sf];
+        })
+      })
+
+      relevantRoomDescription && this.startCutscene(relevantRoomDescription.events)
+     
+    } 
+
+
+      //this.startCutscene( this.roomDescription.events)
+  }//end of sceneDescription
 
 
 
@@ -326,7 +342,14 @@ window.OverworldMaps = {
 
     },//end of walls
 
-    roomDescription: {
+    roomDescription: [
+      {
+        required: ["OUTSIDE_FIRST"],
+        events: [
+          { type: "textMessage", text:"Odvars Bedroom. There is a bed in the center, a window to the top left, and a computer to the top right."},
+        ]
+    },
+      {
           events: [
             { type: "textMessage", text:"Odvar awakes in their small bedroom. There is a bed in the center, a desk to the right, and Odvar stands on the left by a window."},
             /* { type: "textMessage", text:"The bed is unmade, there are clothes on the floor, and there is an exit at the bottom of the room"},
@@ -337,7 +360,8 @@ window.OverworldMaps = {
             { type: "textMessage", text:"Odvar: ...lived in!"},
             { type: "textMessage", text:"Odvar: ...besides, I didn't know I'd be having guests!"}, */
           ]
-    },//end of roomDescription
+      },
+    ],//end of roomDescription
 
     cutsceneSpaces: {
       [utils.asGridCoord(1,4)]: [
@@ -386,14 +410,161 @@ Livingroom: {
             { type: "textMessage", text: " [tapping sounds]" },
             { type: "textMessage", text: "Odvar: ...morning...?" },
             { type: "textMessage", text: "Const: urgh, almost ready to go to bed, just one last line of code to solve..." },
-            { type: "textMessage", text: "Odvar: It's quite a push to offer help, but anything a noob can help with?" },
-            { type: "textMessage", text: "Const: I'm close to tearing my hair out! I'm stuck on a \"for\" loop...but...it keeps returning undefined..." },
+            { type: "textMessage", text: "Odvar: Anything a noob can help with?" },
+            { type: "textMessage", text: "Const: I'm close to tearing my hair out! I'm stuck on a \"for\" loop...but...it keeps returning...undefined..." },
+            { type: "textMessage", text: "Const: F\!\?\!\?\!\*\!\£\&\^\$\\!\!\!\!\!" },
             { type: "textMessage", text: " [awkward silence as Odvar leans in pretending to scrutinise code]" },
             { type: "textMessage", text: "Const: Don't worry, I'll...figure...something..." },
+            { type: "textMessage", text: "Odvar: ...jeez, you're really pushing yourself hard!" },
             { type: "textMessage", text: "Const: ...aha! Odvar you genius! The Push function!" },
-            { type: "textMessage", text: "Odvar: What a relief! I'm headed out. Good luck!" },
+            { type: "textMessage", text: "Odvar: What a relief! ...I mean, uh, no problem!" },
+            { type: "textMessage", text: "Odvar: ...actually, my mother always said I was a genius!" },
+            { type: "textMessage", text: "Odvar: I'm headed out for the day. Good luck!" },
           ]
         }
+      ],
+    },
+
+    //Objects
+    Coffee_table: {
+      type: "Person",
+      x: utils.withGrid(2),
+      y: utils.withGrid(5),
+      src: "./images/objects/empty.png",
+      talking: [
+        {
+          events: [
+            { type: "textMessage", text: "...the finest in Swedish mass-produced craftsmenship..." },
+          ]
+        }
+      ]
+    },
+
+    Sink: {
+      type: "Person",
+      x: utils.withGrid(5),
+      y: utils.withGrid(2),
+      src: "./images/objects/empty.png",
+      talking: [
+        {
+          events: [
+            { type: "textMessage", text: "...if it isn't old Mount Jenga! Someday I'll say something...for now I'll just quietly seethe..." },
+            { type: "textMessage", text: " [quiet seething]" },
+          ]
+        }
+      ]
+    },
+    
+  },//end of config objects
+
+  walls: {
+    //perimeter
+    [utils.asGridCoord(0,1)] : true,
+    [utils.asGridCoord(0,2)] : true,
+    [utils.asGridCoord(-1,3)] : true,
+    [utils.asGridCoord(-1,4)] : true,
+    [utils.asGridCoord(0,5)] : true,
+    [utils.asGridCoord(0,6)] : true,
+    [utils.asGridCoord(1,7)] : true,
+    [utils.asGridCoord(2,7)] : true,
+    [utils.asGridCoord(3,8)] : true,
+    [utils.asGridCoord(4,8)] : true,
+    [utils.asGridCoord(4,9)] : true,
+    [utils.asGridCoord(6,9)] : true, 
+    [utils.asGridCoord(6,8)] : true, 
+    [utils.asGridCoord(7,8)] : true, 
+    [utils.asGridCoord(8,8)] : true, 
+    [utils.asGridCoord(9,7)] : true,
+    [utils.asGridCoord(9,6)] : true,
+    [utils.asGridCoord(9,5)] : true,
+    [utils.asGridCoord(9,4)] : true,
+    [utils.asGridCoord(9,3)] : true,
+    [utils.asGridCoord(9,2)] : true,
+    [utils.asGridCoord(8,1)] : true,
+    [utils.asGridCoord(7,2)] : true,
+    [utils.asGridCoord(6,2)] : true,
+    //[utils.asGridCoord(5,2)] : true,
+    [utils.asGridCoord(4,2)] : true,
+    [utils.asGridCoord(3,2)] : true,
+    [utils.asGridCoord(2,2)] : true,
+    [utils.asGridCoord(2,1)] : true,
+    //objects in room
+    [utils.asGridCoord(4,5)] : true,
+    [utils.asGridCoord(5,5)] : true,
+
+
+  },//end of walls
+
+  roomDescription: [
+    {
+      required:["OUTSIDE_FIRST"],
+      events: [
+        { type: "textMessage", text:"The Living Room and Kitchen from outside"},
+      ]
+  },
+    {
+        events: [
+          { type: "textMessage", text:"The Living Room and Kitchen"},
+          { type: "textMessage", text:"...and Workspace"},
+          { type: "textMessage", text:"...and sometimes Dancefloor..."},
+          { type: "textMessage", text:"Odvar: ...it's not a Hub though. Everything else might be becoming a Hub, but this is definitely NOT a Hub!"},
+          { type: "textMessage", text:"Odvar stands at the top left of the space. At the top of the room is a kitchenette. At the bottom left is a set of couches."},
+          { type: "textMessage", text:"In the center of the room is a kitchen table, with a person sat facing up toward a laptop. There is an exit at the bottom of the room."},
+        ]
+    },
+    
+], //end of roomDescription
+
+
+  cutsceneSpaces: {
+    [utils.asGridCoord(1,0)]: [
+      {
+        events: [
+          { type: "changeMap", map: "Bedroom"}
+        ]
+      }
+    ],
+    [utils.asGridCoord(5,9)]: [
+      {
+        events: [
+          { type: "changeMap", map: "outsideFlat"},
+          
+        ]
+      }
+    ],
+  },//end of cutsceneSpaces
+
+},//end of Livingroom
+
+Livingroom_fromOutside: {
+  lowerSrc: "./images/maps/livingroom_lower.png",
+  upperSrc: "./images/maps/livingroom_upper.png",
+
+  configObjects: {
+
+    hero: {
+      type: "Person",
+      isPlayerControlled: true,
+      useShadow: true,
+      x: utils.withGrid(5),
+      y: utils.withGrid(8),
+    },
+
+    Const: {
+      type: "Person",
+      useShadow: true,
+      x: utils.withGrid(4),
+      y: utils.withGrid(6),
+      src: "./images/characters/people/constsit.png",
+      talking: [
+
+        {
+          required:["OUTSIDE_FIRST"],
+          events:[ 
+            { type: "textMessage", text: "Const: back so soon?" },
+          ]
+        },
+
       ],
     },
 
@@ -470,11 +641,8 @@ Livingroom: {
   roomDescription: {
         events: [
           { type: "textMessage", text:"The Living Room and Kitchen"},
-          { type: "textMessage", text:"...and Workspace"},
-          { type: "textMessage", text:"...and sometimes Dancefloor..."},
-          { type: "textMessage", text:"Odvar: ...it's not a Hub though. Everything else might be becoming a Hub, but this is definitely NOT a Hub!"},
-          { type: "textMessage", text:"Odvar stands at the top left of the space. At the top of the room is a kitchenette. At the bottom left is a set of couches."},
-          { type: "textMessage", text:"In the center of the room is a kitchen table, with a person sat facing up toward a laptop. There is an exit at the bottom of the room."},
+          { type: "textMessage", text:"Odvar stands at the bottom of the space at the exit to outside. At the top of the room is a kitchenette. At the bottom left is a set of couches."},
+          { type: "textMessage", text:"In the center of the room is a kitchen table, with a person sat facing up toward a laptop. There is an exit to Odvars' bedroom at the top left."},
         ]
   },//end of roomDescription
 
@@ -489,19 +657,21 @@ Livingroom: {
     [utils.asGridCoord(5,9)]: [
       {
         events: [
-          { type: "changeMap", map: "outsideFlat"}
+          { type: "changeMap", map: "outsideFlat"},
+          { type: "addStoryFlag", flag:"OUTSIDE_FIRST"}
         ]
       }
     ],
   },//end of cutsceneSpaces
 
-},//end of Livingroom
+},//end of Livingroom_fromOutside
 
 
 outsideFlat: {
   lowerSrc: "./images/maps/outsideFlat_lower.png",
   upperSrc: "./images/maps/outsideFlat_upper.png",
 
+  //entering NaN's occurs after speaking
   configObjects: {
 
     hero: {
@@ -511,6 +681,32 @@ outsideFlat: {
       x: utils.withGrid(5),
       y: utils.withGrid(1),
     },
+    Stranger: {
+      type: "Person",
+      useShadow: false,
+      isPlayerControlled: false,
+      x: utils.withGrid(14),
+      y: utils.withGrid(1),
+      src: "./images/characters/people/npc1.png",
+      behaviorLoop: [
+        { type: "stand",  direction: "left", time: 3000 },
+        { type: "stand",  direction: "left", time: 3000 },
+        { type: "walk",  direction: "up" },
+        { type: "stand",  direction: "left", time: 1000 },
+        { type: "stand",  direction: "left", time: 1000 },
+        { type: "walk",  direction: "down" },
+      ],
+      talking: [
+        {
+          events: [
+            { type: "textMessage", text: "Stranger: Did you hear about the mansplainer who fell down a manhole?", faceHero:"Stranger"},
+            { type: "textMessage", text: "Odvar: ..." },
+            { type: "textMessage", text: "Stranger: ...it was a well, actually!" },
+          ]
+        }
+      ]
+    },
+
     NaN: {
       type: "Person",
       useShadow: false,
@@ -545,7 +741,7 @@ outsideFlat: {
     [utils.asGridCoord(1,0)] : true,
     [utils.asGridCoord(2,0)] : true,
     [utils.asGridCoord(4,0)] : true,
-    [utils.asGridCoord(5,0)] : true,
+    //[utils.asGridCoord(5,0)] : true,
     [utils.asGridCoord(6,0)] : true,
     [utils.asGridCoord(7,0)] : true,
     [utils.asGridCoord(8,0)] : true,
@@ -597,14 +793,23 @@ outsideFlat: {
 
   },//end of walls
 
-  roomDescription: {
+  roomDescription: [
+    { 
+      required: ["OUTSIDE_FIRST"],
+      events: [
+        { type: "textMessage", text:"Odvar: Still pretty grim out here..!"},
+      ]
+},
+    {
         events: [
           { type: "textMessage", text:"Odvar exits via steps onto a desolate concrete city path leading left to work or right to NaN's."},
           { type: "textMessage", text:"Odvar: Its pretty grim alright..!"},
           { type: "textMessage", text: "I could get to work early..."},
           { type: "textMessage", text: "...or I could use the extra time to check up on NaN?"},
+          { type: "addStoryFlag", flag:"OUTSIDE_FIRST"}
         ]
-  },//end of roomDescription
+  },
+],//end of roomDescription
 
   cutsceneSpaces: {
     [utils.asGridCoord(0,2)]: [
@@ -625,14 +830,14 @@ outsideFlat: {
         ]
       }
     ],
-    /* [utils.asGridCoord(6,2)]: [
+    [utils.asGridCoord(5,0)]: [
       {
         events: [
-          { type: "changeMap", map: "NaN" },
+          { type: "changeMap", map: "Livingroom" },
           
         ]
       }
-    ], */
+    ], 
   },
 
 },//end of outsideFlat
