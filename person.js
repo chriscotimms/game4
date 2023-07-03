@@ -7,6 +7,7 @@ class Person extends GameObject {
     this.intentPosition = null; //[x,y];
     this.isPlayerControlled = config.isPlayerControlled || false;
     this.useShadow = config.useShadow || false;
+    this.isOnce = config.isOnce || false;
 
     this.directionUpdate = {
       "up": ["y", -1],
@@ -49,15 +50,19 @@ class Person extends GameObject {
       
       
       if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-        
+       
+
         if (this.isPlayerControlled) {
         const aa = state.map.isSpaceTaken(this.x, this.y, this.direction);
+
         if (aa.second === "blocked"){
           AccessMessage(aa.second);
-  
+        /* } else if (aa.isOnce) {  
+          AccessMessage("disappear");
+          AccessMessage(aa.isOnce); */
         } else {
           AccessMessage(aa.id);
-    
+          console.log(aa);
         }
         
       }; 
@@ -73,6 +78,11 @@ class Person extends GameObject {
       //Ready to walk!
       //state.map.moveWall(this.x, this.y, this.direction);
       this.movingProgressRemaining = 16;
+
+      //I think here is where to insert objects disappearing?
+
+
+
       const intentPosition = utils.nextPosition(this.x, this.y, this.direction);
       this.intentPosition = [
         intentPosition.x,

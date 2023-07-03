@@ -15,9 +15,7 @@ class Battle {
         this.battleCanvas = document.createElement("canvas");
         this.battleCanvas.classList.add("Battle");
         this.ctx = this.battleCanvas.getContext("2d");
-        this.ctx.fillRect(25, 25, 100, 100);
-        this.ctx.clearRect(45, 45, 60, 60);
-        this.ctx.strokeRect(50, 50, 50, 50);
+        
 
       
     }
@@ -26,7 +24,9 @@ class Battle {
         this.createElement();
         container.appendChild(this.battleCanvas);
 
-        
+        this.ctx.fillRect(25, 25, 200, 200);
+        this.ctx.clearRect(45, 45, 60, 60);
+        this.ctx.strokeRect(50, 50, 50, 50);
 
 
         setTimeout(() => {

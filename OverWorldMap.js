@@ -52,7 +52,7 @@ class OverworldMap {
 
     //check for game objects at this position
     return Object.values(this.gameObjects).find(obj => {
-      if (obj.x === x && obj.y === y) {
+      if (obj.x === x && obj.y === y && !obj.isOnce) {
           return true; 
       }
       if (obj.intentPosition && obj.intentPosition[0] === x && obj.intentPosition && obj.intentPosition[1] === y) {
@@ -853,6 +853,14 @@ Nans: {
       type: "Person",
       useShadow: true,
       isPlayerControlled: true,
+      x: utils.withGrid(0),
+      y: utils.withGrid(0),
+    },
+    objectA: {
+      type: "Person",
+      isOnce: true,
+      useShadow: true,
+      isPlayerControlled: false,
       x: utils.withGrid(0),
       y: utils.withGrid(0),
     },
