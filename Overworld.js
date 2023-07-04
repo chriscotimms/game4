@@ -54,11 +54,12 @@ class Overworld {
     document.addEventListener("PersonWalkingComplete", e => {
       if (e.detail.whoId === "hero") {
         //Hero's position has changed
-        this.map.checkForFootstepCutscene()
+        this.map.FootstepCutscene()
       }
     })
   }
-
+  
+  //added room description each time you enter a room
   initDescription() {
     // /console.log(this.roomDescription.events[0]);
     this.map.sceneDescription();

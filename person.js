@@ -7,7 +7,9 @@ class Person extends GameObject {
     this.intentPosition = null; //[x,y];
     this.isPlayerControlled = config.isPlayerControlled || false;
     this.useShadow = config.useShadow || false;
-    this.isOnce = config.isOnce || false;
+
+  
+
 
     this.directionUpdate = {
       "up": ["y", -1],
@@ -46,7 +48,6 @@ class Person extends GameObject {
     if (behavior.type === "walk") {
       //Stop here if space is not free
 
-      /* console.log(state.map.checkPositionForAccess(this.x, this.y, this.direction)); */
       
       
       if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
@@ -57,9 +58,9 @@ class Person extends GameObject {
 
         if (aa.second === "blocked"){
           AccessMessage(aa.second);
-        /* } else if (aa.isOnce) {  
+        /* } else if (aa.collectible) {  
           AccessMessage("disappear");
-          AccessMessage(aa.isOnce); */
+          AccessMessage(aa.collectible); */
         } else {
           AccessMessage(aa.id);
           console.log(aa);
@@ -79,15 +80,19 @@ class Person extends GameObject {
       //state.map.moveWall(this.x, this.y, this.direction);
       this.movingProgressRemaining = 16;
 
-      //I think here is where to insert objects disappearing?
 
-
+      //console.log((state.map.isCollectible(this.x, this.y)));
+      /* if (state.map.isCollectible(this.x, this.y)) {
+        console.log("Collectible");
+      } */
 
       const intentPosition = utils.nextPosition(this.x, this.y, this.direction);
       this.intentPosition = [
         intentPosition.x,
         intentPosition.y,
       ];
+
+
 
       if (!state.map.isCutscenePlaying && this.isPlayerControlled && state.arrow) {
       AccessMessageWalk("tile x:"+utils.withoutGrid(this.intentPosition[0])+", y:"+utils.withoutGrid(this.intentPosition[1]) );

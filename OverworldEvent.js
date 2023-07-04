@@ -67,7 +67,6 @@ class OverworldEvent {
   battle(resolve) {
     const battle = new Battle({
 
-      
       onComplete: () => {
         resolve();
       }
@@ -80,6 +79,15 @@ class OverworldEvent {
     resolve();
   }
 
+  craftingMenu(resolve) {
+    const menu = new CraftingMenu({
+      //pizzas: this.event.pizzas,
+      onComplete: () => {
+        resolve();
+      }
+    })
+    menu.init(document.querySelector(".game-container"))
+  }
 
   init() {
     return new Promise(resolve => {

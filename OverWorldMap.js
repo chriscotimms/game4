@@ -48,11 +48,9 @@ class OverworldMap {
         return coll;
     }
 
-    
-
     //check for game objects at this position
     return Object.values(this.gameObjects).find(obj => {
-      if (obj.x === x && obj.y === y && !obj.isOnce) {
+      if (obj.x === x && obj.y === y) {
           return true; 
       }
       if (obj.intentPosition && obj.intentPosition[0] === x && obj.intentPosition && obj.intentPosition[1] === y) {
@@ -60,6 +58,40 @@ class OverworldMap {
     }
     })
   }//end isSpaceTaken
+
+
+
+  /* isCollectible(currentX, currentY) {
+    const x = utils.withoutGrid(currentX);
+    const y = utils.withoutGrid(currentY);
+    const matchCollectible = Object.values(this.gameObjects).find(obj => {
+      if (obj.x === x && obj.y === y && obj.isCollectible) {
+          console.log("matchCollectible");
+          return [x, y];
+      }
+    }) */
+    
+    //console.log("from inside isCollectible function ", x, y);
+    //return [x, y];
+
+    /* if (this.walls[`${x},${y}`]) {
+      let coll = {
+        first: true,
+        second: "blocked",
+      }
+        return coll;
+    }
+
+    //check for game objects at this position
+    return Object.values(this.gameObjects).find(obj => {
+      if (obj.x === x && obj.y === y && !obj.collectible) {
+          return true; 
+      }
+      if (obj.intentPosition && obj.intentPosition[0] === x && obj.intentPosition && obj.intentPosition[1] === y) {
+        return false;
+    }
+    }) */
+  //}//end isSpaceTaken
 
  
 
@@ -73,8 +105,12 @@ class OverworldMap {
       if (object.type === "Person") {
         instance = new Person(object);
       }
+      if (object.type === "collectible1") {
+        instance = new collectible1(object);
+      }
+      
       this.gameObjects[key] = instance;
-      this.gameObjects[key].id = key;
+      this.gameObjects[key].id = key; 
       instance.mount(this);
 
 
@@ -120,7 +156,7 @@ class OverworldMap {
     }
   }
 
-  checkForFootstepCutscene() {
+  FootstepCutscene() {
     const hero = this.gameObjects["hero"];
     if (!this.isCutscenePlaying) {
     }
@@ -129,6 +165,10 @@ class OverworldMap {
       this.startCutscene( match[0].events )
     }
   }
+
+
+
+
 
   //scene description
   sceneDescription() {
@@ -838,7 +878,7 @@ outsideFlat: {
         ]
       }
     ], 
-  },
+  },//end of cutSceneSpaces
 
 },//end of outsideFlat
 
@@ -856,36 +896,21 @@ Nans: {
       x: utils.withGrid(0),
       y: utils.withGrid(0),
     },
-    objectA: {
-      type: "Person",
-      isOnce: true,
-      useShadow: true,
-      isPlayerControlled: false,
-      x: utils.withGrid(0),
-      y: utils.withGrid(0),
-    },
+    collectibleObjectA: {
+      type: "collectible1",
+      x: utils.withGrid(1),
+      y: utils.withGrid(1),
+      storyFlag:"USED_collectibleObjectA",
+      pizzas: ["1a", "2a"],
+    }, 
+  
+  
 
   },//end of config objects
 
   walls: {
     [utils.asGridCoord(-1,0)] : true,
-    /* [utils.asGridCoord(0,0)] : true,
-    [utils.asGridCoord(-1,1)] : true,
-    [utils.asGridCoord(-1,2)] : true,
-    [utils.asGridCoord(-1,3)] : true,
-    [utils.asGridCoord(1,0)] : true,
-    [utils.asGridCoord(2,0)] : true,
-    [utils.asGridCoord(4,0)] : true,
-    [utils.asGridCoord(5,0)] : true,
-    [utils.asGridCoord(6,0)] : true,
-    [utils.asGridCoord(0,4)] : true,
-    [utils.asGridCoord(1,4)] : true,
-    [utils.asGridCoord(2,4)] : true, 
-    [utils.asGridCoord(3,4)] : true,
-    [utils.asGridCoord(4,4)] : true,
-    [utils.asGridCoord(5,4)] : true,
-    [utils.asGridCoord(6,4)] : true, */
-
+    
   },//end of walls
 
   roomDescription: [
@@ -906,6 +931,7 @@ Nans: {
         ]
       }
     ],
+  
     /* [utils.asGridCoord(6,2)]: [
       {
         events: [
@@ -914,8 +940,14 @@ Nans: {
         ]
       }
     ], */
-  },
+  },//end of cutSceneSpaces
+
+
 
 },//end of NaN
+
+
+
+
 
 }//end of window.OverworldMaps
