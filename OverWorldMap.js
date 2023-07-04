@@ -901,7 +901,7 @@ Nans: {
       x: utils.withGrid(1),
       y: utils.withGrid(1),
       storyFlag:"USED_collectibleObjectA",
-      pizzas: ["1a", "2a"],
+      pizzas: ["v001", "f001"],
     }, 
   
   

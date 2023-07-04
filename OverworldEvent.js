@@ -81,7 +81,7 @@ class OverworldEvent {
 
   craftingMenu(resolve) {
     const menu = new CraftingMenu({
-      //pizzas: this.event.pizzas,
+      pizzas: this.event.pizzas,
       onComplete: () => {
         resolve();
       }

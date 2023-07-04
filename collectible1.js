@@ -11,7 +11,7 @@ class collectible1 extends GameObject {
           currentAnimation: "used-down"
         });
         this.storyFlag = config.storyFlag;
-        //this.pizzas = config.pizzas; -->reintroduce once menu set up
+        this.pizzas = config.pizzas;
 
         this.talking = [
             {
@@ -23,7 +23,7 @@ class collectible1 extends GameObject {
             {
                 events: [
                     { type:"textMessage", text: "want to use it?"},
-                    { type: "craftingMenu"},//, pizzas: this.pizzas}, 
+                    { type: "craftingMenu", pizzas: this.pizzas}, 
                     { type:"addStoryFlag", flag: this.storyFlag },
                 ]
             }

@@ -5,14 +5,25 @@ class CraftingMenu {
     }//end constructor
 
     getOptions() {
-        return [
-            { label: "Test", description: "crafting will go here!"}
-        ]
+        return this.pizzas.map(id => {
+            const base = Pizzas[id];
+            return {
+                label: base.name,
+                description: base.description,
+                handler: () => {
+                    //create a way to add items
+
+                    playerState.addPizza(id);
+                    this.close();
+                }
+            }
+        })
     }
 
     createElement() {
         this.element = document.createElement("div");
         this.element.classList.add("CraftingMenu");
+        this.element.classList.add("overlayMenu");
         this.element.innerHTML = (`
         <h2>Create a Pizza</h2>
         `)
