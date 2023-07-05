@@ -59,7 +59,11 @@ class OverworldEvent {
   }
 
   changeMap(resolve) {
-    this.map.overworld.startMap( window.OverworldMaps[this.event.map] );
+    this.map.overworld.startMap( window.OverworldMaps[this.event.map], {
+      x: this.event.x,
+      y: this.event.y,
+      direction: this.event.direction,
+    });
     this.map.overworld.initDescription();
     resolve();
   }

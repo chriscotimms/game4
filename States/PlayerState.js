@@ -10,15 +10,6 @@ class PlayerState {
                 level: 1,
                 status: {type:"saucy"},
             },
-            "p1": {
-                pizzaId:"s001",
-                hp:1,
-                maxHp: 50,
-                xp: 90,
-                maxXp: 100,
-                level: 1,
-                status: {type:"saucy"},
-            },
             "p2": {
                 pizzaId:"v001",
                 hp:50,
@@ -26,7 +17,7 @@ class PlayerState {
                 xp: 75,
                 maxXp: 100,
                 level: 1,
-                status: {type:"saucy"},
+                status: {type:"veg-tastic"},
             },
             "p3": {
                 pizzaId:"f001",
@@ -35,7 +26,7 @@ class PlayerState {
                 xp: 75,
                 maxXp: 100,
                 level: 1,
-                status: {type:"saucy"},
+                status: {type:"mushie"},
             },
         }
         this.lineup = ["p1"];

@@ -407,7 +407,13 @@ window.OverworldMaps = {
       [utils.asGridCoord(1,4)]: [
         {
           events: [
-            { type: "changeMap", map: "Livingroom"}
+            { 
+              type: "changeMap", 
+              map: "Livingroom",
+              x: utils.withGrid(1),
+              y: utils.withGrid(1),
+              direction:"down"
+            }
           ]
         }
       ],
@@ -539,7 +545,8 @@ Livingroom: {
     {
       required:["OUTSIDE_FIRST"],
       events: [
-        { type: "textMessage", text:"The Living Room and Kitchen from outside"},
+        { type: "textMessage", text:"The Living Room and Kitchen.At the top of the room is a kitchenette. At the bottom left is a set of couches."},
+        { type: "textMessage", text:"In the center of the room is a kitchen table, with a person sat facing up toward a laptop. There is an exit at the bottom of the room."},
       ]
   },
     {
@@ -560,14 +567,23 @@ Livingroom: {
     [utils.asGridCoord(1,0)]: [
       {
         events: [
-          { type: "changeMap", map: "Bedroom"}
+          { 
+            type: "changeMap", 
+            map: "Bedroom",
+            x: utils.withGrid(1),
+            y: utils.withGrid(4),
+            direction:"up"}
         ]
       }
     ],
     [utils.asGridCoord(5,9)]: [
       {
         events: [
-          { type: "changeMap", map: "outsideFlat"},
+          { type: "changeMap", 
+          map: "outsideFlat",
+          x: utils.withGrid(5),
+          y: utils.withGrid(1),
+          direction:"down"},
           
         ]
       }
@@ -576,7 +592,7 @@ Livingroom: {
 
 },//end of Livingroom
 
-Livingroom_fromOutside: {
+/* Livingroom_fromOutside: {
   lowerSrc: "./images/maps/livingroom_lower.png",
   upperSrc: "./images/maps/livingroom_upper.png",
 
@@ -704,7 +720,7 @@ Livingroom_fromOutside: {
     ],
   },//end of cutsceneSpaces
 
-},//end of Livingroom_fromOutside
+},//end of Livingroom_fromOutside */
 
 
 outsideFlat: {
@@ -873,7 +889,13 @@ outsideFlat: {
     [utils.asGridCoord(5,0)]: [
       {
         events: [
-          { type: "changeMap", map: "Livingroom" },
+          { 
+          type: "changeMap", 
+          map: "Livingroom",
+          x: utils.withGrid(5),
+          y: utils.withGrid(8),
+          direction:"up",
+         },
           
         ]
       }
