@@ -28,8 +28,15 @@ class PlayerState {
                 level: 1,
                 status: {type:"mushie"},
             },
+        },
+    
+        this.plants = {
+            "plant0": {
+                plantId: "fern",
+            },
         }
         this.lineup = ["p1"];
+        this.Plantlineup = ["No plants"];
         this.storyFlags = {
             //"DID_SOMETHING" = true,
             //"DID_ANOTHER_THING" = true,
@@ -51,7 +58,12 @@ class PlayerState {
         }
         this.lineup.push(newId);
         utils.emitEvent("LineupChanged");
-        console.log(this);
+    }
+
+    addPlant(plantId) {
+        this.Plantlineup.push(plantId);
+        console.log(plantId);
+        utils.emitEvent("LineupChanged");
     }
 
 

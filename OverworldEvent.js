@@ -62,8 +62,13 @@ class OverworldEvent {
     console.log(this.event.id, this.map, this.map.gameObjects);
     const match = Object.values(this.map.gameObjects).find(object => {
       if (object.id === this.event.id) {
-        object.visible1 = false;
+        object.visible1 = false;//remove collision  
         console.log(object);
+        playerState.addPlant(object.id);//add object to playerState.Plantlineup[]
+        object.sprite.setAnimation("idle-right");
+        
+        //object.sprite.currentAnimation = "idle-right";
+        //console.log(object.sprite.currentAnimation);
       }
       
     });

@@ -1038,6 +1038,7 @@ Garden: {
           events: [
             { type: "textMessage", text: "...if it isn't old Mount Jenga! Someday I'll say something...for now I'll just quietly seethe..." },
             { type: "objectCollected", id: "Plant1"},
+           
           ]
         }
       ]

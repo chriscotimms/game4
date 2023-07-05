@@ -9,6 +9,7 @@ class GameObject {
         gameObject: this,
         src: config.src || "./images/characters/people/hero.png",
         useShadow: config.useShadow || false,
+      
       });
     
       this.behaviorLoop = config.behaviorLoop || [];
