@@ -81,7 +81,7 @@ class Overworld {
  
   init() {
   //this.startMap(window.OverworldMaps.Bedroom);
-   this.startMap(window.OverworldMaps.outsideFlat);
+   this.startMap(window.OverworldMaps.Garden);
  
  
    this.bindActionInput();

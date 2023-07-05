@@ -50,7 +50,7 @@ class OverworldMap {
 
     //check for game objects at this position
     return Object.values(this.gameObjects).find(obj => {
-      if (obj.x === x && obj.y === y) {
+      if (obj.x === x && obj.y === y && obj.visible1 === true) {
           return true; 
       }
       if (obj.intentPosition && obj.intentPosition[0] === x && obj.intentPosition && obj.intentPosition[1] === y) {
@@ -107,6 +107,9 @@ class OverworldMap {
       }
       if (object.type === "collectible1") {
         instance = new collectible1(object);
+      }
+      if (object.type === "collectible2") {
+        instance = new collectible2(object);
       }
       
       this.gameObjects[key] = instance;
@@ -781,7 +784,13 @@ outsideFlat: {
             { type: "textMessage", text: "NaN: ...Ah Odvar! Why didn't you say!" },
             { type: "textMessage", text: " [more indeterminate noises, more loud crashing]" },
             { type: "textMessage", text: "NaN: ...come on in!" },
-            { type: "changeMap", map: "Nans" }
+            { 
+            type: "changeMap", 
+            map: "Nans",
+            x: utils.withGrid(1),
+            y: utils.withGrid(7),
+            direction:"up",
+           }
           ]
         }
       ]
@@ -915,16 +924,52 @@ Nans: {
       type: "Person",
       useShadow: true,
       isPlayerControlled: true,
-      x: utils.withGrid(0),
-      y: utils.withGrid(0),
-    },
-    collectibleObjectA: {
-      type: "collectible1",
       x: utils.withGrid(1),
-      y: utils.withGrid(1),
+      y: utils.withGrid(7),
+    },
+    NaN: {
+      type: "Person",
+      useShadow: true,
+      isPlayerControlled: false,
+      x: utils.withGrid(3),
+      y: utils.withGrid(2),
+      src: "./images/characters/people/NaN.png",
+      talking: [
+
+        {
+          required:["OUTSIDE_GARDEN"],
+          events:[ 
+            { type: "textMessage", text: "NaN: back so soon?" },
+          ]
+        },
+
+        {
+          events: [
+            { type: "textMessage", text: "NaN: Welcome dear Odvar, how nice of you to drop in!" },
+            { type: "textMessage", text: "NaN: Sorry, I'm in the middle of brewing a new concoction, and it's not going very well!" },
+            { type: "textMessage", text: "Odvar: Anything I can help with?" },
+            { type: "textMessage", text: "NaN: well if you're offering, yes! there is!" },
+            { type: "textMessage", text: "NaN: would you be a dear and grab some herbs from the garden?" },
+            { type: "textMessage", text: "Odvar: As long as you don't need me to collect any nettles, that hurt!" },
+            { 
+              type: "changeMap", 
+              map: "Garden",
+              x: utils.withGrid(1),
+              y: utils.withGrid(16),
+              direction:"right",
+            },
+          ]
+        }
+      ],
+    },
+
+    /* collectibleObjectA: {
+      type: "collectible1",
+      x: utils.withGrid(4),
+      y: utils.withGrid(2),
       storyFlag:"USED_collectibleObjectA",
       pizzas: ["v001", "f001"],
-    }, 
+    },  */
   
   
 
@@ -968,7 +1013,87 @@ Nans: {
 
 },//end of NaN
 
+Garden: {
+  lowerSrc: "./images/maps/Garden_lower.png",
+  upperSrc: "",//"./images/maps/Garden_upper.png",
 
+  configObjects: {
+
+    hero: {
+      type: "Person",
+      useShadow: true,
+      isPlayerControlled: true,
+      visible1: true,
+      x: utils.withGrid(0),
+      y: utils.withGrid(3),
+    },
+    Plant1: {
+      type: "Person",
+      x: utils.withGrid(5),
+      y: utils.withGrid(2),
+      src: "./images/objects/Plant1.png",
+      visible1: true,
+      talking: [
+        {
+          events: [
+            { type: "textMessage", text: "...if it isn't old Mount Jenga! Someday I'll say something...for now I'll just quietly seethe..." },
+            { type: "objectCollected", id: "Plant1"},
+          ]
+        }
+      ]
+    },
+
+    /*  collectibleObjectA: {
+      type: "collectible2",
+      x: utils.withGrid(4),
+      y: utils.withGrid(9),
+      src: "./images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectA",
+      pizzas: ["v001", "f001"],
+    }, */  
+  
+  
+
+  },//end of config objects
+
+  walls: {
+    [utils.asGridCoord(-1,0)] : true,
+    
+  },//end of walls
+
+  roomDescription: [
+    {
+        events: [
+          { type: "textMessage", text:"nans"},
+        ]
+  },
+],//end of roomDescription
+
+  /*
+  cutsceneSpaces: {
+    [utils.asGridCoord(0,2)]: [
+      {
+        events: [
+          { type: "textMessage", text: "begin the battle scene" },
+          { type: "battle"},
+          
+        ]
+      }
+    ],
+  
+     [utils.asGridCoord(6,2)]: [
+      {
+        events: [
+          { type: "changeMap", map: "NaN" },
+          
+        ]
+      }
+    ], 
+  },//end of cutSceneSpaces
+  */
+
+
+},//end of NaN
 
 
 

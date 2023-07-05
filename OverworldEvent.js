@@ -58,6 +58,19 @@ class OverworldEvent {
     message.init( document.querySelector(".game-container") )
   }
 
+  objectCollected(resolve) {
+    console.log(this.event.id, this.map, this.map.gameObjects);
+    const match = Object.values(this.map.gameObjects).find(object => {
+      if (object.id === this.event.id) {
+        object.visible1 = false;
+        console.log(object);
+      }
+      
+    });
+  
+    resolve();
+  }
+
   changeMap(resolve) {
     this.map.overworld.startMap( window.OverworldMaps[this.event.map], {
       x: this.event.x,
@@ -85,7 +98,7 @@ class OverworldEvent {
 
   craftingMenu(resolve) {
     const menu = new CraftingMenu({
-      pizzas: this.event.pizzas,
+      pizzas: this.event.pizzas,//from OverworldMap
       onComplete: () => {
         resolve();
       }

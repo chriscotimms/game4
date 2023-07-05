@@ -5,9 +5,10 @@ class Person extends GameObject {
     this.isStanding = false;
     this.isSpecial = false;
     this.intentPosition = null; //[x,y];
+    this.visible1 = config.visible1;
     this.isPlayerControlled = config.isPlayerControlled || false;
     this.useShadow = config.useShadow || false;
-
+  
   
 
 
@@ -50,7 +51,7 @@ class Person extends GameObject {
 
       
       
-      if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+      if (state.map.isSpaceTaken(this.x, this.y, this.direction) && this.visible1) {
        
 
         if (this.isPlayerControlled) {
