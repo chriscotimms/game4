@@ -58,23 +58,22 @@ class OverworldEvent {
     message.init( document.querySelector(".game-container") )
   }
 
-  objectCollected(resolve) {
-    console.log(this.event.id, this.map, this.map.gameObjects);
+   objectCollected(resolve) {
+    
     const match = Object.values(this.map.gameObjects).find(object => {
       if (object.id === this.event.id) {
         object.visible1 = false;//remove collision  
-        console.log(object);
         playerState.addPlant(object.id);//add object to playerState.Plantlineup[]
-        object.sprite.setAnimation("idle-right");
         
-        //object.sprite.currentAnimation = "idle-right";
-        //console.log(object.sprite.currentAnimation);
+        //object.sprite.setAnimation("idle-right");//either this
+        //object.sprite.currentAnimation = "idle-right";//or this
+        
       }
       
     });
-  
+    console.log(playerState);
     resolve();
-  }
+  } 
 
   changeMap(resolve) {
     this.map.overworld.startMap( window.OverworldMaps[this.event.map], {

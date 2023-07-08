@@ -1027,7 +1027,7 @@ Garden: {
       x: utils.withGrid(0),
       y: utils.withGrid(3),
     },
-    Plant1: {
+    /* Plant1: {
       type: "Person",
       x: utils.withGrid(5),
       y: utils.withGrid(2),
@@ -1042,16 +1042,26 @@ Garden: {
           ]
         }
       ]
-    },
+    }, */
 
-    /*  collectibleObjectA: {
+    Plant1: {
       type: "collectible2",
-      x: utils.withGrid(4),
-      y: utils.withGrid(9),
-      src: "./images/objects/Plant1.png",
+      x: utils.withGrid(5),
+      y: utils.withGrid(2),
+      visible1: true,
+      src: "images/objects/Plant1.png",
       storyFlag:"USED_collectibleObjectA",
       pizzas: ["v001", "f001"],
-    }, */  
+    },   
+    Plant2: {
+      type: "collectible2",
+      x: utils.withGrid(5),
+      y: utils.withGrid(3),
+      visible1: true,
+      src: "images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectB",
+      pizzas: ["v001", "f001"],
+    }, 
   
   
 

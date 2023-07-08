@@ -1,18 +1,22 @@
 class collectible2 extends GameObject {
     constructor(config) {
         super(config);
+
+        this.id = config.id;
+        this.visible1 = config.visible1;
+        console.log(this.visible1);
         this.sprite = new Sprite({
           gameObject: this,
-          src: config.src,
+          src: config.src,// || "images/objects/Plant1.png",
           animations: {
-            "used-down"   : [ [0,0] ],
-            "unused-down" : [ [1,0] ],
+            "used-down"   : [ [1,0] ],
+            "unused-down" : [ [0,0] ],
           },
-          currentAnimation: "used-down"
+          currentAnimation: "used-down",
         });
-        console.log(this);
         this.storyFlag = config.storyFlag;
         this.pizzas = config.pizzas;
+        this.plants = config.plants;
 
         this.talking = [
             {
@@ -26,6 +30,7 @@ class collectible2 extends GameObject {
                     { type:"textMessage", text: "want to use it?"},
                     { type: "craftingMenu", pizzas: this.pizzas}, 
                     { type:"addStoryFlag", flag: this.storyFlag },
+                    { type: "objectCollected", id: this.id},
                 ]
             }
         ]
@@ -36,7 +41,9 @@ class collectible2 extends GameObject {
         this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
         ? "used-down"
         : "unused-down"
+    
+       
     }
 
 
-}//end collectible2 class
+}//end collectible1 class
