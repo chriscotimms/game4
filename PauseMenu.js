@@ -1,0 +1,3 @@
+class PauseMenu {
+    constructor({onComplete})
+}

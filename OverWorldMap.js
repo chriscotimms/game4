@@ -3,7 +3,6 @@ class OverworldMap {
     this.overworld = null;
     this.gameObjects = {}; //where live objects are
     this.configObjects = config.configObjects;// config content
-    console.log(this.gameObjects);
 
 
     this.cutsceneSpaces = config.cutsceneSpaces || {};
@@ -940,6 +939,7 @@ Nans: {
           required:["OUTSIDE_GARDEN"],
           events:[ 
             { type: "textMessage", text: "NaN: back so soon?" },
+            { type: "checkMissionComplete", check:["Plant1","Plant2"]},
           ]
         },
 
@@ -958,6 +958,7 @@ Nans: {
               y: utils.withGrid(16),
               direction:"right",
             },
+            { type: "addStoryFlag", flag:"OUTSIDE_GARDEN"}
           ]
         }
       ],
@@ -999,14 +1000,20 @@ Nans: {
       }
     ],
   
-    /* [utils.asGridCoord(6,2)]: [
+    [utils.asGridCoord(7,1)]: [
       {
         events: [
-          { type: "changeMap", map: "NaN" },
+          { 
+          type: "changeMap", 
+          map: "Garden",
+          x: utils.withGrid(1),
+          y: utils.withGrid(2),
+          direction:"right",
+         },
           
         ]
       }
-    ], */
+    ], 
   },//end of cutSceneSpaces
 
 
@@ -1080,28 +1087,24 @@ Garden: {
   },
 ],//end of roomDescription
 
-  /*
+  
   cutsceneSpaces: {
-    [utils.asGridCoord(0,2)]: [
+    [utils.asGridCoord(-1,3)]: [
       {
         events: [
-          { type: "textMessage", text: "begin the battle scene" },
-          { type: "battle"},
+          { 
+          type: "changeMap", 
+          map: "Nans",
+          x: utils.withGrid(7),
+          y: utils.withGrid(1),
+          direction:"left",
+         },
           
         ]
       }
     ],
-  
-     [utils.asGridCoord(6,2)]: [
-      {
-        events: [
-          { type: "changeMap", map: "NaN" },
-          
-        ]
-      }
-    ], 
   },//end of cutSceneSpaces
-  */
+  
 
 
 },//end of NaN

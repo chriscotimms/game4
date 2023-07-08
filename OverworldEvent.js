@@ -100,6 +100,18 @@ class OverworldEvent {
     resolve();
   }
 
+  checkMissionComplete(resolve) {
+    const needed = this.event.check;
+    const retrieved = playerState.Plantlineup;
+    let result = needed.every(i => retrieved.includes(i));
+    console.log(result);
+    //if (playerState.plantlineup === )
+    //if (window.playerState.Plantlineup[this.event.flag] = true){
+      //console.log("complete");
+    
+    resolve();
+  }
+ 
   craftingMenu(resolve) {
     const menu = new CraftingMenu({
       pizzas: this.event.pizzas,//from OverworldMap

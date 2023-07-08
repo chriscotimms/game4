@@ -37,6 +37,7 @@ class PlayerState {
         }
         this.lineup = ["p1"];
         this.Plantlineup = ["No plants"];
+
         this.storyFlags = {
             //"DID_SOMETHING" = true,
             //"DID_ANOTHER_THING" = true,
@@ -62,7 +63,8 @@ class PlayerState {
 
     addPlant(plantId) {
         this.Plantlineup.push(plantId);
-        console.log(plantId);
+        //console.log(plantId);
+        //console.log(this + "from within playerstate");
         utils.emitEvent("LineupChanged");
     }
 

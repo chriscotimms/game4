@@ -9,8 +9,8 @@ class collectible2 extends GameObject {
           gameObject: this,
           src: config.src,// || "images/objects/Plant1.png",
           animations: {
-            "used-down"   : [ [1,0] ],
-            "unused-down" : [ [0,0] ],
+            "used-down"   : [ [0,0] ],
+            "unused-down" : [ [1,0] ],
           },
           currentAnimation: "used-down",
         });

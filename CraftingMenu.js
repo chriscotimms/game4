@@ -40,8 +40,8 @@ class CraftingMenu {
         this.keyboardMenu = new KeyboardMenu({
             descriptionContainer: container
         })
-        this.keyboardMenu.init(this.element)
-        this.keyboardMenu.setOptions(this.getOptions())//specified above
+        this.keyboardMenu.init(this.element);
+        this.keyboardMenu.setOptions(this.getOptions());//specified above
         container.appendChild(this.element);
 
     }
