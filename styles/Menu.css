@@ -1,6 +1,5 @@
 .overlayMenu {
     position:absolute;
-    left:4.5em;
     top: 1em;
     right: 4.5em;
     background: var(--menu-background);
