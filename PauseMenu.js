@@ -6,8 +6,16 @@ class PauseMenu {
     getOptions(pageKey) {
 
         if (pageKey === "root") {
+
         return [
             //all dynamic content
+            {
+                label: "Inventory",
+                description: "Check your inventory",
+                handler: () => {
+                 //to add inventory info
+                }
+            },
             {
                 label: "Save",
                 description: "Save your progress",
@@ -27,13 +35,15 @@ class PauseMenu {
         
 
 
-        return [];
+        return [
+
+        ];
     }
 
 
     createElement() {
         this.element = document.createElement("div");
-        this.element.classList.add("PauseMenu");
+        this.element.classList.add("overlayMenu");
         this.element.innerHTML = (`
         <h2>Pause Menu</h2>
         `)
@@ -50,13 +60,13 @@ class PauseMenu {
     async init (container) {
         this.createElement();
         this.keyboardMenu = new KeyboardMenu({
-            //
+            descriptionContainer: container
         })
         this.keyboardMenu.init(this.element);
         this.keyboardMenu.setOptions(this.getOptions("root"));
 
         container.appendChild(this.element);
-
+        console.log(playerState.Plantlineup, playerState.Plantlineup[0]);
         utils.wait(200);//create option to escape after menu loads
         this.esc = new KeyPressListener("Escape", () => {
             this.close();
