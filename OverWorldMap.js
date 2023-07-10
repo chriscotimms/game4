@@ -449,7 +449,7 @@ Livingroom: {
       visible1: true,
       x: utils.withGrid(4),
       y: utils.withGrid(6),
-      src: "./images/characters/people/constsit.png",
+      src: "images/characters/people/constsit.png",
       talking: [
 
         {
@@ -944,7 +944,7 @@ Nans: {
       visible1: true,
       x: utils.withGrid(4),
       y: utils.withGrid(2),
-      src: "./images/characters/people/Nan.png",
+      src: "images/characters/people/Nan.png",
       talking: [
         {
           required:["OUTSIDE_GARDEN", "OUTSIDE_GARDEN_COMPLETED"],
