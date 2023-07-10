@@ -40,11 +40,11 @@ class GameObject {
       //Don't do anything if there is a more important cutscene or I don't have config to do anything
       //anyway.
       if (this.behaviorLoop.length === 0 || this.isStanding) {
-        return;
+        return;//cut back if no behaviour or character is standing
       }
-      if (map.isCutscenePlaying) {
 
-        //console.log("will retry", this.id)
+      //keep on trerying behaviour until cutscene is finished
+      if (map.isCutscenePlaying) {
         if (this.retryTimeout) {
           clearTimeout(this.retryTimeout);
         }
@@ -52,11 +52,13 @@ class GameObject {
           this.doBehaviorEvent(map);
         }, 1000)
         return;
-      }
+      } 
   
       //Setting up our event with relevant info
+      console.log(this.behaviorLoop);
       let eventConfig = this.behaviorLoop[this.behaviorLoopIndex];
       eventConfig.who = this.id;
+       
   
       //Create an event instance out of our next event config
       const eventHandler = new OverworldEvent({ map, event: eventConfig });

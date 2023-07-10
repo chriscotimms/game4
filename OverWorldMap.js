@@ -766,6 +766,13 @@ outsideFlat: {
       ],
       talking: [
         {
+          required:["OUTSIDE_GARDEN", "OUTSIDE_GARDEN_COMPLETED", "FINISHED_NAN"],
+          events:[ 
+            { type: "textMessage", text: "Stranger: In case you were wondering...", faceHero:"Stranger" },
+            { type: "textMessage", text: "Stranger: I Am A Free, I Am Not Man, A Number!", faceHero:"Stranger" },
+          ]
+        },
+        {
           events: [
             { type: "textMessage", text: "Stranger: Did you hear about the mansplainer who fell down a manhole?", faceHero:"Stranger"},
             { type: "textMessage", text: "Odvar: ..." },
@@ -944,12 +951,19 @@ Nans: {
       visible1: true,
       x: utils.withGrid(4),
       y: utils.withGrid(2),
-      src: "images/characters/people/Nan.png",
+      src: "./images/characters/people/Nan.png",
       talking: [
+        {
+          required:["OUTSIDE_GARDEN", "OUTSIDE_GARDEN_COMPLETED", "FINISHED_NAN"],
+          events:[ 
+            { type: "textMessage", text: "NaN: Odvar, hadn't you'd better be getting to work?", faceHero:"NaN" },
+          ]
+        },
         {
           required:["OUTSIDE_GARDEN", "OUTSIDE_GARDEN_COMPLETED"],
           events:[ 
-            { type: "textMessage", text: "NaN: Odvar, you're a star!", faceHero:"NaN" },
+            { type: "textMessage", text: "NaN: Odvar, you're a star! I can't thank you enough!", faceHero:"NaN" },
+            { type: "textMessage", text: "NaN: You'd better get off to work before you get a reputation!", faceHero:"NaN" },
             { who: "NaN", type: "walk",  direction: "left" },
             { who: "NaN", type: "stand",  direction: "up" },
             { who: "NaN", type: "walk",  direction: "left" },
@@ -957,6 +971,7 @@ Nans: {
             { who: "NaN", type: "walk",  direction: "left" },
             { who: "NaN", type: "walk",  direction: "left" },
             { who: "NaN", type: "walk",  direction: "down" },
+            { type: "addStoryFlag", flag:"FINISHED_NAN"}
           ]
         },
         {
@@ -985,6 +1000,7 @@ Nans: {
           ]
         }
       ],
+      
       behaviorLoop: [
         { type: "stand",  direction: "right", time: 8000 },
       ],
