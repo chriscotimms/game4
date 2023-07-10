@@ -449,7 +449,7 @@ Livingroom: {
       visible1: true,
       x: utils.withGrid(4),
       y: utils.withGrid(6),
-      src: "images/characters/people/constsit.png",
+      src: "images/characters/people/constSit.png",
       talking: [
 
         {
@@ -769,7 +769,7 @@ outsideFlat: {
           required:["OUTSIDE_GARDEN", "OUTSIDE_GARDEN_COMPLETED", "FINISHED_NAN"],
           events:[ 
             { type: "textMessage", text: "Stranger: In case you were wondering...", faceHero:"Stranger" },
-            { type: "textMessage", text: "Stranger: I Am A Free, I Am Not Man, A Number!", faceHero:"Stranger" },
+            { type: "textMessage", text: "Stranger: I Am A Free, I Am Not Man...A Number!", faceHero:"Stranger" },
           ]
         },
         {
@@ -875,6 +875,12 @@ outsideFlat: {
   },//end of walls
 
   roomDescription: [
+    {
+      required: ["OUTSIDE_FIRST", "OUTSIDE_GARDEN"],
+      events: [
+        { type: "textMessage", text:"Outside on the street."},
+      ]
+    },
     { 
       required: ["OUTSIDE_FIRST"],
       events: [
@@ -928,7 +934,6 @@ outsideFlat: {
   },//end of cutSceneSpaces
 
 },//end of outsideFlat
-
 
 Nans: {
   lowerSrc: "./images/maps/NaN_lower.png",
@@ -1072,13 +1077,19 @@ Nans: {
 
   roomDescription: [
     {
+      required: ["OUTSIDE_GARDEN"],
+      events: [
+        { type: "textMessage", text:"NaNs"},
+      ]
+    },
+    {
         events: [
           { type: "textMessage", text:"NaNs House is dark and rustic, five tiles wide by five tiles deep. NaN is stood at the top right center of the room facing a cauldron."},
           { type: "textMessage", text:"The street entrance is to the left of the bottom of the room, and a Garden entrance to the top of the right."},
           { type: "textMessage", text:"There is a table to the center left of the room, and a counter to the top left of the room."},
           { type: "textMessage", text:"Odvar: It's the only place I know where the moss grows inside!"},
         ]
-  },
+    },
 ],//end of roomDescription
 
   cutsceneSpaces: {
@@ -1206,6 +1217,7 @@ Garden: {
     [utils.asGridCoord(0,14)] : true,
     [utils.asGridCoord(0,15)] : true,
     [utils.asGridCoord(0,16)] : true,
+    [utils.asGridCoord(-1,17)] : true,
     [utils.asGridCoord(0,18)] : true,//end of left side
     [utils.asGridCoord(1,19)] : true,//beginning of bottom
     [utils.asGridCoord(2,19)] : true,
@@ -1258,21 +1270,22 @@ Garden: {
     [utils.asGridCoord(7,0)] : true,
     [utils.asGridCoord(6,0)] : true,
     [utils.asGridCoord(5,0)] : true,
-    [utils.asGridCoord(4,0)] : true,
-    [utils.asGridCoord(3,0)] : true,
-    [utils.asGridCoord(2,0)] : true,
-    [utils.asGridCoord(1,0)] : true,//end of top
-    [utils.asGridCoord(4,2)] : true,//begiing of fence
-    [utils.asGridCoord(4,3)] : true,
-    [utils.asGridCoord(4,4)] : true,
-    [utils.asGridCoord(4,5)] : true,
-    [utils.asGridCoord(4,6)] : true,
-    [utils.asGridCoord(4,7)] : true,
-    [utils.asGridCoord(4,8)] : true,
-    [utils.asGridCoord(4,9)] : true,
-    [utils.asGridCoord(4,10)] : true,
-    [utils.asGridCoord(4,11)] : true,
-    [utils.asGridCoord(4,12)] : true,//end fence
+    [utils.asGridCoord(4,-1)] : true,
+    [utils.asGridCoord(3,-1)] : true,
+    [utils.asGridCoord(2,-1)] : true,
+    [utils.asGridCoord(1,-1)] : true,
+    [utils.asGridCoord(0,-1)] : true,//end of top
+    [utils.asGridCoord(3,2)] : true,//beginning of fence
+    [utils.asGridCoord(3,3)] : true,
+    [utils.asGridCoord(3,4)] : true,
+    [utils.asGridCoord(3,5)] : true,
+    [utils.asGridCoord(3,6)] : true,
+    [utils.asGridCoord(3,7)] : true,
+    [utils.asGridCoord(3,8)] : true,
+    [utils.asGridCoord(3,9)] : true,
+    [utils.asGridCoord(3,10)] : true,
+    [utils.asGridCoord(3,11)] : true,
+    [utils.asGridCoord(3,12)] : true,//end fence
     [utils.asGridCoord(1,13)] : true,//begin hedge
     [utils.asGridCoord(2,13)] : true,
     [utils.asGridCoord(3,13)] : true,
@@ -1292,13 +1305,19 @@ Garden: {
 
   roomDescription: [
     {
+      required: ["OUTSIDE_GARDEN"],
+      events: [
+        { type: "textMessage", text:"The Garden"},
+      ]
+    },
+    {
         events: [
           { type: "textMessage", text:"NaNs Garden is eight tiles wide by five tiles deep, with the entrance to Nans house near the bottom of the left side."},
           { type: "textMessage", text:"There are plant beds running in horizontal lines, with some plants that can be harvested."},
           { type: "textMessage", text:"There are hedges marking the edges of the garden, with accessible gaps at the top and bottom right leading to wildly overgrown spaces."},
         ]
-  },
-],//end of roomDescription
+    },
+  ],//end of roomDescription
 
   
   cutsceneSpaces: {
