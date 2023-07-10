@@ -28,7 +28,7 @@ class collectible2 extends GameObject {
             {
                 events: [
                     { type:"textMessage", text: "want to use it?"},
-                    { type: "craftingMenu", pizzas: this.pizzas}, 
+                    //{ type: "craftingMenu", plants: this.plants}, 
                     { type:"addStoryFlag", flag: this.storyFlag },
                     { type: "objectCollected", id: this.id},
                 ]

@@ -322,6 +322,7 @@ window.OverworldMaps = {
         type: "Person",
         useShadow: true,
         isPlayerControlled: true,
+        visible1: true,
         x: utils.withGrid(0),
         y: utils.withGrid(1),
       },
@@ -329,6 +330,7 @@ window.OverworldMaps = {
         type: "Person",
         x: utils.withGrid(1),
         y: utils.withGrid(1),
+        visible1: true,
         src: "./images/objects/empty.png",
         useShadow: false,
         talking: [
@@ -343,6 +345,7 @@ window.OverworldMaps = {
         type: "Person",
         x: utils.withGrid(0),
         y: utils.withGrid(0),
+        visible1: true,
         src: "./images/objects/empty.png",
         useShadow: false,
         talking: [
@@ -357,6 +360,7 @@ window.OverworldMaps = {
         type: "Person",
         x: utils.withGrid(2),
         y: utils.withGrid(0),
+        visible1: true,
         src: "./images/objects/empty.png",
         talking: [
           {
@@ -394,13 +398,13 @@ window.OverworldMaps = {
       {
           events: [
             { type: "textMessage", text:"Odvar awakes in their small bedroom. There is a bed in the center, a desk to the right, and Odvar stands on the left by a window."},
-            /* { type: "textMessage", text:"The bed is unmade, there are clothes on the floor, and there is an exit at the bottom of the room"},
+            { type: "textMessage", text:"The bed is unmade, there are clothes on the floor, and there is an exit at the bottom of the room"},
             { type: "textMessage", text:"Odvar: Hey!...that seems a little ...rude... to call it \"small\" !"},
             { type: "textMessage", text:"Odvar: ...it's...modest...what did the estate agent call it?...\"neat\" !"},
             { type: "textMessage", text:"Odvar: ...and it's not really that messy! Just..."},
             { type: "textMessage", text:"Odvar: ...um..."},
             { type: "textMessage", text:"Odvar: ...lived in!"},
-            { type: "textMessage", text:"Odvar: ...besides, I didn't know I'd be having guests!"}, */
+            { type: "textMessage", text:"Odvar: ...besides, I didn't know I'd be having guests!"},
           ]
       },
     ],//end of roomDescription
@@ -434,6 +438,7 @@ Livingroom: {
       type: "Person",
       isPlayerControlled: true,
       useShadow: true,
+      visible1: true,
       x: utils.withGrid(1),
       y: utils.withGrid(1),
     },
@@ -441,6 +446,7 @@ Livingroom: {
     Const: {
       type: "Person",
       useShadow: true,
+      visible1: true,
       x: utils.withGrid(4),
       y: utils.withGrid(6),
       src: "./images/characters/people/constsit.png",
@@ -476,6 +482,7 @@ Livingroom: {
     //Objects
     Coffee_table: {
       type: "Person",
+      visible1: true,
       x: utils.withGrid(2),
       y: utils.withGrid(5),
       src: "./images/objects/empty.png",
@@ -492,6 +499,7 @@ Livingroom: {
       type: "Person",
       x: utils.withGrid(5),
       y: utils.withGrid(2),
+      visible1: true,
       src: "./images/objects/empty.png",
       talking: [
         {
@@ -736,13 +744,15 @@ outsideFlat: {
       type: "Person",
       useShadow: true,
       isPlayerControlled: true,
+      visible1: true,
       x: utils.withGrid(5),
       y: utils.withGrid(1),
     },
     Stranger: {
       type: "Person",
-      useShadow: false,
+      useShadow: true,
       isPlayerControlled: false,
+      visible1: true,
       x: utils.withGrid(14),
       y: utils.withGrid(1),
       src: "./images/characters/people/npc1.png",
@@ -767,8 +777,9 @@ outsideFlat: {
 
     NaN: {
       type: "Person",
-      useShadow: false,
+      useShadow: true,
       isPlayerControlled: false,
+      visible1: true,
       x: utils.withGrid(23),
       y: utils.withGrid(0),
       src: "./images/objects/empty.png",
@@ -922,6 +933,7 @@ Nans: {
     hero: {
       type: "Person",
       useShadow: true,
+      visible1: true,
       isPlayerControlled: true,
       x: utils.withGrid(1),
       y: utils.withGrid(7),
@@ -930,22 +942,27 @@ Nans: {
       type: "Person",
       useShadow: true,
       isPlayerControlled: false,
+      visible1: true,
       x: utils.withGrid(3),
       y: utils.withGrid(2),
       src: "./images/characters/people/NaN.png",
       talking: [
-
+        {
+          required:["OUTSIDE_GARDEN", "OUTSIDE_GARDEN_COMPLETED"],
+          events:[ 
+            { type: "textMessage", text: "NaN: Odvar, you're a star!", faceHero:"NaN" },
+          ]
+        },
         {
           required:["OUTSIDE_GARDEN"],
           events:[ 
-            { type: "textMessage", text: "NaN: back so soon?" },
-            { type: "checkMissionComplete", check:["Plant1","Plant2"]},
+            { type: "textMessage", text: "NaN: Did you find everything? ...every ingredient counts!", faceHero:"NaN" },
           ]
         },
-
+        
         {
           events: [
-            { type: "textMessage", text: "NaN: Welcome dear Odvar, how nice of you to drop in!" },
+            { type: "textMessage", text: "NaN: Welcome dear Odvar, how nice of you to drop in!", faceHero:"NaN" },
             { type: "textMessage", text: "NaN: Sorry, I'm in the middle of brewing a new concoction, and it's not going very well!" },
             { type: "textMessage", text: "Odvar: Anything I can help with?" },
             { type: "textMessage", text: "NaN: well if you're offering, yes! there is!" },
@@ -962,15 +979,12 @@ Nans: {
           ]
         }
       ],
+      behaviorLoop: [
+        { type: "stand",  direction: "right", time: 8000 },
+      ],
     },
 
-    /* collectibleObjectA: {
-      type: "collectible1",
-      x: utils.withGrid(4),
-      y: utils.withGrid(2),
-      storyFlag:"USED_collectibleObjectA",
-      pizzas: ["v001", "f001"],
-    },  */
+   
   
   
 
@@ -990,11 +1004,20 @@ Nans: {
 ],//end of roomDescription
 
   cutsceneSpaces: {
-    [utils.asGridCoord(0,2)]: [
+    /* [utils.asGridCoord(0,2)]: [
       {
         events: [
           { type: "textMessage", text: "begin the battle scene" },
           { type: "battle"},
+          
+        ]
+      }
+    ], */
+    [utils.asGridCoord(6,1)]: [
+      {
+        events: [
+
+          { type: "checkMissionComplete", check:["Thyme","Rosemary"], flag:"OUTSIDE_GARDEN_COMPLETED"},
           
         ]
       }
@@ -1006,8 +1029,8 @@ Nans: {
           { 
           type: "changeMap", 
           map: "Garden",
-          x: utils.withGrid(1),
-          y: utils.withGrid(2),
+          x: utils.withGrid(0),
+          y: utils.withGrid(16),
           direction:"right",
          },
           
@@ -1051,23 +1074,23 @@ Garden: {
       ]
     }, */
 
-    Plant1: {
+    Thyme: {
       type: "collectible2",
       x: utils.withGrid(5),
       y: utils.withGrid(2),
       visible1: true,
       src: "images/objects/Plant1.png",
       storyFlag:"USED_collectibleObjectA",
-      pizzas: ["v001", "f001"],
+      plants: ["v01", "f01"],
     },   
-    Plant2: {
+    Rosemary: {
       type: "collectible2",
       x: utils.withGrid(5),
       y: utils.withGrid(3),
       visible1: true,
       src: "images/objects/Plant1.png",
       storyFlag:"USED_collectibleObjectB",
-      pizzas: ["v001", "f001"],
+      plants: ["v01", "f01"],
     }, 
   
   
@@ -1082,14 +1105,14 @@ Garden: {
   roomDescription: [
     {
         events: [
-          { type: "textMessage", text:"nans"},
+          { type: "textMessage", text:"The Garden is big, wild and overgrown. It can be hard to find your way around."},
         ]
   },
 ],//end of roomDescription
 
   
   cutsceneSpaces: {
-    [utils.asGridCoord(-1,3)]: [
+    [utils.asGridCoord(0,16)]: [
       {
         events: [
           { 

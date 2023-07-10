@@ -1,10 +1,27 @@
 class CraftingMenu {
-    constructor({ pizzas, onComplete}) {
-        this.pizzas = pizzas;
+    constructor({ plants, onComplete}) {
+        this.plants = plants;
         this.onComplete = onComplete;
     }//end constructor
 
     getOptions() {
+        return this.plants.map(id => {
+            const base = Plants[id];
+            return {
+                label: base.name,
+                description: base.description,
+                handler: () => {
+                    //create a way to add items
+
+                    playerState.addPlant(id);
+                    this.close();
+                }
+            }
+        })
+    }
+
+
+    /* getOptions() {
         return this.pizzas.map(id => {
             const base = Pizzas[id];
             return {
@@ -18,7 +35,7 @@ class CraftingMenu {
                 }
             }
         })
-    }
+    } */
 
     createElement() {
         this.element = document.createElement("div");

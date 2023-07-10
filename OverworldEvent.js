@@ -58,7 +58,7 @@ class OverworldEvent {
     message.init( document.querySelector(".game-container") )
   }
 
-   objectCollected(resolve) {
+  objectCollected(resolve) {
     
     const match = Object.values(this.map.gameObjects).find(object => {
       if (object.id === this.event.id) {
@@ -103,18 +103,19 @@ class OverworldEvent {
   checkMissionComplete(resolve) {
     const needed = this.event.check;
     const retrieved = playerState.Plantlineup;
-    let result = needed.every(i => retrieved.includes(i));
-    console.log(result);
-    //if (playerState.plantlineup === )
-    //if (window.playerState.Plantlineup[this.event.flag] = true){
-      //console.log("complete");
-    
+    let result = needed.every(i => retrieved.includes(i));//check for required collection
+    if (result) {
+    window.playerState.storyFlags[this.event.flag] = true;//if true add flag
+    console.log(this.event.true);
+    } else {
+      console.log(this.event.false);
+    }
     resolve();
   }
  
   craftingMenu(resolve) {
     const menu = new CraftingMenu({
-      pizzas: this.event.pizzas,//from OverworldMap
+      plants: this.event.plants,//from OverworldMap
       onComplete: () => {
         resolve();
       }

@@ -32,7 +32,13 @@ class PlayerState {
     
         this.plants = {
             "plant0": {
-                plantId: "fern",
+                plantId: "Thyme01",
+            },
+            "plant1": {
+                plantId: "Rosemary01",
+            },
+            "plant2": {
+                plantId: "Sage01",
             },
         }
         this.lineup = ["p1"];
