@@ -326,7 +326,7 @@ window.OverworldMaps = {
         x: utils.withGrid(0),
         y: utils.withGrid(1),
       },
-       Bed: {
+      Bed: {
         type: "Person",
         x: utils.withGrid(1),
         y: utils.withGrid(1),
@@ -774,7 +774,6 @@ outsideFlat: {
         }
       ]
     },
-
     NaN: {
       type: "Person",
       useShadow: true,
@@ -943,7 +942,7 @@ Nans: {
       useShadow: true,
       isPlayerControlled: false,
       visible1: true,
-      x: utils.withGrid(3),
+      x: utils.withGrid(4),
       y: utils.withGrid(2),
       src: "./images/characters/people/NaN.png",
       talking: [
@@ -951,6 +950,13 @@ Nans: {
           required:["OUTSIDE_GARDEN", "OUTSIDE_GARDEN_COMPLETED"],
           events:[ 
             { type: "textMessage", text: "NaN: Odvar, you're a star!", faceHero:"NaN" },
+            { who: "NaN", type: "walk",  direction: "left" },
+            { who: "NaN", type: "stand",  direction: "up" },
+            { who: "NaN", type: "walk",  direction: "left" },
+            { who: "NaN", type: "walk",  direction: "down" },
+            { who: "NaN", type: "walk",  direction: "left" },
+            { who: "NaN", type: "walk",  direction: "left" },
+            { who: "NaN", type: "walk",  direction: "down" },
           ]
         },
         {
@@ -967,12 +973,12 @@ Nans: {
             { type: "textMessage", text: "Odvar: Anything I can help with?" },
             { type: "textMessage", text: "NaN: well if you're offering, yes! there is!" },
             { type: "textMessage", text: "NaN: would you be a dear and grab some herbs from the garden?" },
-            { type: "textMessage", text: "Odvar: As long as you don't need me to collect any nettles, that hurt!" },
+            { type: "textMessage", text: "Odvar: As long as you don't need me to collect any more nettles, that really hurt!" },
             { 
               type: "changeMap", 
               map: "Garden",
               x: utils.withGrid(1),
-              y: utils.withGrid(16),
+              y: utils.withGrid(17),
               direction:"right",
             },
             { type: "addStoryFlag", flag:"OUTSIDE_GARDEN"}
@@ -983,7 +989,36 @@ Nans: {
         { type: "stand",  direction: "right", time: 8000 },
       ],
     },
-
+    Cauldron: {
+      type: "Person",
+      x: utils.withGrid(5),
+      y: utils.withGrid(2),
+      visible1: true,
+      src: "./images/objects/empty.png",
+      useShadow: false,
+      talking: [
+        {
+          events: [
+            { type: "textMessage", text: "alluring...smells medicinal...with a whiff of wet dog" },
+          ]
+        }
+      ]
+    },
+    Table: {
+      type: "Person",
+      x: utils.withGrid(1),
+      y: utils.withGrid(4),
+      visible1: true,
+      src: "./images/objects/empty.png",
+      useShadow: false,
+      talking: [
+        {
+          events: [
+            { type: "textMessage", text: "alluring...smells medicinal...with a whiff of wet dog" },
+          ]
+        }
+      ]
+    },
    
   
   
@@ -991,14 +1026,41 @@ Nans: {
   },//end of config objects
 
   walls: {
-    [utils.asGridCoord(-1,0)] : true,
+    [utils.asGridCoord(-1,2)] : true,
+    [utils.asGridCoord(-1,3)] : true,
+    [utils.asGridCoord(-1,4)] : true,
+    [utils.asGridCoord(-1,5)] : true,
+    [utils.asGridCoord(0,6)] : true,
+    [utils.asGridCoord(0,7)] : true,
+    [utils.asGridCoord(2,7)] : true,
+    [utils.asGridCoord(2,6)] : true,
+    [utils.asGridCoord(3,6)] : true,
+    [utils.asGridCoord(4,6)] : true,
+    [utils.asGridCoord(5,6)] : true,
+    [utils.asGridCoord(6,5)] : true,
+    [utils.asGridCoord(6,4)] : true,
+    [utils.asGridCoord(6,3)] : true,
+    [utils.asGridCoord(6,2)] : true,
+    [utils.asGridCoord(7,2)] : true,
+    [utils.asGridCoord(7,0)] : true,
+    [utils.asGridCoord(6,0)] : true,
+    [utils.asGridCoord(5,0)] : true,
+    [utils.asGridCoord(4,0)] : true,
+    [utils.asGridCoord(3,1)] : true,
+    [utils.asGridCoord(2,1)] : true,
+    [utils.asGridCoord(1,1)] : true,
+    [utils.asGridCoord(0,1)] : true,
+    [utils.asGridCoord(2,4)] : true,//table
     
   },//end of walls
 
   roomDescription: [
     {
         events: [
-          { type: "textMessage", text:"nans"},
+          { type: "textMessage", text:"NaNs House is dark and rustic, five tiles wide by five tiles deep. NaN is stood at the top right center of the room facing a cauldron."},
+          { type: "textMessage", text:"The street entrance is to the left of the bottom of the room, and a Garden entrance to the top of the right."},
+          { type: "textMessage", text:"There is a table to the center left of the room, and a counter to the top left of the room."},
+          { type: "textMessage", text:"Odvar: It's the only place I know where the moss grows inside!"},
         ]
   },
 ],//end of roomDescription
@@ -1022,7 +1084,20 @@ Nans: {
         ]
       }
     ],
-  
+    [utils.asGridCoord(1,7)]: [
+      {
+        events: [
+          { 
+          type: "changeMap", 
+          map: "outsideFlat",
+          x: utils.withGrid(23),
+          y: utils.withGrid(1),
+          direction:"down",
+         },
+          
+        ]
+      }
+    ], 
     [utils.asGridCoord(7,1)]: [
       {
         events: [
@@ -1030,13 +1105,13 @@ Nans: {
           type: "changeMap", 
           map: "Garden",
           x: utils.withGrid(0),
-          y: utils.withGrid(16),
+          y: utils.withGrid(17),
           direction:"right",
          },
           
         ]
       }
-    ], 
+    ],
   },//end of cutSceneSpaces
 
 
@@ -1045,7 +1120,7 @@ Nans: {
 
 Garden: {
   lowerSrc: "./images/maps/Garden_lower.png",
-  upperSrc: "",//"./images/maps/Garden_upper.png",
+  upperSrc: "./images/maps/Garden_upper.png",
 
   configObjects: {
 
@@ -1076,21 +1151,21 @@ Garden: {
 
     Thyme: {
       type: "collectible2",
-      x: utils.withGrid(5),
-      y: utils.withGrid(2),
+      x: utils.withGrid(2),
+      y: utils.withGrid(16),
       visible1: true,
       src: "images/objects/Plant1.png",
       storyFlag:"USED_collectibleObjectA",
-      plants: ["v01", "f01"],
+      //plants: ["v01", "f01"],
     },   
     Rosemary: {
       type: "collectible2",
-      x: utils.withGrid(5),
-      y: utils.withGrid(3),
+      x: utils.withGrid(3),
+      y: utils.withGrid(18),
       visible1: true,
       src: "images/objects/Plant1.png",
       storyFlag:"USED_collectibleObjectB",
-      plants: ["v01", "f01"],
+      //plants: ["v01", "f01"],
     }, 
   
   
@@ -1099,20 +1174,119 @@ Garden: {
 
   walls: {
     [utils.asGridCoord(-1,0)] : true,
+    [utils.asGridCoord(-1,1)] : true,
+    [utils.asGridCoord(-1,2)] : true,
+    [utils.asGridCoord(-1,3)] : true,
+    [utils.asGridCoord(-1,4)] : true,
+    [utils.asGridCoord(-1,5)] : true,
+    [utils.asGridCoord(-1,6)] : true,
+    [utils.asGridCoord(-1,7)] : true,
+    [utils.asGridCoord(-1,8)] : true,
+    [utils.asGridCoord(-1,9)] : true,
+    [utils.asGridCoord(-1,10)] : true,
+    [utils.asGridCoord(-1,11)] : true,
+    [utils.asGridCoord(-1,12)] : true,
+    [utils.asGridCoord(0,13)] : true,
+    [utils.asGridCoord(0,14)] : true,
+    [utils.asGridCoord(0,15)] : true,
+    [utils.asGridCoord(0,16)] : true,
+    [utils.asGridCoord(0,18)] : true,//end of left side
+    [utils.asGridCoord(1,19)] : true,//beginning of bottom
+    [utils.asGridCoord(2,19)] : true,
+    [utils.asGridCoord(3,19)] : true,
+    [utils.asGridCoord(4,19)] : true,
+    [utils.asGridCoord(5,19)] : true,
+    [utils.asGridCoord(6,19)] : true,
+    [utils.asGridCoord(7,19)] : true,
+    [utils.asGridCoord(8,19)] : true,
+    [utils.asGridCoord(9,19)] : true,
+    [utils.asGridCoord(10,19)] : true,
+    [utils.asGridCoord(11,19)] : true,
+    [utils.asGridCoord(12,19)] : true,
+    [utils.asGridCoord(13,19)] : true,
+    [utils.asGridCoord(14,19)] : true,
+    [utils.asGridCoord(15,19)] : true,
+    [utils.asGridCoord(16,19)] : true,
+    [utils.asGridCoord(17,19)] : true,
+    [utils.asGridCoord(18,19)] : true,
+    [utils.asGridCoord(19,19)] : true,//end of bottom
+    [utils.asGridCoord(19,18)] : true,//beginning of right side
+    [utils.asGridCoord(19,17)] : true,
+    [utils.asGridCoord(19,16)] : true,
+    [utils.asGridCoord(19,15)] : true,
+    [utils.asGridCoord(19,14)] : true,
+    [utils.asGridCoord(19,13)] : true,
+    [utils.asGridCoord(19,12)] : true,
+    [utils.asGridCoord(19,11)] : true,
+    [utils.asGridCoord(19,10)] : true,
+    [utils.asGridCoord(19,9)] : true,
+    [utils.asGridCoord(19,8)] : true,
+    [utils.asGridCoord(19,7)] : true,
+    [utils.asGridCoord(19,6)] : true,
+    [utils.asGridCoord(19,5)] : true,
+    [utils.asGridCoord(19,4)] : true,
+    [utils.asGridCoord(19,3)] : true,
+    [utils.asGridCoord(19,2)] : true,
+    [utils.asGridCoord(19,1)] : true,//end of right side
+    [utils.asGridCoord(18,0)] : true,//beginning of top
+    [utils.asGridCoord(17,0)] : true,
+    [utils.asGridCoord(16,0)] : true,
+    [utils.asGridCoord(15,0)] : true,
+    [utils.asGridCoord(14,0)] : true,
+    [utils.asGridCoord(13,0)] : true,
+    [utils.asGridCoord(12,0)] : true,
+    [utils.asGridCoord(11,0)] : true,
+    [utils.asGridCoord(10,0)] : true,
+    [utils.asGridCoord(9,0)] : true,
+    [utils.asGridCoord(8,0)] : true,
+    [utils.asGridCoord(7,0)] : true,
+    [utils.asGridCoord(6,0)] : true,
+    [utils.asGridCoord(5,0)] : true,
+    [utils.asGridCoord(4,0)] : true,
+    [utils.asGridCoord(3,0)] : true,
+    [utils.asGridCoord(2,0)] : true,
+    [utils.asGridCoord(1,0)] : true,//end of top
+    [utils.asGridCoord(4,2)] : true,//begiing of fence
+    [utils.asGridCoord(4,3)] : true,
+    [utils.asGridCoord(4,4)] : true,
+    [utils.asGridCoord(4,5)] : true,
+    [utils.asGridCoord(4,6)] : true,
+    [utils.asGridCoord(4,7)] : true,
+    [utils.asGridCoord(4,8)] : true,
+    [utils.asGridCoord(4,9)] : true,
+    [utils.asGridCoord(4,10)] : true,
+    [utils.asGridCoord(4,11)] : true,
+    [utils.asGridCoord(4,12)] : true,//end fence
+    [utils.asGridCoord(1,13)] : true,//begin hedge
+    [utils.asGridCoord(2,13)] : true,
+    [utils.asGridCoord(3,13)] : true,
+    [utils.asGridCoord(4,13)] : true,
+    [utils.asGridCoord(5,13)] : true,
+    [utils.asGridCoord(6,13)] : true,
+    [utils.asGridCoord(8,13)] : true,
+    [utils.asGridCoord(9,13)] : true,
+    [utils.asGridCoord(9,14)] : true,
+    [utils.asGridCoord(9,15)] : true,
+    [utils.asGridCoord(9,16)] : true,
+    [utils.asGridCoord(9,17)] : true,//end hedges
+    
+
     
   },//end of walls
 
   roomDescription: [
     {
         events: [
-          { type: "textMessage", text:"The Garden is big, wild and overgrown. It can be hard to find your way around."},
+          { type: "textMessage", text:"NaNs Garden is eight tiles wide by five tiles deep, with the entrance to Nans house near the bottom of the left side."},
+          { type: "textMessage", text:"There are plant beds running in horizontal lines, with some plants that can be harvested."},
+          { type: "textMessage", text:"There are hedges marking the edges of the garden, with accessible gaps at the top and bottom right leading to wildly overgrown spaces."},
         ]
   },
 ],//end of roomDescription
 
   
   cutsceneSpaces: {
-    [utils.asGridCoord(0,16)]: [
+    [utils.asGridCoord(0,17)]: [
       {
         events: [
           { 
@@ -1128,9 +1302,7 @@ Garden: {
     ],
   },//end of cutSceneSpaces
   
-
-
-},//end of NaN
+},//end of NaNs
 
 
 
