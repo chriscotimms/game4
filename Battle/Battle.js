@@ -5,30 +5,38 @@ class Battle {
             "player1": new Combatant({
                 ...Pizzas.s001,
                 team: "player",
-                hp: 50,
+                hp: 30,
                 maxHp: 50,
-                xp: 0,
+                xp: 40,
+                maxXp: 100,
                 level: 1,
                 status: null
             }, this),
             "enemy1": new Combatant({
                 ...Pizzas.v001,
                 team: "enemy",
-                hp: 50,
+                hp: 15,
                 maxHp: 50,
-                xp: 0,
+                xp: 10,
+                maxXp: 100,
                 level: 2,
                 status: null
             }, this),
             "enemy2": new Combatant({
                 ...Pizzas.f001,
                 team: "enemy",
-                hp: 50,
+                hp: 5,
                 maxHp: 50,
-                xp: 0,
+                xp: 30,
+                maxXp: 100,
                 level: 2,
                 status: null
             }, this),
+        }
+        //to keep track of active combantants on screen
+        this.activeCombatants = {
+            player: "player1",
+            enemy:"enemy1",
         }
 
         //this.onComplete = onComplete;
@@ -57,7 +65,20 @@ class Battle {
             combatant.id = key;
             combatant.init(this.element);
         })
-    }
+
+        this.turnCycle = new TurnCycle({
+            battle: this,
+            onNewEvent: event => {
+                return new Promise(resolve => {
+                    const battleEvent = new BattleEvent(event, this)
+                    battleEvent.init(resolve);
+                })
+            }
+        })
+        this.turnCycle.init();
+
+
+    }//end of init
 
 
 }//end Battle

@@ -17,8 +17,6 @@
 
 
 
-
-
 .Combatant[data-team="player"] {
     left: 46px;
     top: 70px;
@@ -36,12 +34,14 @@
     height: 12px;
     overflow:hidden;
 }
+
 .Combatant_character {
     display:block;
     position:absolute;
     left: -11px;
     bottom: -7px;
 }
+
 .Battle .Combatant_character_crop {
     display: none;
 }
@@ -67,7 +67,7 @@
     height: 16px;
 }
 
-.Combatant_life_container {
+.Combatant_life-container {
     position: absolute;
     left: 20px;
     top:4px;
@@ -117,4 +117,20 @@
 }
 .Combatant_status[data-status="clumsy"] {
     background: #582a79;
+}
+
+.Pizza {
+    position: absolute;
+    transform:scale(2);
+    background: url(../images/characters/pizzas/pizza-shadow.png) no-repeat no-repeat;
+}
+
+.Pizza[data-team="player"] {
+    bottom: 73px;
+    left: 51px;
+}
+
+.Pizza[data-team="enemy"] {
+    top: 47px;
+    right: 100px;
 }
