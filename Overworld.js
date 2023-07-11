@@ -97,7 +97,7 @@ class Overworld {
     this.hud.init(document.querySelector(".game-container")); */
 
   //this.startMap(window.OverworldMaps.Bedroom);
-   this.startMap(window.OverworldMaps.Bedroom);
+   this.startMap(window.OverworldMaps.Nans);
  
  
    this.bindActionInput();
