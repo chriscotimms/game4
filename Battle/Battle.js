@@ -1,40 +1,62 @@
 //Overworld Event
 class Battle {
-    constructor({ onComplete }) {
-        console.log(onComplete);
-        this.onComplete = onComplete;
+    constructor(/* { onComplete } */) {
+        this.combatants = {
+            "player1": new Combatant({
+                ...Pizzas.s001,
+                team: "player",
+                hp: 50,
+                maxHp: 50,
+                xp: 0,
+                level: 1,
+                status: null
+            }, this),
+            "enemy1": new Combatant({
+                ...Pizzas.v001,
+                team: "enemy",
+                hp: 50,
+                maxHp: 50,
+                xp: 0,
+                level: 2,
+                status: null
+            }, this),
+            "enemy2": new Combatant({
+                ...Pizzas.f001,
+                team: "enemy",
+                hp: 50,
+                maxHp: 50,
+                xp: 0,
+                level: 2,
+                status: null
+            }, this),
+        }
+
+        //this.onComplete = onComplete;
     }//end constructor
 
     createElement() {
-
-        //POssibly create canvas element for game here
-        
-        /* this.element = document.createElement("div");
+        this.element = document.createElement("div");
         this.element.classList.add("Battle");
-        this.element.innerHTML = "Battle time";  */
-        this.battleCanvas = document.createElement("canvas");
-        this.battleCanvas.classList.add("Battle");
-        this.ctx = this.battleCanvas.getContext("2d");
-        
-
-      
+        this.element.innerHTML = (`
+        <div class="Battle_hero">
+         <img src="${'images/characters/people/hero.png'}" alt="Hero" />
+        </div>
+        <div class="Battle_enemy">
+         <img src="${'images/characters/people/npc3.png'}" alt="Enemy" />
+        </div>
+        `)
     }
+
 
     init(container) {
         this.createElement();
-        container.appendChild(this.battleCanvas);
+        container.appendChild(this.element);
 
-        this.ctx.fillRect(25, 25, 200, 200);
-        this.ctx.clearRect(45, 45, 60, 60);
-        this.ctx.strokeRect(50, 50, 50, 50);
-
-
-        setTimeout(() => {
-            console.log("finish");
-            this.battleCanvas.remove();
-            this.onComplete();
-          }, "4000");
-
+        Object.keys(this.combatants).forEach(key => {
+            let combatant = this.combatants[key];
+            combatant.id = key;
+            combatant.init(this.element);
+        })
     }
 
 

@@ -13,7 +13,7 @@ class PauseMenu {
                 label: "Inventory",
                 description: "Check your inventory",
                 handler: () => {
-                 //to add inventory info
+                 "pizza2";
                 }
             },
             {

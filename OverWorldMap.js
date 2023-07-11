@@ -1094,7 +1094,7 @@ Nans: {
 ],//end of roomDescription
 
   cutsceneSpaces: {
-    /* [utils.asGridCoord(0,2)]: [
+     [utils.asGridCoord(1,5)]: [
       {
         events: [
           { type: "textMessage", text: "begin the battle scene" },
@@ -1102,7 +1102,7 @@ Nans: {
           
         ]
       }
-    ], */
+    ], 
     [utils.asGridCoord(6,1)]: [
       {
         events: [
