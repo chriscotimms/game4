@@ -15,6 +15,14 @@ window.Pizzas = {
         icon: "images/icons/spicy.png",
         actions: ["saucyStatus", "clumsyStatus","damage1"],//defined in action.js
     },
+    "s002": {
+        name:"Bacon Brigade",
+        description: "A salty dog",
+        type: PizzaTypes.spicy,
+        src: "images/characters/pizzas/s002.png",
+        icon: "images/icons/spicy.png",
+        actions: ["saucyStatus", "clumsyStatus","damage1"],
+    },
     "v001": {
         name:"Call Me Kale",
         description: "Pizza desc here",

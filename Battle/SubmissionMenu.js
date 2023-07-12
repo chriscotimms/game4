@@ -1,13 +1,36 @@
 class SubmissionMenu {
-    constructor( { caster, enemy, onComplete }) {
+    constructor( { caster, enemy, onComplete, items, replacements }) {
         this.caster = caster;
         this.enemy = enemy;
+        this.replacements = replacements;
         this.onComplete = onComplete;
+
+
+        //method for counting quantity of each item on caster team
+        let quantityMap = {};
+        items.forEach(item => {
+            if (item.team === caster.team) {
+
+                let existing = quantityMap[item.actionId];
+                if (existing) {
+                    existing.quantity += 1;
+
+                } else {
+                quantityMap[item.actionId] = {
+                    actionId: item.actionId,
+                    quantity: 1,
+                    instanceId: item.instanceId,
+                }
+            }
+            }
+        })
+        this.items = Object.values(quantityMap);
     }//end constructer
     
     
     getPages() {
 
+        //static back option to return to root
         const backOption = {
             label: "Go Back",
             description: "Return to previous page",
@@ -16,8 +39,7 @@ class SubmissionMenu {
             }
         };
 
-
-
+        //root menu to make choices
         return {
             root: [
                 {
@@ -42,10 +64,10 @@ class SubmissionMenu {
                 {
                     label:"Swap",
                     description: "Change to another pizza",
-                    disabled: true,
+                    //disabled: true,
                     handler: () => {
                         // Do something when chosen
-                        console.log("go to pizzas page");
+                        this.keyboardMenu.setOptions( this.getPages().replacements )
                     }
                 },
             ],
@@ -63,11 +85,44 @@ class SubmissionMenu {
                 backOption
             ],
             items: [
-                //items will g here
+                ...this.items.map(item => {
+                    const action = Actions[item.actionId];
+                    return { 
+                        label: action.name,
+                        description: action.description,
+                        right: () => {
+                            return "x"+item.quantity
+                        },
+                        handler: () => {
+                            this.menuSubmit(action, item.instanceId)//doing what decide does below, returning an action decision from the menu
+                        }
+                    }
+                }),
                 backOption
-            ]
+            ],
+            replacements: [
+                ...this.replacements.map(replacement => {
+                    return {
+                        label: replacement.name,
+                        description: replacement.description,
+                        handler: () => {
+                            this.menuSubmitReplacement(replacement);
+                        }
+                    }
+                }),
+                backOption
+            ],
         }
     }
+
+
+    menuSubmitReplacement(replacement) {
+        this.keyboardMenu?.end();
+        this.onComplete({
+            replacement
+        })
+    }
+
 
 
     menuSubmit(action, instanceId=null) {
@@ -77,6 +132,7 @@ class SubmissionMenu {
         this.onComplete({
             action,
             target: action.targetType === "friendly" ? this.caster : this.enemy,
+            instanceId
         })
     }
 
@@ -84,7 +140,7 @@ class SubmissionMenu {
     //kind of very basic computer choices in the battle game
     decide() {
         //to do - enemies randomly decide what to do
-        this.menuSubmit(Actions[ this.enemy.actions[0] ]);
+        this.menuSubmit(Actions[ this.enemy .actions[0] ]);
     }
 
 
