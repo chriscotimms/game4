@@ -69,10 +69,48 @@ class Combatant {
         this.hpFills.forEach(rect => rect.style.width = `${this.hpPercent}%`);
         this.xpFills.forEach(rect => rect.style.width = `${this.xpPercent}%`);
 
-        //update level
+        //update level 
         this.hudElement.querySelector(".Combatant_level").innerText = this.level;//updating combatant level bar
 
+        //update status from Battle.js
+        const statusElement = this.hudElement.querySelector(".Combatant_status");
+        if (this.status) {
+            statusElement.innerText = this.status.type;
+            statusElement.style.display = "block";
+        } else {
+            statusElement.innerText = "";
+            statusElement.style.display = "none";
+        }
     }
+
+    //handling status events defined in battle.js, 
+    getPostEvents() {
+        if (this.status?.type === "saucy") {
+            return [
+                {type: "textMessage", text: "I like feeling saucy"},
+                {type: "stateChange", recover: 5, onCaster: true }
+            ];
+        }
+        return [];
+    }
+
+    decrementStatus() {
+        if (this.status?.expiresIn > 0) {
+            this.status.expiresIn -= 1;
+            if (this.status.expiresIn === 0) {
+            this.update({
+                status: null
+            })
+            return {
+                type: "textMessage",//this can be rmeoved to just return null
+                text: "Status expired",
+            }
+            }
+        }
+        return null;
+    }
+
+
 
 
     init(container) {

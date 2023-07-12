@@ -31,6 +31,29 @@ class TurnCycle {
             await this.onNewEvent(event);
         }
 
+        //check for post-events, after the turn
+        const postEvents = caster.getPostEvents();
+        for (let i=0; i < postEvents.length; i+=1) {
+            const event = {
+                ...postEvents[i],
+                submission,
+                action: submission.action,
+                caster,
+                target: submission.target,
+            }
+            await this.onNewEvent(event);
+        }
+
+        //Chck for status expire
+        const expiredEvent = caster.decrementStatus();//if expires, capture
+        if (expiredEvent) {
+            await this.onNewEvent(expiredEvent);//pass this as the next event in the turncycle
+        }
+
+
+
+
+        //switch whos turn it is, player or enemy
         this.currentTeam = this.currentTeam === "player" ? "enemy" : "player";
         this.turn();
 
