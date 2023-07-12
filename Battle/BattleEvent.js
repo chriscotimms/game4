@@ -26,9 +26,7 @@ class BattleEvent {
         const {caster, target, damage, recover, status, action} = this.event;
         let who = this.event.onCaster ? caster : target;
 
-        if (action.targetType === "friendly") {//if the action is defined as "friendly" in action.js 
-            who = caster;                       //set the action to occur on the caster, not the enemy
-        }
+       
 
         if (damage) {
             //modify the target to have less HP

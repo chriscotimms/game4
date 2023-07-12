@@ -10,6 +10,7 @@ class Battle {
                 xp: 40,
                 maxXp: 100,
                 level: 1,
+                isPlayerControlled: true,
                 status: null,
             }, this),
             "enemy1": new Combatant({

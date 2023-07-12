@@ -1,5 +1,6 @@
 .KeyboardMenu {
     border: 1px solid var(--border-color);
+    background: var(--menu-background);
     position:absolute;
 }
 
@@ -15,6 +16,7 @@
     cursor: pointer;
     font-family:inherit;
     padding:0;
+    padding-left:1em;
     font-size: 10px;
 }
 
