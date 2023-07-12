@@ -21,9 +21,15 @@ class BattleEvent {
         message.init(this.battle.element);
     }
 
-    //introducing change form turn event
+    //introducing change form turn event (defined in actions.js)
     async stateChange(resolve) {
-        const {caster, target, damage, recover} = this.event;
+        const {caster, target, damage, recover, status, action} = this.event;
+        let who = this.event.onCaster ? caster : target;
+
+        if (action.targetType === "friendly") {//if the action is defined as "friendly" in action.js 
+            who = caster;                       //set the action to occur on the caster, not the enemy
+        }
+
         if (damage) {
             //modify the target to have less HP
             target.update({
@@ -34,7 +40,6 @@ class BattleEvent {
         }
 
         if (recover) {
-            const who = this.event.onCaster ? caster : target;
             let newHp = who.hp + recover;
             if (newHp > who.maxHp) {
                 newHp = who.maxHp;
@@ -44,7 +49,16 @@ class BattleEvent {
             })
         }
 
-
+        if (status) {
+            who.update({
+                status: {...status}
+            })
+        }
+        if (status === null) {
+            who.update({
+                status: null
+            })
+        }
 
 
         //Wait a ittle bit

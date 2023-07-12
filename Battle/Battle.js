@@ -10,10 +10,7 @@ class Battle {
                 xp: 40,
                 maxXp: 100,
                 level: 1,
-                status: {
-                    type:"saucy",
-                    expiresIn: 1,
-                }
+                status: null,
             }, this),
             "enemy1": new Combatant({
                 ...Pizzas.v001,
@@ -23,7 +20,7 @@ class Battle {
                 xp: 10,
                 maxXp: 100,
                 level: 2,
-                status: null
+                status: null,
             }, this),
             "enemy2": new Combatant({
                 ...Pizzas.f001,
@@ -33,7 +30,7 @@ class Battle {
                 xp: 30,
                 maxXp: 100,
                 level: 2,
-                status: null
+                status: null,
             }, this),
         }
         //to keep track of active combantants on screen

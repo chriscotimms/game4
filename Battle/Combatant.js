@@ -83,6 +83,19 @@ class Combatant {
         }
     }
 
+    getReplacedEvents(originalEvents) { 
+
+        if (this.status?.type === "clumsy" && utils.randomFromArray([true, false, false])) {
+            return [
+                { type: "textMessage", text:`${this.name} flops over!`}
+            ]
+        }
+
+
+
+        return originalEvents;//pass through original events if not changed by caster
+    }
+
     //handling status events defined in battle.js, 
     getPostEvents() {
         if (this.status?.type === "saucy") {
