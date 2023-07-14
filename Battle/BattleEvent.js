@@ -129,6 +129,33 @@ class BattleEvent {
         resolve();
       }
 
+    
+    //a new way of animating the xp visibility on screen instead of css animations
+    giveXp(resolve) {
+        let amount = this.event.xp;
+        const {combatant} = this.event;
+        //stepped animation where xp is trasnferred to combatatent step by step
+        const step = () => {
+            if (amount > 0) {
+                amount -= 1;
+                combatant.xp +=1;
+
+                //checking if htting a certain level
+                if (combatant.xp === combatant.maxXp) {
+                    combatant.xp = 0;
+                    combatant.maxXp = 100;
+                    combatant.level += 1;
+                }
+
+
+                combatant.update();
+                requestAnimationFrame(step);
+                return;
+            }
+            resolve();
+        }
+        requestAnimationFrame(step);
+    }
 
 
     animation(resolve){

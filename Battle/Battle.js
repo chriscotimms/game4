@@ -1,13 +1,17 @@
 //Overworld Event
 class Battle {
-    constructor(/* { onComplete } */) {
+    constructor({ enemy, onComplete }) {
+
+        this.enemy = enemy;
+        this.onComplete = onComplete;
+
         this.combatants = {
-            "player1": new Combatant({
+            /* "player1": new Combatant({
                 ...Pizzas.s001,
                 team: "player",
                 hp: 30,
                 maxHp: 50,
-                xp: 40,
+                xp: 95,
                 maxXp: 100,
                 level: 1,
                 isPlayerControlled: true,
@@ -43,25 +47,51 @@ class Battle {
                 maxXp: 100,
                 level: 2,
                 status: null,
-            }, this),
+            }, this), */
         }
+
+
         //to keep track of active combantants on screen
         this.activeCombatants = {
-            player: "player1",
-            enemy:"enemy1",
+            player: null, //"player1",
+            enemy: null, //"enemy1",
         }
+
+        //Dynamically add player team
+        window.playerState.lineup.forEach(id => {
+            this.addCombatant(id, "player", window.playerState.pizzas[id])//looks up pizza object stored in PlayerState.js 
+        })
+        //Dynamically add enemy team
+        Object.keys(this.enemy.pizzas).forEach(key => {
+            this.addCombatant("e_"+key, "enemy", this.enemy.pizzas[key])
+        })
+
 
         //array of items collected to be stored or used
         this.items = [
-            { actionId: "item_recoverStatus", instanceId: "p1", team: "player"},
+            /* { actionId: "item_recoverStatus", instanceId: "p1", team: "player"},
             { actionId: "item_recoverStatus", instanceId: "p2", team: "player"},
             { actionId: "item_recoverStatus", instanceId: "p3", team: "enemy"},
-            { actionId: "item_recoverHp", instanceId: "p4", team: "player"},
-
+            { actionId: "item_recoverHp", instanceId: "p4", team: "player"}, */
         ]
-
         //this.onComplete = onComplete;
     }//end constructor
+
+
+    //dynamically create combatants
+    addCombatant(id, team, config) {
+        this.combatants[id] = new Combatant({
+            ...Pizzas[config.pizzaId],
+            ...config,
+            team,
+            isPlayerControlled: team === "player"
+        }, this)
+
+        //populate first active pizza
+        this.activeCombatants[team] = this.activeCombatants[team] || id
+
+    }
+
 
     createElement() {
         this.element = document.createElement("div");
@@ -71,7 +101,7 @@ class Battle {
          <img src="${'images/characters/people/hero.png'}" alt="Hero" />
         </div>
         <div class="Battle_enemy">
-         <img src="${'images/characters/people/npc3.png'}" alt="Enemy" />
+         <img src=${this.enemy.src} alt=${this.enemy.name} />
         </div>
         `)
     }
@@ -109,8 +139,13 @@ class Battle {
                     const battleEvent = new BattleEvent(event, this)
                     battleEvent.init(resolve);
                 })
+            },
+            onWinner: winner => {
+                //remove elements and clear screen of battle elements
+                this.element.remove();
+                this.onComplete();
             }
-        })
+        })//end this.turnCycle
         this.turnCycle.init();
 
 

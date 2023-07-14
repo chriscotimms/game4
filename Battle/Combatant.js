@@ -3,6 +3,8 @@ class Combatant {
         Object.keys(config).forEach(key => {
         this[key] = config[key];
         })
+        //set hp, if hp defined=>accept this.hp, if undefined=>accept this.maxHp 
+        this.hp = typeof(this.hp) === "undefined" ? this.maxHp : this.hp;
         this.battle = battle;
     }
 

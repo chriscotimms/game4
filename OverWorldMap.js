@@ -1098,7 +1098,7 @@ Nans: {
       {
         events: [
           { type: "textMessage", text: "begin the battle scene" },
-          { type: "battle"},
+          { type: "battle", enemyId: "beth" },
           
         ]
       }

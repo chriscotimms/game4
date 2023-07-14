@@ -43,6 +43,10 @@ class PlayerState {
         }
         this.lineup = ["p1"];
         this.Plantlineup = ["No plants"];
+        this.items = [
+            { actionId: "item_recoverHp", instanceId: "item1"},
+            { actionId: "item_recoverHp", instanceId: "item2"},
+        ]
 
         this.storyFlags = {
             //"DID_SOMETHING" = true,
