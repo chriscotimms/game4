@@ -54,12 +54,31 @@ class TurnCycle {
         }
 
         //Did the target die?
-    const targetDead = submission.target.hp <= 0;
-    if (targetDead) {
-      await this.onNewEvent({ 
-        type: "textMessage", text: `${submission.target.name} is ruined!`
-      })
-    }
+        const targetDead = submission.target.hp <= 0;
+        if (targetDead) {
+          await this.onNewEvent({ 
+            type: "textMessage", text: `${submission.target.name} is ruined!`
+          })
+
+          //reward some Xp
+          if (submission.target.team === "enemy"){
+
+            const playerActivePizzaId = this.battle.activeCombatants.player;
+            const xp = submission.target.givesXp;//function in combatant.js
+
+            await this.onNewEvent({
+              type: "textMessage",
+              text: `Gained ${xp} XP!`
+            })
+
+            await this.onNewEvent({
+              type: "giveXp",
+              xp,
+              combatant: this.battle.combatants[playerActivePizzaId]
+            })
+          }
+        }
+
         //Do we have a winning team?
         const winner = this.getWinningTeam();
         if (winner) {

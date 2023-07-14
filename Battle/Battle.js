@@ -81,11 +81,26 @@ class Battle {
         this.createElement();
         container.appendChild(this.element);
 
+        //hard baking names for now, but these can be changed or added dynamically
+        this.playerTeam = new Team("player", "Hero");
+        this.enemyTeam = new Team("enemy", "Bully");
+
         Object.keys(this.combatants).forEach(key => {
             let combatant = this.combatants[key];
             combatant.id = key;
             combatant.init(this.element);
+
+            //Add the "Team" object to the correct team
+            if (combatant.team === "player") {
+                this.playerTeam.combatants.push(combatant);
+              } else if (combatant.team === "enemy") {
+                this.enemyTeam.combatants.push(combatant);
+              }
+
         })
+
+        this.playerTeam.init(this.element);
+        this.enemyTeam.init(this.element);
 
         this.turnCycle = new TurnCycle({
             battle: this,
