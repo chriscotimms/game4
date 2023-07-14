@@ -67,13 +67,17 @@ class Battle {
         })
 
 
-        //array of items collected to be stored or used
-        this.items = [
-            /* { actionId: "item_recoverStatus", instanceId: "p1", team: "player"},
-            { actionId: "item_recoverStatus", instanceId: "p2", team: "player"},
-            { actionId: "item_recoverStatus", instanceId: "p3", team: "enemy"},
-            { actionId: "item_recoverHp", instanceId: "p4", team: "player"}, */
-        ]
+        //start empty
+        this.items = [];
+
+        //add in player items
+        window.playerState.items.forEach(item => {
+            this.items.push({
+                ...item,
+                team: "player"
+            })
+        })
+        this.usedInstanceIds = {};
         //this.onComplete = onComplete;
     }//end constructor
 
@@ -141,6 +145,30 @@ class Battle {
                 })
             },
             onWinner: winner => {
+
+                //transferring outcome of stats into playerState
+                if (winner === "player") {
+                    const playerState = window.playerState;
+                    Object.keys(playerState.pizzas).forEach(id => {
+                        const playerStatePizza = playerState.pizzas[id];
+                        const combatant = this.combatants[id];
+                        if (combatant) {
+                            playerStatePizza.hp = combatant.hp;
+                            playerStatePizza.xp = combatant.xp;
+                            playerStatePizza.maxXp = combatant.maxXp;
+                            playerStatePizza.level = combatant.level;
+                        }
+                    })
+
+                    //get rid of player used items
+                    playerState.items = playerState.items.filter(item => {
+                        return !this.usedInstanceIds[item.instanceId]
+                    })
+                }
+
+
+
+
                 //remove elements and clear screen of battle elements
                 this.element.remove();
                 this.onComplete();

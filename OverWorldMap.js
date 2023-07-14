@@ -1094,15 +1094,16 @@ Nans: {
 ],//end of roomDescription
 
   cutsceneSpaces: {
-     [utils.asGridCoord(0,5)]: [
+    //battle prototype
+     /* [utils.asGridCoord(0,5)]: [
       {
         events: [
           { type: "textMessage", text: "begin the battle scene" },
-          { type: "battle", enemyId: "beth" },
+          { type: "battle", enemyId: "erio" },
           
         ]
       }
-    ], 
+    ],  */
     [utils.asGridCoord(6,1)]: [
       {
         events: [
@@ -1276,17 +1277,17 @@ Garden: {
     [utils.asGridCoord(2,-1)] : true,
     [utils.asGridCoord(1,-1)] : true,
     [utils.asGridCoord(0,-1)] : true,//end of top
-    [utils.asGridCoord(3,2)] : true,//beginning of fence
-    [utils.asGridCoord(3,3)] : true,
-    [utils.asGridCoord(3,4)] : true,
-    [utils.asGridCoord(3,5)] : true,
-    [utils.asGridCoord(3,6)] : true,
-    [utils.asGridCoord(3,7)] : true,
-    [utils.asGridCoord(3,8)] : true,
-    [utils.asGridCoord(3,9)] : true,
-    [utils.asGridCoord(3,10)] : true,
-    [utils.asGridCoord(3,11)] : true,
-    [utils.asGridCoord(3,12)] : true,//end fence
+    [utils.asGridCoord(4,2)] : true,//beginning of fence
+    [utils.asGridCoord(4,3)] : true,
+    [utils.asGridCoord(4,4)] : true,
+    [utils.asGridCoord(4,5)] : true,
+    [utils.asGridCoord(4,6)] : true,
+    [utils.asGridCoord(4,7)] : true,
+    [utils.asGridCoord(4,8)] : true,
+    [utils.asGridCoord(4,9)] : true,
+    [utils.asGridCoord(4,10)] : true,
+    [utils.asGridCoord(4,11)] : true,
+    [utils.asGridCoord(4,12)] : true,//end fence
     [utils.asGridCoord(1,13)] : true,//begin hedge
     [utils.asGridCoord(2,13)] : true,
     [utils.asGridCoord(3,13)] : true,
