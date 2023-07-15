@@ -1,4 +1,4 @@
- window.PizzaTypes = {
+ window.PlantTypes = {
     normal: "normal",
     spicy: "spicy",
     veggie: "veggie",
@@ -6,11 +6,11 @@
     chill: "chill",
 } 
 
-window.Pizzas = {
+window.Plants = {
     "s001": {
         name:"Slice Samaurai",
-        description: "Pizza desc here",
-        type: PizzaTypes.spicy,
+        description: "Plant desc here",
+        type: PlantTypes.spicy,
         src: "images/characters/pizzas/s001.png",
         icon: "images/icons/spicy.png",
         actions: ["saucyStatus", "clumsyStatus","damage1"],//defined in action.js
@@ -18,23 +18,23 @@ window.Pizzas = {
     "s002": {
         name:"Bacon Brigade",
         description: "A salty dog",
-        type: PizzaTypes.spicy,
+        type: PlantTypes.spicy,
         src: "images/characters/pizzas/s002.png",
         icon: "images/icons/spicy.png",
         actions: ["saucyStatus", "clumsyStatus","damage1"],
     },
     "v001": {
         name:"Call Me Kale",
-        description: "Pizza desc here",
-        type: PizzaTypes.veggie,
+        description: "Plant desc here",
+        type: PlantTypes.veggie,
         src: "images/characters/pizzas/v001.png",
         icon: "images/icons/veggie.png",
         actions: ["damage1"],//defined in action.js
     },
     "f001": {
         name:"Portobello Express",
-        description: "Pizza desc here",
-        type: PizzaTypes.fungi,
+        description: "Plant desc here",
+        type: PlantTypes.fungi,
         src: "images/characters/pizzas/f001.png",
         icon: "images/icons/fungi.png",
         actions: ["damage1"],//defined in action.js

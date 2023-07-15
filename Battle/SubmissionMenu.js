@@ -63,7 +63,7 @@ class SubmissionMenu {
                 },
                 {
                     label:"Swap",
-                    description: "Change to another pizza",
+                    description: "Change to another plant",
                     //disabled: true,
                     handler: () => {
                         // Do something when chosen

@@ -1,6 +1,6 @@
 window.BattleAnimations = {
     async spin(event, onComplete) {
-        const element = event.caster.pizzaElement;
+        const element = event.caster.plantElement;
         const animationClassName = event.caster.team === "player" ? "battle-spin-right" : "battle-spin-left";
         element.classList.add(animationClassName);
 
@@ -9,7 +9,7 @@ window.BattleAnimations = {
             element.classList.remove(animationClassName);
         }, { once:true });
 
-        //continue rest of event firing of turn, updating hp etc, timed for when pizza makes contact
+        //continue rest of event firing of turn, updating hp etc, timed for when Plant makes contact
         await utils.wait(100);
         onComplete();
     },
@@ -34,7 +34,7 @@ window.BattleAnimations = {
         //add to battle scene
         document.querySelector(".Battle").appendChild(div);
 
-        //continue rest of event firing of turn, updating hp etc, timed for when pizza makes contact
+        //continue rest of event firing of turn, updating hp etc, timed for when Plant makes contact
         await utils.wait(820);
         onComplete();
     },

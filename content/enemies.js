@@ -2,14 +2,14 @@ window.Enemies = {
     "erio" : {
         name: "Erio",
         src: "images/characters/people/erio.png",
-        pizzas: {
+        plants: {
             "a": {
-                pizzaId: "s001",
+                plantId: "s001",
                 maxHp: 50,
                 level: 1,
             },
             "b": {
-                pizzaId: "s002",
+                plantId: "s002",
                 maxHp: 50,
                 level: 1,
             },
@@ -18,10 +18,10 @@ window.Enemies = {
     "beth" : {
         name: "Beth",
         src: "images/characters/people/npc1.png",
-        pizzas: {
+        plants: {
             "a": {
                 hp: 1,
-                pizzaId: "f001",
+                plantId: "f001",
                 maxHp: 50,
                 level: 1,
             },

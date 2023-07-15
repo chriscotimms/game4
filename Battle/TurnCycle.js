@@ -69,7 +69,7 @@ class TurnCycle {
           //reward some Xp
           if (submission.target.team === "enemy"){
 
-            const playerActivePizzaId = this.battle.activeCombatants.player;
+            const playerActivePlantId = this.battle.activeCombatants.player;
             const xp = submission.target.givesXp;//function in combatant.js
 
             await this.onNewEvent({
@@ -80,7 +80,7 @@ class TurnCycle {
             await this.onNewEvent({
               type: "giveXp",
               xp,
-              combatant: this.battle.combatants[playerActivePizzaId]
+              combatant: this.battle.combatants[playerActivePlantId]
             })
           }
         }

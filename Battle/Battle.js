@@ -59,11 +59,11 @@ class Battle {
 
         //Dynamically add player team
         window.playerState.lineup.forEach(id => {
-            this.addCombatant(id, "player", window.playerState.pizzas[id])//looks up pizza object stored in PlayerState.js 
+            this.addCombatant(id, "player", window.playerState.plants[id])//looks up Plant object stored in PlayerState.js 
         })
         //Dynamically add enemy team
-        Object.keys(this.enemy.pizzas).forEach(key => {
-            this.addCombatant("e_"+key, "enemy", this.enemy.pizzas[key])
+        Object.keys(this.enemy.plants).forEach(key => {
+            this.addCombatant("e_"+key, "enemy", this.enemy.plants[key])
         })
 
 
@@ -85,13 +85,13 @@ class Battle {
     //dynamically create combatants
     addCombatant(id, team, config) {
         this.combatants[id] = new Combatant({
-            ...Pizzas[config.pizzaId],
+            ...Plants[config.plantId],
             ...config,
             team,
             isPlayerControlled: team === "player"
         }, this)
 
-        //populate first active pizza
+        //populate first active Plant
         this.activeCombatants[team] = this.activeCombatants[team] || id
 
     }
@@ -149,14 +149,14 @@ class Battle {
                 //transferring outcome of stats into playerState
                 if (winner === "player") {
                     const playerState = window.playerState;
-                    Object.keys(playerState.pizzas).forEach(id => {
-                        const playerStatePizza = playerState.pizzas[id];
+                    Object.keys(playerState.plants).forEach(id => {
+                        const playerStatePlant = playerState.plants[id];
                         const combatant = this.combatants[id];
                         if (combatant) {
-                            playerStatePizza.hp = combatant.hp;
-                            playerStatePizza.xp = combatant.xp;
-                            playerStatePizza.maxXp = combatant.maxXp;
-                            playerStatePizza.level = combatant.level;
+                            playerStatePlant.hp = combatant.hp;
+                            playerStatePlant.xp = combatant.xp;
+                            playerStatePlant.maxXp = combatant.maxXp;
+                            playerStatePlant.level = combatant.level;
                         }
                     })
 

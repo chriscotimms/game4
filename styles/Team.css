@@ -13,17 +13,17 @@
 }
 
 /* start by displayin none */
-.Team .dead-pizza {
+.Team .dead-plant {
     display:none;
 }
-.Team .active-pizza-indicator {
+.Team .active-plant-indicator {
     display:none;
 }
 
 /* Display them when activated */
-.Team [data-dead="true"] .dead-pizza {
+.Team [data-dead="true"] .dead-plant {
     display:block;
 }
-.Team [data-active="true"] .active-pizza-indicator {
+.Team [data-active="true"] .active-plant-indicator {
     display:none;
 }

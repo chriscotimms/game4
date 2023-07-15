@@ -1,8 +1,8 @@
 class PlayerState {
     constructor() {
-        this.pizzas = {
+        this.plants = {
             "p1": {
-                pizzaId:"s001",
+                plantId:"s001",
                 hp:1,
                 maxHp: 50,
                 xp: 90,
@@ -11,7 +11,7 @@ class PlayerState {
                 status: null,
             },
             "p2": {
-                pizzaId:"v001",
+                plantId:"v001",
                 hp:50,
                 maxHp: 50,
                 xp: 75,
@@ -20,7 +20,7 @@ class PlayerState {
                 status: {type:"veg-tastic"},
             },
             "p3": {
-                pizzaId:"f001",
+                plantId:"f001",
                 hp:50,
                 maxHp: 50,
                 xp: 75,
@@ -32,7 +32,7 @@ class PlayerState {
     
         this.plants = {
             "plant0": {
-                pizzaId:"s01",
+                plantId:"s01",
                 hp:50,
                 maxHp: 50,
                 xp: 75,
@@ -41,16 +41,13 @@ class PlayerState {
                 status: null,
             },
             "plant1": {
-                pizzaId:"f01",
+                plantId:"f01",
                 hp:1,
                 maxHp: 50,
                 xp: 90,
                 maxXp: 100,
                 level: 1,
                 status: null,
-            },
-            "plant2": {
-                plantId: "Sage01",
             },
         }
         this.lineup = ["p1", "p2"];
@@ -68,10 +65,10 @@ class PlayerState {
 
     }//end constructor
 
-    addPizza(pizzaId) {
+    addPlant2(plantId) {
         const newId = `p${Date.now()}`+Math.floor(Math.random() * 99999);
-        this.pizzas[newId] = {
-            pizzaId,
+        this.plants[newId] = {
+            plantId,
             hp:50, 
             maxHp: 50,
             xp: 0,
@@ -79,7 +76,7 @@ class PlayerState {
             level:1,
             status:null,
         }
-        this.lineup.push(newId);
+        this.Plantlineup.push(newId);
         utils.emitEvent("LineupChanged");
     }
 

@@ -48,11 +48,11 @@ class Combatant {
         <p class="Combatant_status"></p>
         `);
 
-        this.pizzaElement = document.createElement("img");
-        this.pizzaElement.classList.add("Pizza");
-        this.pizzaElement.setAttribute("src", this.src);
-        this.pizzaElement.setAttribute("alt", this.name);
-        this.pizzaElement.setAttribute("data-team", this.team);
+        this.plantElement = document.createElement("img");
+        this.plantElement.classList.add("Plant");
+        this.plantElement.setAttribute("src", this.src);
+        this.plantElement.setAttribute("alt", this.name);
+        this.plantElement.setAttribute("data-team", this.team);
 
         //a cache to store references to these for use below
         this.hpFills = this.hudElement.querySelectorAll(".Combatant_life-container > rect");
@@ -66,10 +66,10 @@ class Combatant {
             this[key] = changes[key];
         });
 
-        //saying if this is the active character and pizza
+        //saying if this is the active character and plant
         //toggles true or false on opacity 
         this.hudElement.setAttribute("data-active", this.isActive);
-        this.pizzaElement.setAttribute("data-active", this.isActive);
+        this.plantElement.setAttribute("data-active", this.isActive);
 
         //update wdith of bars for hp and xp
         this.hpFills.forEach(rect => rect.style.width = `${this.hpPercent}%`);
@@ -135,7 +135,7 @@ class Combatant {
     init(container) {
         this.createElement();
         container.appendChild(this.hudElement);
-        container.appendChild(this.pizzaElement);
+        container.appendChild(this.plantElement);
         this.update();
     }
 
