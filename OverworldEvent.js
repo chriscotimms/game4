@@ -102,12 +102,57 @@ class OverworldEvent {
   checkMissionComplete(resolve) {
     const needed = this.event.check;
     const retrieved = playerState.Plantlineup;
-    let result = needed.every(i => retrieved.includes(i));//check for required collection
-    if (result) {
+    //console.log(needed[0].herb, needed[0].quantity);
+    //console.log(window.playerState.plants[retrieved[1]].plantId, window.playerState.plants[retrieved[1]].quantity);
+    
+    let counter = 0;
+    for(let j=0;j<needed.length; j+=1) {
+      let neededherb = needed[j].herb;
+      let neededquan = needed[j].quantity;
+
+
+      for(let i=0;i<retrieved.length; i+=1) {
+        let retrievedherb = window.playerState.plants[retrieved[i]].plantId;
+        let retrievedquan = window.playerState.plants[retrieved[i]].quantity;
+        
+        if (retrievedherb === neededherb && retrievedquan === neededquan) {
+          counter++;
+        } 
+
+      }
+    }
+    console.log("needed.lenght = ", needed.length, "counter = ", counter);
+    if (counter === needed.length) {
+      window.playerState.storyFlags[this.event.flag] = true;//if true add flag
+    }
+    
+
+  
+      /* retrieved.forEach(el => {
+        console.log(window.playerState.plants[el].plantId, window.playerState.plants[el].quantity);
+      }) */
+
+    
+        /* for(let i=0;i<retrieved.length;i+=1){
+          if (needed[j].herb === window.playerState.plants[retrieved[i]].plantId && needed[j].quantity === window.playerState.plants[retrieved[i]].quantity) {
+            counter++;
+            console.log("match");
+            
+            
+          } 
+        } */
+        
+      
+      
+     
+    //let result = needed.every(i => retrieved.includes(i));//check for required collection
+    //console.log(result);
+
+    /* if (result) {
     window.playerState.storyFlags[this.event.flag] = true;//if true add flag
     } else {
-      /* console.log(this.event.false); */
-    }
+      /* console.log(this.event.false); 
+    } */
     resolve();
   }
  

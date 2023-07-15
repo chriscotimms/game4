@@ -11,7 +11,7 @@ class PlayerState {
                 quantity: 1,
                 status: null,
             },
-            "p2": {
+            /* "p2": {
                 plantId:"f001",
                 hp:50,
                 maxHp: 50,
@@ -20,7 +20,7 @@ class PlayerState {
                 level: 1,
                 quantity: 1,
                 status: {type:"mushie"},
-            },
+            }, */
         },
     
         /* this.plants = {
@@ -43,8 +43,8 @@ class PlayerState {
                 status: null,
             },
         } */
-        this.lineup = ["p1", "p2"];
-        this.Plantlineup = ["p1", "p2"];
+        this.lineup = ["p1"];
+        this.Plantlineup = ["p1"];
         this.items = [
             { actionId: "item_recoverHp", instanceId: "item1"},
             { actionId: "item_recoverHp", instanceId: "item2"},

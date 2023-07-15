@@ -1123,7 +1123,7 @@ Nans: {
       {
         events: [
 
-          { type: "checkMissionComplete", check:["Thyme","Rosemary"], flag:"OUTSIDE_GARDEN_COMPLETED"},
+          { type: "checkMissionComplete", check:[{herb:"s001",quantity:2}, {herb:"v001", quantity:2}], flag:"OUTSIDE_GARDEN_COMPLETED"},
           
         ]
       }

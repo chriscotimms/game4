@@ -32,7 +32,7 @@ class Combatant {
         this.hudElement.setAttribute("data-team", this.team);
         this.hudElement.innerHTML = (`
         <p class="Combatant_name">${this.name}</p>
-        <p class="Combatant_level"></p>
+        
         <p class="Combatant_quantity"></p>
 
         <div class="Combatant_character_crop">
@@ -78,7 +78,7 @@ class Combatant {
         this.xpFills.forEach(rect => rect.style.width = `${this.xpPercent}%`);
 
         //update level 
-        this.hudElement.querySelector(".Combatant_level").innerText = this.level;//updating combatant level bar
+        //this.hudElement.querySelector(".Combatant_level").innerText = this.level;//updating combatant level bar
         this.hudElement.querySelector(".Combatant_quantity").innerText = this.quantity;//updating combatant level bar
 
         //update status from Battle.js
