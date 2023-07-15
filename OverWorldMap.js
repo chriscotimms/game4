@@ -1277,17 +1277,17 @@ Garden: {
     [utils.asGridCoord(2,-1)] : true,
     [utils.asGridCoord(1,-1)] : true,
     [utils.asGridCoord(0,-1)] : true,//end of top
-    [utils.asGridCoord(4,2)] : true,//beginning of fence
-    [utils.asGridCoord(4,3)] : true,
-    [utils.asGridCoord(4,4)] : true,
-    [utils.asGridCoord(4,5)] : true,
-    [utils.asGridCoord(4,6)] : true,
-    [utils.asGridCoord(4,7)] : true,
-    [utils.asGridCoord(4,8)] : true,
-    [utils.asGridCoord(4,9)] : true,
-    [utils.asGridCoord(4,10)] : true,
-    [utils.asGridCoord(4,11)] : true,
-    [utils.asGridCoord(4,12)] : true,//end fence
+    [utils.asGridCoord(5,2)] : true,//beginning of fence
+    [utils.asGridCoord(5,3)] : true,
+    [utils.asGridCoord(5,4)] : true,
+    [utils.asGridCoord(5,5)] : true,
+    [utils.asGridCoord(5,6)] : true,
+    [utils.asGridCoord(5,7)] : true,
+    [utils.asGridCoord(5,8)] : true,
+    [utils.asGridCoord(5,9)] : true,
+    [utils.asGridCoord(5,10)] : true,
+    [utils.asGridCoord(5,11)] : true,
+    [utils.asGridCoord(5,12)] : true,//end fence
     [utils.asGridCoord(1,13)] : true,//begin hedge
     [utils.asGridCoord(2,13)] : true,
     [utils.asGridCoord(3,13)] : true,
