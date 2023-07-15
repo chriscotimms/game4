@@ -91,14 +91,18 @@ class Overworld {
    }
   }
  
-  init() {
+  async init() {
 
-    
+  this.titleScreen = new TitleScreen({
+  })
+  await this.titleScreen.init(document.querySelector(".game-container"));
+
+
     /* this.hud = new Hud();
     this.hud.init(document.querySelector(".game-container")); */
 
   //this.startMap(window.OverworldMaps.Bedroom);
-   this.startMap(window.OverworldMaps.Nans);
+   this.startMap(window.OverworldMaps.First);
  
  
    this.bindActionInput();

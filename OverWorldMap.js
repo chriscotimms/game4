@@ -318,6 +318,69 @@ window.OverworldMaps = {
     }
   }, */
 
+
+  First: {
+    lowerSrc: "./images/maps/first_lower.png",
+    upperSrc: "",
+    configObjects: {
+      hero: {
+        type: "Person",
+        useShadow: true,
+        isPlayerControlled: true,
+        visible1: true,
+        Atag: "hero",
+        x: utils.withGrid(0),
+        y: utils.withGrid(1),
+      },
+      
+    },//end of config objects
+
+    walls: {
+      /* [utils.asGridCoord(1,0)] : true,
+      [utils.asGridCoord(-1,1)] : true,
+      [utils.asGridCoord(-1,2)] : true,
+      [utils.asGridCoord(0,3)] : true,
+      [utils.asGridCoord(0,4)] : true,
+      [utils.asGridCoord(1,5)] : true,
+      [utils.asGridCoord(2,4)] : true,
+      [utils.asGridCoord(2,3)] : true,
+      [utils.asGridCoord(3,2)] : true,
+      [utils.asGridCoord(3,1)] : true, */
+
+    },//end of walls
+
+    roomDescription: [
+      {
+          events: [
+            { type: "textMessage", text:"When text appears you can push enter or click next to proceed."},
+            { type: "textMessage", text:"Odvar can walk around the space using the arrow keys"},
+            { type: "textMessage", text:"and can interact with people and some objects by approaching them and pressing the Enter key"},
+            { type: "textMessage", text:"There is an Access Panel on the top of the screen."},
+            { type: "textMessage", text:"It feeds back the players position on the screen and objects of interest or spaces that are blocked"},
+            { type: "textMessage", text:"The \"X\" tile is the position on the horizontal axis, with 0 beginning at the left of the space"},
+            { type: "textMessage", text:"The \"Y\" tile is the position on the horizontal axis, with 0 beginning at the top of the space"},
+          ]
+      },
+    ],//end of roomDescription
+
+    cutsceneSpaces: {
+      [utils.asGridCoord(1,4)]: [
+        {
+          events: [
+            { 
+              type: "changeMap", 
+              map: "Livingroom",
+              x: utils.withGrid(1),
+              y: utils.withGrid(1),
+              direction:"down"
+            }
+          ]
+        }
+      ],
+    },
+
+},//end of Bedroom
+
   Bedroom: {
     lowerSrc: "./images/maps/bedroom.png",
     upperSrc: "",
@@ -327,6 +390,7 @@ window.OverworldMaps = {
         useShadow: true,
         isPlayerControlled: true,
         visible1: true,
+        Atag: "hero",
         x: utils.withGrid(0),
         y: utils.withGrid(1),
       },
@@ -335,6 +399,7 @@ window.OverworldMaps = {
         x: utils.withGrid(1),
         y: utils.withGrid(1),
         visible1: true,
+        Atag: "Bed",
         src: "./images/objects/empty.png",
         useShadow: false,
         talking: [
@@ -350,6 +415,7 @@ window.OverworldMaps = {
         x: utils.withGrid(0),
         y: utils.withGrid(0),
         visible1: true,
+        Atag: "Window",
         src: "./images/objects/empty.png",
         useShadow: false,
         talking: [
@@ -365,6 +431,7 @@ window.OverworldMaps = {
         x: utils.withGrid(2),
         y: utils.withGrid(0),
         visible1: true,
+        Atag: "Computer",
         src: "./images/objects/empty.png",
         talking: [
           {
@@ -472,7 +539,7 @@ Livingroom: {
             { type: "textMessage", text: "Const: urgh, almost ready to go to bed, just one last line of code to solve..." },
             { type: "textMessage", text: "Odvar: Anything a noob can help with?" },
             { type: "textMessage", text: "Const: I'm close to tearing my hair out! I'm stuck on a \"for\" loop...but...it keeps returning...undefined..." },
-            { type: "textMessage", text: "Const: F\!\?\!\?\!\*\!\£\&\^\$\\!\!\!\!\!" },
+            { type: "textMessage", text: "Const: [inaudible muttering]" },
             { type: "textMessage", text: " [awkward silence as Odvar leans in pretending to scrutinise code]" },
             { type: "textMessage", text: "Const: Don't worry, I'll...figure...something..." },
             { type: "textMessage", text: "Odvar: ...jeez, you're really pushing yourself hard!" },
@@ -580,7 +647,6 @@ Livingroom: {
     
 ], //end of roomDescription
 
-
   cutsceneSpaces: {
     [utils.asGridCoord(1,0)]: [
       {
@@ -609,137 +675,6 @@ Livingroom: {
   },//end of cutsceneSpaces
 
 },//end of Livingroom
-
-/* Livingroom_fromOutside: {
-  lowerSrc: "./images/maps/livingroom_lower.png",
-  upperSrc: "./images/maps/livingroom_upper.png",
-
-  configObjects: {
-
-    hero: {
-      type: "Person",
-      isPlayerControlled: true,
-      useShadow: true,
-      x: utils.withGrid(5),
-      y: utils.withGrid(8),
-    },
-
-    Const: {
-      type: "Person",
-      useShadow: true,
-      x: utils.withGrid(4),
-      y: utils.withGrid(6),
-      src: "./images/characters/people/constsit.png",
-      talking: [
-
-        {
-          required:["OUTSIDE_FIRST"],
-          events:[ 
-            { type: "textMessage", text: "Const: back so soon?" },
-          ]
-        },
-
-      ],
-    },
-
-    //Objects
-    Coffee_table: {
-      type: "Person",
-      x: utils.withGrid(2),
-      y: utils.withGrid(5),
-      src: "./images/objects/empty.png",
-      talking: [
-        {
-          events: [
-            { type: "textMessage", text: "...the finest in Swedish mass-produced craftsmenship..." },
-          ]
-        }
-      ]
-    },
-
-    Sink: {
-      type: "Person",
-      x: utils.withGrid(5),
-      y: utils.withGrid(2),
-      src: "./images/objects/empty.png",
-      talking: [
-        {
-          events: [
-            { type: "textMessage", text: "...if it isn't old Mount Jenga! Someday I'll say something...for now I'll just quietly seethe..." },
-            { type: "textMessage", text: " [quiet seething]" },
-          ]
-        }
-      ]
-    },
-    
-  },//end of config objects
-
-  walls: {
-    //perimeter
-    [utils.asGridCoord(0,1)] : true,
-    [utils.asGridCoord(0,2)] : true,
-    [utils.asGridCoord(-1,3)] : true,
-    [utils.asGridCoord(-1,4)] : true,
-    [utils.asGridCoord(0,5)] : true,
-    [utils.asGridCoord(0,6)] : true,
-    [utils.asGridCoord(1,7)] : true,
-    [utils.asGridCoord(2,7)] : true,
-    [utils.asGridCoord(3,8)] : true,
-    [utils.asGridCoord(4,8)] : true,
-    [utils.asGridCoord(4,9)] : true,
-    [utils.asGridCoord(6,9)] : true, 
-    [utils.asGridCoord(6,8)] : true, 
-    [utils.asGridCoord(7,8)] : true, 
-    [utils.asGridCoord(8,8)] : true, 
-    [utils.asGridCoord(9,7)] : true,
-    [utils.asGridCoord(9,6)] : true,
-    [utils.asGridCoord(9,5)] : true,
-    [utils.asGridCoord(9,4)] : true,
-    [utils.asGridCoord(9,3)] : true,
-    [utils.asGridCoord(9,2)] : true,
-    [utils.asGridCoord(8,1)] : true,
-    [utils.asGridCoord(7,2)] : true,
-    [utils.asGridCoord(6,2)] : true,
-    //[utils.asGridCoord(5,2)] : true,
-    [utils.asGridCoord(4,2)] : true,
-    [utils.asGridCoord(3,2)] : true,
-    [utils.asGridCoord(2,2)] : true,
-    [utils.asGridCoord(2,1)] : true,
-    //objects in room
-    [utils.asGridCoord(4,5)] : true,
-    [utils.asGridCoord(5,5)] : true,
-
-
-  },//end of walls
-
-  roomDescription: {
-        events: [
-          { type: "textMessage", text:"The Living Room and Kitchen"},
-          { type: "textMessage", text:"Odvar stands at the bottom of the space at the exit to outside. At the top of the room is a kitchenette. At the bottom left is a set of couches."},
-          { type: "textMessage", text:"In the center of the room is a kitchen table, with a person sat facing up toward a laptop. There is an exit to Odvars' bedroom at the top left."},
-        ]
-  },//end of roomDescription
-
-  cutsceneSpaces: {
-    [utils.asGridCoord(1,0)]: [
-      {
-        events: [
-          { type: "changeMap", map: "Bedroom"}
-        ]
-      }
-    ],
-    [utils.asGridCoord(5,9)]: [
-      {
-        events: [
-          { type: "changeMap", map: "outsideFlat"},
-          { type: "addStoryFlag", flag:"OUTSIDE_FIRST"}
-        ]
-      }
-    ],
-  },//end of cutsceneSpaces
-
-},//end of Livingroom_fromOutside */
-
 
 outsideFlat: {
   lowerSrc: "./images/maps/outsideFlat_lower.png",
@@ -780,6 +715,7 @@ outsideFlat: {
           events:[ 
             { type: "textMessage", text: "Stranger: In case you were wondering...", faceHero:"Stranger" },
             { type: "textMessage", text: "Stranger: I Am A Free, I Am Not Man...A Number!", faceHero:"Stranger" },
+            { type: "textMessage", text: "Odvar: ...well that clears things up!"},
           ]
         },
         {
@@ -796,6 +732,7 @@ outsideFlat: {
       useShadow: true,
       isPlayerControlled: false,
       visible1: true,
+      Atag: "NaN",
       x: utils.withGrid(23),
       y: utils.withGrid(0),
       src: "./images/objects/empty.png",
@@ -1124,7 +1061,7 @@ Nans: {
       {
         events: [
 
-          { type: "checkMissionComplete", check:[{herb:"s001",quantity:2}, {herb:"v001", quantity:2}], flag:"OUTSIDE_GARDEN_COMPLETED"},
+          { type: "checkMissionComplete", check:[{herb:"s001",quantity:2}, {herb:"v001", quantity:2}, {herb:"s002", quantity:2}, {herb:"f001", quantity:2}], flag:"OUTSIDE_GARDEN_COMPLETED"},
           
         ]
       }
@@ -1225,6 +1162,46 @@ Garden: {
       storyFlag:"USED_collectibleObjectC",
       plants: "v001",
     }, 
+    Echinacea1: {
+      type: "collectible3",
+      x: utils.withGrid(7),
+      y: utils.withGrid(18),
+      Atag: "Echinacea",
+      visible1: true,
+      src: "images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectD",
+      plants: "s002",
+    },
+    Echinacea2: {
+      type: "collectible3",
+      x: utils.withGrid(8),
+      y: utils.withGrid(18),
+      Atag: "Echinacea",
+      visible1: true,
+      src: "images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectE",
+      plants: "s002",
+    },
+    Chamomile1: {
+      type: "collectible3",
+      x: utils.withGrid(9),
+      y: utils.withGrid(18),
+      Atag: "Chamomile",
+      visible1: true,
+      src: "images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectF",
+      plants: "f001",
+    },
+    Chamomile2: {
+      type: "collectible3",
+      x: utils.withGrid(4),
+      y: utils.withGrid(12),
+      Atag: "Chamomile",
+      visible1: true,
+      src: "images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectG",
+      plants: "f001",
+    },
   
   
 

@@ -11,15 +11,15 @@ window.Plants = {
         name:"Thyme",
         description: "Plant desc here",
         type: PlantTypes.spicy,
-        src: "images/characters/pizzas/s001.png",
+        src: "images/characters/pizzas/thyme.png",
         icon: "images/icons/spicy.png",
         actions: ["saucyStatus", "clumsyStatus","damage1"],//defined in action.js
     },
     "s002": {
-        name:"Bacon Brigade",
+        name:"Echinacea",
         description: "A salty dog",
         type: PlantTypes.spicy,
-        src: "images/characters/pizzas/s002.png",
+        src: "images/characters/pizzas/echinacea.png",
         icon: "images/icons/spicy.png",
         actions: ["saucyStatus", "clumsyStatus","damage1"],
     },
@@ -27,15 +27,15 @@ window.Plants = {
         name:"Rosemary",
         description: "Plant desc here",
         type: PlantTypes.veggie,
-        src: "images/characters/pizzas/v001.png",
+        src: "images/characters/pizzas/rosemary.png",
         icon: "images/icons/veggie.png",
         actions: ["damage1"],//defined in action.js
     },
     "f001": {
-        name:"Portobello Express",
+        name:"Chamomile",
         description: "Plant desc here",
         type: PlantTypes.fungi,
-        src: "images/characters/pizzas/f001.png",
+        src: "images/characters/pizzas/chamomile.png",
         icon: "images/icons/fungi.png",
         actions: ["damage1"],//defined in action.js
     },
