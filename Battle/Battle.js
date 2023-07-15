@@ -58,7 +58,7 @@ class Battle {
         }
 
         //Dynamically add player team
-        window.playerState.lineup.forEach(id => {
+        window.playerState.Plantlineup.forEach(id => {
             this.addCombatant(id, "player", window.playerState.plants[id])//looks up Plant object stored in PlayerState.js 
         })
         //Dynamically add enemy team

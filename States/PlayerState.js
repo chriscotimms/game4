@@ -30,7 +30,7 @@ class PlayerState {
             },
         },
     
-        this.plants = {
+        /* this.plants = {
             "plant0": {
                 plantId:"s01",
                 hp:50,
@@ -49,9 +49,9 @@ class PlayerState {
                 level: 1,
                 status: null,
             },
-        }
+        } */
         this.lineup = ["p1", "p2"];
-        this.Plantlineup = ["plant0", "plant1"];
+        this.Plantlineup = ["p1"];
         this.items = [
             { actionId: "item_recoverHp", instanceId: "item1"},
             { actionId: "item_recoverHp", instanceId: "item2"},
@@ -78,8 +78,21 @@ class PlayerState {
         }
         this.Plantlineup.push(newId);
         utils.emitEvent("LineupChanged");
+        console.log(this);
+        //utils.emitEvent("LineupChanged");
     }
 
+
+
+
+
+
+
+
+
+
+
+    
     addPlant(plantId) {
         this.Plantlineup.push(plantId);
         //console.log(plantId);

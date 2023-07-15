@@ -8,6 +8,7 @@ class Person extends GameObject {
     this.visible1 = config.visible1;
     this.isPlayerControlled = config.isPlayerControlled || false;
     this.useShadow = config.useShadow || false;
+    this.Atag = config.Atag || "not-named"; //new access tags
   
   
 
@@ -63,8 +64,8 @@ class Person extends GameObject {
           AccessMessage("disappear");
           AccessMessage(aa.collectible); */
         } else {
-          AccessMessage(aa.id);
-          /* console.log(aa); */
+          AccessMessage(aa.Atag);
+
         }
         
       }; 

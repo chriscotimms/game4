@@ -8,7 +8,7 @@
 
 window.Plants = {
     "s001": {
-        name:"Slice Samaurai",
+        name:"Thyme",
         description: "Plant desc here",
         type: PlantTypes.spicy,
         src: "images/characters/pizzas/s001.png",
@@ -24,7 +24,7 @@ window.Plants = {
         actions: ["saucyStatus", "clumsyStatus","damage1"],
     },
     "v001": {
-        name:"Call Me Kale",
+        name:"Rosemary",
         description: "Plant desc here",
         type: PlantTypes.veggie,
         src: "images/characters/pizzas/v001.png",
@@ -44,7 +44,7 @@ window.Plants = {
 
 
 
-window.Plants = {
+/* window.Plants = {
     "s01": {
         name:"Thyme",
         description: "Smells like wood",
@@ -66,4 +66,4 @@ window.Plants = {
         src: "images/characters/pizzas/f001.png",
         icon: "images/icons/fungi.png",
     },
-}//end window.Plants
+}//end window.Plants */

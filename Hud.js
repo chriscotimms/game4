@@ -15,6 +15,13 @@ class Hud {
 
     //new code with plants
     createElement() {
+
+        //clean up DOm stuff first before repopulating
+        if (this.element) {
+            this.element.remove();
+            this.scoreboards = [];
+        }
+
         //create DOM element of hud
         this.element = document.createElement("div");
         this.element.classList.add("Hud");
@@ -56,6 +63,12 @@ class Hud {
         document.addEventListener("PlayerStateUpdated", () => {
             this.update();
         })
+
+        document.addEventListener("LineupChanged", () => {
+            this.createElement();
+            container.appendChild(this.element);
+        })
+
     }
 
 }

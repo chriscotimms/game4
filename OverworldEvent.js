@@ -59,19 +59,18 @@ class OverworldEvent {
   }
 
   objectCollected(resolve) {
-    
-    const match = Object.values(this.map.gameObjects).find(object => {
+  
+      const match = Object.values(this.map.gameObjects).find(object => {
       if (object.id === this.event.id) {
         object.visible1 = false;//remove collision  
-        playerState.addPlant(object.id);//add object to playerState.Plantlineup[]
+        //working function, but needs expanding below to update Hud inventory 
+        //playerState.addPlant(object.id);//add object to playerState.Plantlineup[]
+        playerState.addPlant2(object.plants/*object.id*/);//add object to playerState.Plantlineup[]
+        utils.emitEvent("PlayerStateUpdated");
         
-        //object.sprite.setAnimation("idle-right");//either this
-        //object.sprite.currentAnimation = "idle-right";//or this
-        
-      }
+      } 
       
     });
-    /* console.log(playerState); */
     resolve();
   } 
 
@@ -97,7 +96,6 @@ class OverworldEvent {
 
   addStoryFlag(resolve) {
     window.playerState.storyFlags[this.event.flag] = true;
-    console.log(window.playerState.storyFlags);
     resolve();
   }
 
@@ -136,7 +134,6 @@ class OverworldEvent {
   }
 
   addHud(resolve) {
-    console.log("add hud");
     this.hud = new Hud();
     this.hud.init(document.querySelector(".game-container"));
     resolve();

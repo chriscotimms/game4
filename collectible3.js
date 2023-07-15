@@ -1,8 +1,9 @@
-class collectible2 extends GameObject {
+class collectible3 extends GameObject {
     constructor(config) {
         super(config);
 
         this.id = config.id;
+        this.Atag = config.Atag;
         this.visible1 = config.visible1;
         /* console.log(this.visible1); */
         this.sprite = new Sprite({
@@ -15,7 +16,7 @@ class collectible2 extends GameObject {
           currentAnimation: "used-down",
         });
         this.storyFlag = config.storyFlag;
-        this.pizzas = config.pizzas;
+        //this.pizzas = config.pizzas;
         this.plants = config.plants;
 
         this.talking = [
@@ -30,7 +31,6 @@ class collectible2 extends GameObject {
                     { type:"textMessage", text: "Pick it up?"},
                     //{ type: "craftingMenu", plants: this.plants}, 
                     { type:"addStoryFlag", flag: this.storyFlag },
-
                     { type: "objectCollected", id: this.id},
                 ]
             }
@@ -42,7 +42,6 @@ class collectible2 extends GameObject {
         this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
         ? "used-down"
         : "unused-down"
-        //utils.emitEvent("PlayerStateUpdated");
     
        
     }

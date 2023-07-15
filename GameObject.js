@@ -17,6 +17,7 @@ class GameObject {
   
       this.talking = config.talking || [];
       this.retryTimeout = null;
+    
   
     }
     

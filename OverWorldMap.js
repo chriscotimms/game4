@@ -100,7 +100,7 @@ class OverworldMap {
 
       let object = this.configObjects[key];
       object.id = key;
-
+     
       let instance;
       if (object.type === "Person") {
         instance = new Person(object);
@@ -110,6 +110,9 @@ class OverworldMap {
       }
       if (object.type === "collectible2") {
         instance = new collectible2(object);
+      }
+      if (object.type === "collectible3") {
+        instance = new collectible3(object);
       }
       
       this.gameObjects[key] = instance;
@@ -946,6 +949,7 @@ Nans: {
       type: "Person",
       useShadow: true,
       visible1: true,
+      Atag: "hero",
       isPlayerControlled: true,
       x: utils.withGrid(1),
       y: utils.withGrid(7),
@@ -955,6 +959,7 @@ Nans: {
       useShadow: true,
       isPlayerControlled: false,
       visible1: true,
+      Atag: "NaN",
       x: utils.withGrid(4),
       y: utils.withGrid(2),
       src: "./images/characters/people/Nan.png",
@@ -1018,6 +1023,7 @@ Nans: {
       x: utils.withGrid(5),
       y: utils.withGrid(2),
       visible1: true,
+      Atag:"Cauldron", 
       src: "./images/objects/empty.png",
       useShadow: false,
       talking: [
@@ -1033,6 +1039,7 @@ Nans: {
       x: utils.withGrid(1),
       y: utils.withGrid(4),
       visible1: true,
+      Atag: "Table",
       src: "./images/objects/empty.png",
       useShadow: false,
       talking: [
@@ -1160,6 +1167,7 @@ Garden: {
       useShadow: true,
       isPlayerControlled: true,
       visible1: true,
+      Atag: "hero",
       x: utils.withGrid(0),
       y: utils.withGrid(3),
     },
@@ -1180,23 +1188,35 @@ Garden: {
       ]
     }, */
 
-    Thyme: {
-      type: "collectible2",
+    Thyme3: {
+      type: "collectible3",
       x: utils.withGrid(2),
       y: utils.withGrid(16),
       visible1: true,
+      Atag:"Thyme",
       src: "images/objects/Plant1.png",
       storyFlag:"USED_collectibleObjectA",
-      //plants: ["v01", "f01"],
+      plants: "s001",
     },   
-    Rosemary: {
-      type: "collectible2",
+    Rosemary1: {
+      type: "collectible3",
       x: utils.withGrid(3),
       y: utils.withGrid(18),
       visible1: true,
+      Atag:"Rosemary",
       src: "images/objects/Plant1.png",
       storyFlag:"USED_collectibleObjectB",
-      //plants: ["v01", "f01"],
+      plants: "v001",
+    }, 
+    Rosemary2: {
+      type: "collectible3",
+      x: utils.withGrid(5),
+      y: utils.withGrid(18),
+      Atag: "Rosemary",
+      visible1: true,
+      src: "images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectC",
+      plants: "v001",
     }, 
   
   
