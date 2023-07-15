@@ -981,6 +981,7 @@ Nans: {
           events:[ 
             { type: "removeHud"},
             { type: "textMessage", text: "NaN: Odvar, you're a star! I can't thank you enough!", faceHero:"NaN" },
+            { type: "textMessage", text: "NaN: I know all you kids are microdosing these days, so here's a mix of my my own making!", faceHero:"NaN" },
             { type: "textMessage", text: "NaN: You'd better get off to work before you get a reputation!", faceHero:"NaN" },
             { who: "NaN", type: "walk",  direction: "left" },
             { who: "NaN", type: "stand",  direction: "up" },

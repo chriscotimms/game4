@@ -121,38 +121,10 @@ class OverworldEvent {
 
       }
     }
-    console.log("needed.lenght = ", needed.length, "counter = ", counter);
+    //console.log("needed.lenght = ", needed.length, "counter = ", counter);
     if (counter === needed.length) {
       window.playerState.storyFlags[this.event.flag] = true;//if true add flag
     }
-    
-
-  
-      /* retrieved.forEach(el => {
-        console.log(window.playerState.plants[el].plantId, window.playerState.plants[el].quantity);
-      }) */
-
-    
-        /* for(let i=0;i<retrieved.length;i+=1){
-          if (needed[j].herb === window.playerState.plants[retrieved[i]].plantId && needed[j].quantity === window.playerState.plants[retrieved[i]].quantity) {
-            counter++;
-            console.log("match");
-            
-            
-          } 
-        } */
-        
-      
-      
-     
-    //let result = needed.every(i => retrieved.includes(i));//check for required collection
-    //console.log(result);
-
-    /* if (result) {
-    window.playerState.storyFlags[this.event.flag] = true;//if true add flag
-    } else {
-      /* console.log(this.event.false); 
-    } */
     resolve();
   }
  

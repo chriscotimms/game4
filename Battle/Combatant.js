@@ -32,21 +32,13 @@ class Combatant {
         this.hudElement.setAttribute("data-team", this.team);
         this.hudElement.innerHTML = (`
         <p class="Combatant_name">${this.name}</p>
-        
         <p class="Combatant_quantity"></p>
 
         <div class="Combatant_character_crop">
             <img class="Combatant_character" alt="${this.name}" src="${this.src}" />
         </div>
         <img class="Combatant_type" src="${this.icon}" alt="${this.type}"/>
-        <svg viewBox="0 0 26 3" class="Combatant_life-container">
-            <rect x=0 y=0 width="0%" height=1 fill="#82ff71" />
-            <rect x=0 y=1 width="0%" height=2 fill="#3ef126" />
-        </svg>
-        <svg viewBox="0 0 26 2" class="Combatant_xp-container">
-            <rect x=0 y=0 width="0%" height=1 fill="#ffd76a" />
-            <rect x=0 y=1 width="0%" height=1 fill="#ffc934" />
-        </svg>
+        
         <p class="Combatant_status"></p>
         `);
 
@@ -57,8 +49,8 @@ class Combatant {
         this.plantElement.setAttribute("data-team", this.team);
 
         //a cache to store references to these for use below
-        this.hpFills = this.hudElement.querySelectorAll(".Combatant_life-container > rect");
-        this.xpFills = this.hudElement.querySelectorAll(".Combatant_xp-container > rect");
+        //this.hpFills = this.hudElement.querySelectorAll(".Combatant_life-container > rect");
+        //this.xpFills = this.hudElement.querySelectorAll(".Combatant_xp-container > rect");
     }
 
 
@@ -74,12 +66,15 @@ class Combatant {
         this.plantElement.setAttribute("data-active", this.isActive);
 
         //update wdith of bars for hp and xp
-        this.hpFills.forEach(rect => rect.style.width = `${this.hpPercent}%`);
-        this.xpFills.forEach(rect => rect.style.width = `${this.xpPercent}%`);
+        //this.hpFills.forEach(rect => rect.style.width = `${this.hpPercent}%`);
+        //this.xpFills.forEach(rect => rect.style.width = `${this.xpPercent}%`);
 
-        //update level 
+        //update level
         //this.hudElement.querySelector(".Combatant_level").innerText = this.level;//updating combatant level bar
         this.hudElement.querySelector(".Combatant_quantity").innerText = this.quantity;//updating combatant level bar
+
+        //console.log("combatant.js ", window.OverworldMaps.Nans.cutsceneSpaces[`${96},${16}`][0].events[0].check);
+
 
         //update status from Battle.js
         const statusElement = this.hudElement.querySelector(".Combatant_status");
@@ -144,3 +139,14 @@ class Combatant {
 
 
 }
+
+
+/* 
+<svg viewBox="0 0 26 3" class="Combatant_life-container">
+            <rect x=0 y=0 width="0%" height=1 fill="#82ff71" />
+            <rect x=0 y=1 width="0%" height=2 fill="#3ef126" />
+        </svg>
+        <svg viewBox="0 0 26 2" class="Combatant_xp-container">
+            <rect x=0 y=0 width="0%" height=1 fill="#ffd76a" />
+            <rect x=0 y=1 width="0%" height=1 fill="#ffc934" />
+        </svg> */
