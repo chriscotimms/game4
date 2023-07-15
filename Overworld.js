@@ -1,6 +1,6 @@
 class Overworld {
   constructor(config) {
-    console.log(config.element);
+    /* console.log(config.element); */
     this.element = config.element;
     this.canvas = this.element.querySelector(".game-canvas");
     this.ctx = this.canvas.getContext("2d");
@@ -93,6 +93,7 @@ class Overworld {
  
   init() {
 
+    
     /* this.hud = new Hud();
     this.hud.init(document.querySelector(".game-container")); */
 

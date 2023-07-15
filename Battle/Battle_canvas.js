@@ -1,7 +1,7 @@
 //Overworld Event
 class Battle {
     constructor({ onComplete }) {
-        console.log(onComplete);
+        /* console.log(onComplete); */
         this.onComplete = onComplete;
     }//end constructor
 
@@ -32,7 +32,7 @@ class Battle {
 
 
         setTimeout(() => {
-            console.log("finish");
+            /* console.log("finish"); */
             this.battleCanvas.remove();
             this.onComplete();
           }, "4000");

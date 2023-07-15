@@ -22,8 +22,5 @@ const AccessMessageWalk = throttle(function(text){
   document.getElementById("Access_p").textContent = text;
 }, 50)
 
-/* function AccessMessage(text){
-  console.log(text);
-  document.getElementById("Access_p").textContent = text;
-} */
+
 

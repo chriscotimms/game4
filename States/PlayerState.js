@@ -8,7 +8,7 @@ class PlayerState {
                 xp: 90,
                 maxXp: 100,
                 level: 1,
-                status: {type:"saucy"},
+                status: null,
             },
             "p2": {
                 pizzaId:"v001",
@@ -32,17 +32,29 @@ class PlayerState {
     
         this.plants = {
             "plant0": {
-                plantId: "Thyme01",
+                pizzaId:"s01",
+                hp:50,
+                maxHp: 50,
+                xp: 75,
+                maxXp: 100,
+                level: 1,
+                status: null,
             },
             "plant1": {
-                plantId: "Rosemary01",
+                pizzaId:"f01",
+                hp:1,
+                maxHp: 50,
+                xp: 90,
+                maxXp: 100,
+                level: 1,
+                status: null,
             },
             "plant2": {
                 plantId: "Sage01",
             },
         }
-        this.lineup = ["p1"];
-        this.Plantlineup = ["No plants"];
+        this.lineup = ["p1", "p2"];
+        this.Plantlineup = ["plant0", "plant1"];
         this.items = [
             { actionId: "item_recoverHp", instanceId: "item1"},
             { actionId: "item_recoverHp", instanceId: "item2"},

@@ -66,7 +66,7 @@ class PauseMenu {
         this.keyboardMenu.setOptions(this.getOptions("root"));
 
         container.appendChild(this.element);
-        console.log(playerState.Plantlineup, playerState.Plantlineup[0]);
+        /* console.log(playerState.Plantlineup, playerState.Plantlineup[0]); */
         utils.wait(200);//create option to escape after menu loads
         this.esc = new KeyPressListener("Escape", () => {
             this.close();

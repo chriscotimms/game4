@@ -4,7 +4,7 @@ class collectible2 extends GameObject {
 
         this.id = config.id;
         this.visible1 = config.visible1;
-        console.log(this.visible1);
+        /* console.log(this.visible1); */
         this.sprite = new Sprite({
           gameObject: this,
           src: config.src,// || "images/objects/Plant1.png",
@@ -41,6 +41,7 @@ class collectible2 extends GameObject {
         this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag]
         ? "used-down"
         : "unused-down"
+        //utils.emitEvent("PlayerStateUpdated");
     
        
     }

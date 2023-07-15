@@ -71,7 +71,7 @@ class OverworldEvent {
       }
       
     });
-    console.log(playerState);
+    /* console.log(playerState); */
     resolve();
   } 
 
@@ -97,6 +97,7 @@ class OverworldEvent {
 
   addStoryFlag(resolve) {
     window.playerState.storyFlags[this.event.flag] = true;
+    console.log(window.playerState.storyFlags);
     resolve();
   }
 
@@ -106,9 +107,8 @@ class OverworldEvent {
     let result = needed.every(i => retrieved.includes(i));//check for required collection
     if (result) {
     window.playerState.storyFlags[this.event.flag] = true;//if true add flag
-    console.log(this.event.true);
     } else {
-      console.log(this.event.false);
+      /* console.log(this.event.false); */
     }
     resolve();
   }
@@ -134,6 +134,19 @@ class OverworldEvent {
     });
     menu.init(document.querySelector(".game-container"));
   }
+
+  addHud(resolve) {
+    console.log("add hud");
+    this.hud = new Hud();
+    this.hud.init(document.querySelector(".game-container"));
+    resolve();
+  }
+
+  removeHud(resolve) {
+    const undertheHud = document.querySelector(".Hud");
+    undertheHud.remove();
+    resolve();
+  } 
 
   init() {
     return new Promise(resolve => {

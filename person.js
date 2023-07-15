@@ -64,7 +64,7 @@ class Person extends GameObject {
           AccessMessage(aa.collectible); */
         } else {
           AccessMessage(aa.id);
-          console.log(aa);
+          /* console.log(aa); */
         }
         
       }; 

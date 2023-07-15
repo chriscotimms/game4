@@ -164,10 +164,10 @@ class Battle {
                     playerState.items = playerState.items.filter(item => {
                         return !this.usedInstanceIds[item.instanceId]
                     })
+
+                    //send signal tp update
+                    utils.emitEvent("PlayerStateUpdated");
                 }
-
-
-
 
                 //remove elements and clear screen of battle elements
                 this.element.remove();

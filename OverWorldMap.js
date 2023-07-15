@@ -178,7 +178,7 @@ class OverworldMap {
 
     if (!this.isCutscenePlaying) {
 
-      console.log(this.roomDescription);
+      /* console.log(this.roomDescription); */
 
       const relevantRoomDescription = this.roomDescription.find(scenario => {
         return(scenario.required || []).every(sf => {
@@ -968,6 +968,7 @@ Nans: {
         {
           required:["OUTSIDE_GARDEN", "OUTSIDE_GARDEN_COMPLETED"],
           events:[ 
+            { type: "removeHud"},
             { type: "textMessage", text: "NaN: Odvar, you're a star! I can't thank you enough!", faceHero:"NaN" },
             { type: "textMessage", text: "NaN: You'd better get off to work before you get a reputation!", faceHero:"NaN" },
             { who: "NaN", type: "walk",  direction: "left" },
@@ -1002,7 +1003,8 @@ Nans: {
               y: utils.withGrid(17),
               direction:"right",
             },
-            { type: "addStoryFlag", flag:"OUTSIDE_GARDEN"}
+            { type: "addStoryFlag", flag:"OUTSIDE_GARDEN"},
+            { type: "addHud" },
           ]
         }
       ],

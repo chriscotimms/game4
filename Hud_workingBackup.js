@@ -7,7 +7,6 @@ class Hud {
     //update the scoreboards hud elements to reflect live values
     //look at persistent values from playerState and run them through combatant update() method 
     update() {
-        
         this.scoreboards.forEach(s => {
             s.update(window.playerState.pizzas[s.id]);//id established below in createElement()
         })
@@ -34,7 +33,7 @@ class Hud {
                 ...Pizzas[pizza.pizzaId],//calling on pre-made Pizzas in pizzas.js, then pizza.pizzaId in playerState
                 ...pizza,
             }, null)//this addresses the function looking for battle type, but this is an overworld function
-            scoreboard.createElement();//a "scoreboard" keeping track of pizzas elements is created
+            scoreboard.createElement();//each "scoreboard" is created
             this.scoreboards.push(scoreboard);
             //finally adds scorebaord Hud element to the screen
             this.element.appendChild(scoreboard.hudElement);
