@@ -8,24 +8,17 @@ class PlayerState {
                 xp: 90,
                 maxXp: 100,
                 level: 1,
+                quantity: 1,
                 status: null,
             },
             "p2": {
-                plantId:"v001",
-                hp:50,
-                maxHp: 50,
-                xp: 75,
-                maxXp: 100,
-                level: 1,
-                status: {type:"veg-tastic"},
-            },
-            "p3": {
                 plantId:"f001",
                 hp:50,
                 maxHp: 50,
                 xp: 75,
                 maxXp: 100,
                 level: 1,
+                quantity: 1,
                 status: {type:"mushie"},
             },
         },
@@ -51,7 +44,7 @@ class PlayerState {
             },
         } */
         this.lineup = ["p1", "p2"];
-        this.Plantlineup = ["p1"];
+        this.Plantlineup = ["p1", "p2"];
         this.items = [
             { actionId: "item_recoverHp", instanceId: "item1"},
             { actionId: "item_recoverHp", instanceId: "item2"},
@@ -66,6 +59,17 @@ class PlayerState {
     }//end constructor
 
     addPlant2(plantId) {
+        let counter = 0;
+        for (let i = 0; i < this.Plantlineup.length; i+=1) {
+            if (plantId === this.plants[this.Plantlineup[i]].plantId) {
+                //add to quantity
+                counter += 1;
+                this.plants[this.Plantlineup[i]].quantity += 1;
+                console.log(this.plants[this.Plantlineup[i]]);
+            } 
+        }
+        if (counter === 0) {
+        ///if no match add new item
         const newId = `p${Date.now()}`+Math.floor(Math.random() * 99999);
         this.plants[newId] = {
             plantId,
@@ -74,12 +78,12 @@ class PlayerState {
             xp: 0,
             maxXp: 100,
             level:1,
+            quantity:1,
             status:null,
         }
         this.Plantlineup.push(newId);
-        utils.emitEvent("LineupChanged");
-        console.log(this);
-        //utils.emitEvent("LineupChanged");
+        }
+    utils.emitEvent("LineupChanged");
     }
 
 

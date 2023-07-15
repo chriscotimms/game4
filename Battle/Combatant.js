@@ -33,6 +33,8 @@ class Combatant {
         this.hudElement.innerHTML = (`
         <p class="Combatant_name">${this.name}</p>
         <p class="Combatant_level"></p>
+        <p class="Combatant_quantity"></p>
+
         <div class="Combatant_character_crop">
             <img class="Combatant_character" alt="${this.name}" src="${this.src}" />
         </div>
@@ -77,6 +79,7 @@ class Combatant {
 
         //update level 
         this.hudElement.querySelector(".Combatant_level").innerText = this.level;//updating combatant level bar
+        this.hudElement.querySelector(".Combatant_quantity").innerText = this.quantity;//updating combatant level bar
 
         //update status from Battle.js
         const statusElement = this.hudElement.querySelector(".Combatant_status");

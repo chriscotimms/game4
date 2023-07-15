@@ -443,6 +443,7 @@ Livingroom: {
       isPlayerControlled: true,
       useShadow: true,
       visible1: true,
+      Atag: "hero",
       x: utils.withGrid(1),
       y: utils.withGrid(1),
     },
@@ -451,6 +452,7 @@ Livingroom: {
       type: "Person",
       useShadow: true,
       visible1: true,
+      Atag: "Const",
       x: utils.withGrid(4),
       y: utils.withGrid(6),
       src: "images/characters/people/constSit.png",
@@ -487,6 +489,7 @@ Livingroom: {
     Coffee_table: {
       type: "Person",
       visible1: true,
+      Atag: "Coffee Table",
       x: utils.withGrid(2),
       y: utils.withGrid(5),
       src: "./images/objects/empty.png",
@@ -504,6 +507,7 @@ Livingroom: {
       x: utils.withGrid(5),
       y: utils.withGrid(2),
       visible1: true,
+      Atag: "Sink",
       src: "./images/objects/empty.png",
       talking: [
         {
@@ -749,6 +753,7 @@ outsideFlat: {
       useShadow: true,
       isPlayerControlled: true,
       visible1: true,
+      Atag:"hero",
       x: utils.withGrid(5),
       y: utils.withGrid(1),
     },
@@ -757,6 +762,7 @@ outsideFlat: {
       useShadow: true,
       isPlayerControlled: false,
       visible1: true,
+      Atag:"Stranger",
       x: utils.withGrid(14),
       y: utils.withGrid(1),
       src: "./images/characters/people/npc1.png",
@@ -1045,7 +1051,7 @@ Nans: {
       talking: [
         {
           events: [
-            { type: "textMessage", text: "alluring...smells medicinal...with a whiff of wet dog" },
+            { type: "textMessage", text: "some dried herbs" },
           ]
         }
       ]

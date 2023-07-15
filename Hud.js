@@ -30,11 +30,21 @@ class Hud {
         //destructure to break down components
         const {playerState} = window;
 
+
+
+
+
+
         //access array in playerState
         //grabbing each premade "pizza" by their key
         //and assigning it to the const "pizza"
         playerState.Plantlineup.forEach(key => {
             const plant = playerState.plants[key];
+        
+
+
+
+
             //scoreboard is the over HUD object, whihc uses the Combatant class
             const scoreboard = new Combatant({
                 id: key,//to identify which scoreboard to update
@@ -42,6 +52,7 @@ class Hud {
                 ...Plants[plant.plantId],//calling on pre-made Plants in pizzas.js, then Plant.PlantId in playerState
                 ...plant,
             }, null)//this addresses the function looking for battle type, but this is an overworld function
+            console.log(scoreboard);
             scoreboard.createElement();//a "scoreboard" keeping track of Plants elements is created
             this.scoreboards.push(scoreboard);
             //finally adds scorebaord Hud element to the screen
