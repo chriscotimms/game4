@@ -52,7 +52,6 @@ class Hud {
                 ...Plants[plant.plantId],//calling on pre-made Plants in pizzas.js, then Plant.PlantId in playerState
                 ...plant,
             }, null)//this addresses the function looking for battle type, but this is an overworld function
-            console.log(scoreboard);
             scoreboard.createElement();//a "scoreboard" keeping track of Plants elements is created
             this.scoreboards.push(scoreboard);
             //finally adds scorebaord Hud element to the screen

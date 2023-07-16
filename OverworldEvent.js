@@ -100,8 +100,11 @@ class OverworldEvent {
   }
 
   checkMissionComplete(resolve) {
-    const needed = this.event.check;
+    const mission = this.event.check;//the event checking the mission returns the mission name, aka "mission1"
+    const needed = window.Missions[mission].check;//name of mission inserted as variable into window.Mission to return correct mission
     const retrieved = playerState.Plantlineup;
+
+    //console.log(needed.length, needed[0].herb, needed[0].quantity);
     //console.log(needed[0].herb, needed[0].quantity);
     //console.log(window.playerState.plants[retrieved[1]].plantId, window.playerState.plants[retrieved[1]].quantity);
     
@@ -110,12 +113,11 @@ class OverworldEvent {
       let neededherb = needed[j].herb;
       let neededquan = needed[j].quantity;
 
-
       for(let i=0;i<retrieved.length; i+=1) {
         let retrievedherb = window.playerState.plants[retrieved[i]].plantId;
         let retrievedquan = window.playerState.plants[retrieved[i]].quantity;
         
-        if (retrievedherb === neededherb && retrievedquan === neededquan) {
+        if (retrievedherb === neededherb && retrievedquan >= neededquan) {
           counter++;
         } 
 
@@ -138,16 +140,19 @@ class OverworldEvent {
     menu.init(document.querySelector(".game-container"))
   }
 
-  pause(resolve) {
+  async pause(resolve) {
     this.map.isPaused = true;
-    const menu = new PauseMenu({
-      onComplete: () => {
-        resolve();
-        this.map.isPaused = false;
-        this.map.overworld.startGameLoop();
-      }
-    });
-    menu.init(document.querySelector(".game-container"));
+    this.titleScreen = new TitleScreen({
+    })
+    await this.titleScreen.init(document.querySelector(".game-container"));
+    //const menu = new PauseMenu({
+    //  onComplete: () => {
+    //    resolve();
+    //    this.map.isPaused = false;
+    //    this.map.overworld.startGameLoop();
+    //  }
+    //});
+    //menu.init(document.querySelector(".game-container"));
   }
 
   addHud(resolve) {

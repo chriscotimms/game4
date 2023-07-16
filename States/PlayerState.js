@@ -1,7 +1,7 @@
 class PlayerState {
     constructor() {
         this.plants = {
-            "p1": {
+            /* "p1": {
                 plantId:"s001",
                 hp:1,
                 maxHp: 50,
@@ -10,7 +10,7 @@ class PlayerState {
                 level: 1,
                 quantity: 1,
                 status: null,
-            },
+            }, */
             /* "p2": {
                 plantId:"f001",
                 hp:50,
@@ -44,7 +44,7 @@ class PlayerState {
             },
         } */
         this.lineup = ["p1"];
-        this.Plantlineup = ["p1"];
+        this.Plantlineup = [];
         this.items = [
             { actionId: "item_recoverHp", instanceId: "item1"},
             { actionId: "item_recoverHp", instanceId: "item2"},
@@ -65,7 +65,6 @@ class PlayerState {
                 //add to quantity
                 counter += 1;
                 this.plants[this.Plantlineup[i]].quantity += 1;
-                console.log(this.plants[this.Plantlineup[i]]);
             } 
         }
         if (counter === 0) {

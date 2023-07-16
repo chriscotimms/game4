@@ -162,6 +162,26 @@ class OverworldMap {
     }
   }
 
+
+  FootstepCutscene() {
+    const hero = this.gameObjects["hero"];
+    if (!this.isCutscenePlaying) {
+    }
+    const match = this.cutsceneSpaces[ `${hero.x},${hero.y}` ];
+    if (!this.isCutscenePlaying && match) {
+
+      const relevantScenario = match.find(scenario => {
+        return(scenario.required || []).every(sf => {
+          return  playerState.storyFlags[sf];
+        })
+      })
+      relevantScenario && this.startCutscene(relevantScenario.events)
+    }
+  }
+
+
+
+  /*backup working// 
   FootstepCutscene() {
     const hero = this.gameObjects["hero"];
     if (!this.isCutscenePlaying) {
@@ -170,7 +190,10 @@ class OverworldMap {
     if (!this.isCutscenePlaying && match) {
       this.startCutscene( match[0].events )
     }
-  }
+  } 
+  end of backup working */
+
+
 
 
 
@@ -326,7 +349,7 @@ window.OverworldMaps = {
             { type: "textMessage", text:"Odvar can interact with people and objects by approaching them and pressing the Enter key"},
             
           ]
-        }
+        },
       ],
     },
 
@@ -796,21 +819,39 @@ outsideFlat: {
   },
 ],//end of roomDescription
 
-  cutsceneSpaces: {
+cutsceneSpaces: {
     [utils.asGridCoord(0,2)]: [
+      {
+        required: ["OUTSIDE_1A", "FINISHED_NAN"],
+        events: [
+          { type: "textMessage", text: "Sigh, no way to avoid it, I'd better head into work..." },
+          { type: "textMessage", text: "GAME OVER!" },
+          { type: "pause"},
+        ]
+      },
+      {
+        required: ["OUTSIDE_1A"],
+        events: []
+      },
       {
         events: [
           { type: "textMessage", text: "I guess it'll be good to get in early for work. I'll have a chance to get ahead on those iterations!" },
           { type: "textMessage", text: "Although now that I think of it, I do hate my job!" },
+          { type: "addStoryFlag", flag:"OUTSIDE_1A"}
           
         ]
       }
     ],
     [utils.asGridCoord(6,2)]: [
       {
+        required: ["OUTSIDE_1B"],
+        events: []
+      },
+      {
         events: [
           { type: "textMessage", text: "I haven't seen NaN in a while. This is a much better idea than going to work early!" },
           { type: "textMessage", text: "She always has some sage advice for me too" },
+          { type: "addStoryFlag", flag:"OUTSIDE_1B"}
           
         ]
       }
@@ -894,8 +935,8 @@ Nans: {
             { type: "textMessage", text: "NaN: Sorry, I'm in the middle of brewing a new concoction, and it's not going very well!" },
             { type: "textMessage", text: "Odvar: Anything I can help with?" },
             { type: "textMessage", text: "NaN: well if you're offering, yes! there is!" },
-            { type: "textMessage", text: "NaN: would you be a dear and grab some herbs from the garden?" },
-            { type: "textMessage", text: "Odvar: As long as you don't need me to collect any more nettles, that really hurt!" },
+            { type: "textMessage", text: "NaN: would you be a dear and grab some herbs from the garden? I need three of each!" },
+            { type: "textMessage", text: "Odvar: As long as you don't need me to collect any more nettles. That really hurt!" },
             { 
               type: "changeMap", 
               map: "Garden",
@@ -945,7 +986,7 @@ Nans: {
         }
       ]
     },
-    Table: {
+    Table1: {
       type: "Person",
       x: utils.withGrid(2),
       y: utils.withGrid(4),
@@ -992,8 +1033,7 @@ Nans: {
     [utils.asGridCoord(2,1)] : true,
     [utils.asGridCoord(1,1)] : true,
     [utils.asGridCoord(0,1)] : true,
-    [utils.asGridCoord(2,4)] : true,//table
-    
+
   },//end of walls
 
   roomDescription: [
@@ -1028,7 +1068,7 @@ Nans: {
       {
         events: [
 
-          { type: "checkMissionComplete", check:[{herb:"s001",quantity:2}, {herb:"v001", quantity:2}, {herb:"s002", quantity:2}, {herb:"f001", quantity:2}], flag:"OUTSIDE_GARDEN_COMPLETED"},
+          { type: "checkMissionComplete", check: "mission1", flag:"OUTSIDE_GARDEN_COMPLETED"},
           
         ]
       }
@@ -1105,14 +1145,24 @@ Garden: {
     },  
     Thyme1: {
       type: "collectible3",
-      x: utils.withGrid(6),
-      y: utils.withGrid(16),
+      x: utils.withGrid(10),
+      y: utils.withGrid(11),
       visible1: true,
       Atag:"Thyme",
       src: "images/objects/Plant1.png",
       storyFlag:"USED_collectibleObjectA2",
       plants: "s001",
     }, 
+    Thyme4: {
+      type: "collectible3",
+      x: utils.withGrid(18),
+      y: utils.withGrid(11),
+      visible1: true,
+      Atag:"Thyme",
+      src: "images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectA3",
+      plants: "s001",
+    },
     Rosemary1: {
       type: "collectible3",
       x: utils.withGrid(3),
@@ -1130,7 +1180,17 @@ Garden: {
       Atag: "Rosemary",
       visible1: true,
       src: "images/objects/Plant1.png",
-      storyFlag:"USED_collectibleObjectC",
+      storyFlag:"USED_collectibleObjectB1",
+      plants: "v001",
+    }, 
+    Rosemary3: {
+      type: "collectible3",
+      x: utils.withGrid(7),
+      y: utils.withGrid(5),
+      Atag: "Rosemary",
+      visible1: true,
+      src: "images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectB2",
       plants: "v001",
     }, 
     Echinacea1: {
@@ -1145,12 +1205,22 @@ Garden: {
     },
     Echinacea2: {
       type: "collectible3",
-      x: utils.withGrid(6),
-      y: utils.withGrid(8),
+      x: utils.withGrid(11),
+      y: utils.withGrid(4),
       Atag: "Echinacea",
       visible1: true,
       src: "images/objects/Plant1.png",
-      storyFlag:"USED_collectibleObjectE",
+      storyFlag:"USED_collectibleObjectD1",
+      plants: "s002",
+    },
+    Echinacea3: {
+      type: "collectible3",
+      x: utils.withGrid(15),
+      y: utils.withGrid(4),
+      Atag: "Echinacea",
+      visible1: true,
+      src: "images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectD2",
       plants: "s002",
     },
     Chamomile1: {
@@ -1171,6 +1241,16 @@ Garden: {
       visible1: true,
       src: "images/objects/Plant1.png",
       storyFlag:"USED_collectibleObjectG",
+      plants: "f001",
+    },
+    Chamomile3: {
+      type: "collectible3",
+      x: utils.withGrid(4),//the one in the building site
+      y: utils.withGrid(5),
+      Atag: "Chamomile",
+      visible1: true,
+      src: "images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectG1",
       plants: "f001",
     },
   
@@ -1277,6 +1357,52 @@ Garden: {
     [utils.asGridCoord(9,15)] : true,
     [utils.asGridCoord(9,16)] : true,
     [utils.asGridCoord(9,17)] : true,//end hedges
+
+     //Interior bushes
+     [utils.asGridCoord(9,12)] : true,
+     [utils.asGridCoord(9,11)] : true,
+     [utils.asGridCoord(9,10)] : true,
+     [utils.asGridCoord(9,9)] : true,
+     [utils.asGridCoord(9,8)] : true,
+     [utils.asGridCoord(9,7)] : true,
+     [utils.asGridCoord(10,12)] : true,
+     [utils.asGridCoord(11,12)] : true,
+     [utils.asGridCoord(12,12)] : true,
+     [utils.asGridCoord(13,12)] : true,
+     [utils.asGridCoord(14,12)] : true,
+     [utils.asGridCoord(15,12)] : true,
+     [utils.asGridCoord(16,12)] : true,
+     [utils.asGridCoord(17,12)] : true,
+     [utils.asGridCoord(17,11)] : true,
+     [utils.asGridCoord(17,10)] : true,
+     [utils.asGridCoord(17,9)] : true,
+     [utils.asGridCoord(17,8)] : true,
+     [utils.asGridCoord(17,7)] : true,
+     [utils.asGridCoord(17,6)] : true,
+     [utils.asGridCoord(16,3)] : true,
+     [utils.asGridCoord(15,3)] : true,
+     [utils.asGridCoord(14,3)] : true,
+     [utils.asGridCoord(13,3)] : true,
+     [utils.asGridCoord(12,3)] : true,
+     [utils.asGridCoord(11,3)] : true,
+     [utils.asGridCoord(10,3)] : true,
+     [utils.asGridCoord(9,3)] : true,
+     [utils.asGridCoord(8,3)] : true,
+     [utils.asGridCoord(7,3)] : true,
+     [utils.asGridCoord(6,3)] : true,
+     [utils.asGridCoord(12,4)] : true,
+     [utils.asGridCoord(12,5)] : true,
+     [utils.asGridCoord(12,6)] : true,
+     [utils.asGridCoord(12,7)] : true,
+     [utils.asGridCoord(12,8)] : true,
+     [utils.asGridCoord(12,9)] : true,
+     [utils.asGridCoord(14,4)] : true,
+     [utils.asGridCoord(14,5)] : true,
+     [utils.asGridCoord(14,6)] : true,
+     [utils.asGridCoord(14,7)] : true,
+     [utils.asGridCoord(14,8)] : true,
+     [utils.asGridCoord(14,9)] : true,
+     [utils.asGridCoord(13,9)] : true,
     
 
     
