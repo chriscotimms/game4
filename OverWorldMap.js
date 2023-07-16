@@ -205,119 +205,7 @@ class OverworldMap {
 window.OverworldMaps = {
 
 
-  /* DemoRoom: {
-    id: "DemoRoom",
-    lowerSrc: "./images/maps/DemoLower.png",
-    upperSrc: "./images/maps/DemoUpper.png",
-    configObjects: {
-      hero: {
-        type: "Person",
-        isPlayerControlled: true,
-        x: utils.withGrid(5),
-        y: utils.withGrid(6),
-      },
-      npcA: {
-        type: "Person",
-        x: utils.withGrid(7),
-        y: utils.withGrid(9),
-        src: "./images/characters/people/npc1.png",
-        behaviorLoop: [
-          { type: "stand",  direction: "left", time: 800 },
-          { type: "walk",  direction: "left"},
-          { type: "stand",  direction: "up", time: 800 },
-          { type: "walk",  direction: "up"},
-          { type: "stand",  direction: "right", time: 1200 },
-          { type: "walk",  direction: "right"},
-          { type: "stand",  direction: "up", time: 300 },
-          { type: "walk",  direction: "down"},
-        ],
-        talking: [
-          {
-            events: [
-              { type: "textMessage", text: "I'm busy...", faceHero: "npcA" },
-              { type: "textMessage", text: "Go away!"},
-              { who: "hero", type: "walk",  direction: "up" },
-            ]
-          }
-        ]
-      },
-      npcB: {
-        type: "Person",
-        x: utils.withGrid(8),
-        y: utils.withGrid(5),
-        src: "./images/characters/people/npc2.png",
-        // behaviorLoop: [
-        //   { type: "walk",  direction: "left" },
-        //   { type: "stand",  direction: "up", time: 800 },
-        //   { type: "walk",  direction: "up" },
-        //   { type: "walk",  direction: "right" },
-        //   { type: "walk",  direction: "down" },
-        // ]
-      },
-    },//end of configObjects
-    walls: {
-      [utils.asGridCoord(0,4)] : true,
-      [utils.asGridCoord(0,5)] : true,
-      [utils.asGridCoord(0,6)] : true,
-      [utils.asGridCoord(0,7)] : true,
-      [utils.asGridCoord(0,8)] : true,
-      [utils.asGridCoord(0,9)] : true,
-      [utils.asGridCoord(1,10)] : true,
-      [utils.asGridCoord(7,6)] : true,
-      [utils.asGridCoord(8,6)] : true,
-      [utils.asGridCoord(7,7)] : true,
-      [utils.asGridCoord(8,7)] : true,
-    },
-    cutsceneSpaces: {
-      [utils.asGridCoord(7,4)]: [
-        {
-          events: [
-            { who: "npcB", type: "walk",  direction: "left" },
-            { who: "npcB", type: "stand",  direction: "up", time: 500 },
-            { type: "textMessage", text:"You can't be in there!"},
-            { who: "npcB", type: "walk",  direction: "right" },
-            { who: "hero", type: "walk",  direction: "down" },
-            { who: "hero", type: "walk",  direction: "left" },
-          ]
-        }
-      ],
-      [utils.asGridCoord(5,10)]: [
-        {
-          events: [
-            { type: "changeMap", map: "Kitchen"}
-          ]
-        }
-      ]
-    }
-    
-  },
-
-  Kitchen: {
-    lowerSrc: "./images/maps/KitchenLower.png",
-    upperSrc: "./images/maps/KitchenUpper.png",
-    configObjects: {
-      hero: {
-        type: "Person",
-        isPlayerControlled: true,
-        x: utils.withGrid(5),
-        y: utils.withGrid(5),
-      },
-      npcB: {
-        type: "Person",
-        x: utils.withGrid(10),
-        y: utils.withGrid(8),
-        src: "./images/characters/people/npc3.png",
-        talking: [
-          {
-            events: [
-              { type: "textMessage", text: "You made it!", faceHero:"npcB" },
-            ]
-          }
-        ]
-      }
-    }
-  }, */
-
+  
 
   First: {
     lowerSrc: "./images/maps/first_lower.png",
@@ -416,7 +304,6 @@ window.OverworldMaps = {
             { who: "hero", type: "walk",  direction: "up" },
             { who: "hero", type: "walk",  direction: "up" },
             { type: "textMessage", text:"[beep beep beep beep beep]"},
-            { who: "hero", type: "walk",  direction: "up" },
             { who: "hero", type: "walk",  direction: "up" },
             { who: "hero", type: "stand",  direction: "left", time: 1000 },
             { type: "textMessage", text:"[beep beep beep beep beep]"},

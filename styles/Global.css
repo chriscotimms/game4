@@ -25,7 +25,7 @@ body {
     width:352px;
     height:16px;
     margin:0 auto;
-    outline: 1px dashed #ffffff;
+    outline: 1px solid #ffffff;
 
     background: var(--menu-background);
     border-top: 1px solid var(--menu-border-color);

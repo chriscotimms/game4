@@ -102,7 +102,7 @@ class Overworld {
     this.hud.init(document.querySelector(".game-container")); */
 
   //this.startMap(window.OverworldMaps.First);
-   this.startMap(window.OverworldMaps.Garden);
+   this.startMap(window.OverworldMaps.First);
  
  
    this.bindActionInput();
