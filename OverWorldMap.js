@@ -329,23 +329,66 @@ window.OverworldMaps = {
         isPlayerControlled: true,
         visible1: true,
         Atag: "hero",
-        x: utils.withGrid(0),
+        x: utils.withGrid(4),
         y: utils.withGrid(1),
+      },
+      Lemon: {
+        type: "Person",
+        visible1: true,
+        useShadow: true,
+        Atag: "Intimidating oversized Lemon",
+        x: utils.withGrid(1),
+        y: utils.withGrid(4),
+        src: "./images/objects/lemon.png",
+        talking: [
+          {
+            events: [
+              { type: "textMessage", text: "Odvar: ...hmmm...I think it's supposed to be some kind of lemon?" },
+              { type: "textMessage", text: "Odvar: some kind of oversized, not very well executed, slightly intimidating lemon? " },
+              { type: "textMessage", text: "Odvar: I must be dreaming. Why do I have to come up with this weird stuff? why can't my dreams be exciting and fun?! " },
+              { type: "textMessage", text: "Odvar: ...if life gives you badly rendered terrifying lemons, best to try and ignore it and pretend like everything is fine..." },
+              { type: "textMessage", text: "Walking on certain tiles can intitiate transformations, like changing rooms" },
+              { type: "textMessage", text: "Odvar: I hope they don't mean that awful renovation-makeover TV show..." },
+            ]
+          }
+        ]
       },
       
     },//end of config objects
 
     walls: {
-      /* [utils.asGridCoord(1,0)] : true,
+      [utils.asGridCoord(-1,0)] : true,
       [utils.asGridCoord(-1,1)] : true,
       [utils.asGridCoord(-1,2)] : true,
-      [utils.asGridCoord(0,3)] : true,
-      [utils.asGridCoord(0,4)] : true,
-      [utils.asGridCoord(1,5)] : true,
-      [utils.asGridCoord(2,4)] : true,
-      [utils.asGridCoord(2,3)] : true,
-      [utils.asGridCoord(3,2)] : true,
-      [utils.asGridCoord(3,1)] : true, */
+      [utils.asGridCoord(-1,3)] : true,
+      [utils.asGridCoord(-1,4)] : true,
+      [utils.asGridCoord(-1,5)] : true,
+      [utils.asGridCoord(-1,6)] : true,
+      [utils.asGridCoord(-1,7)] : true,
+      [utils.asGridCoord(0,8)] : true,
+      [utils.asGridCoord(1,8)] : true,
+      [utils.asGridCoord(2,8)] : true,
+      [utils.asGridCoord(3,8)] : true,
+      [utils.asGridCoord(4,8)] : true,
+      [utils.asGridCoord(5,8)] : true,
+      [utils.asGridCoord(6,8)] : true,
+      [utils.asGridCoord(7,8)] : true,
+      [utils.asGridCoord(8,7)] : true,
+      [utils.asGridCoord(8,6)] : true,
+      [utils.asGridCoord(8,5)] : true,
+      [utils.asGridCoord(8,4)] : true,
+      [utils.asGridCoord(8,3)] : true,
+      [utils.asGridCoord(8,2)] : true,
+      [utils.asGridCoord(8,1)] : true,
+      [utils.asGridCoord(8,0)] : true,
+      [utils.asGridCoord(7,-1)] : true,
+      [utils.asGridCoord(6,-1)] : true,
+      [utils.asGridCoord(5,-1)] : true,
+      [utils.asGridCoord(4,-1)] : true, 
+      [utils.asGridCoord(3,-1)] : true,
+      [utils.asGridCoord(2,-1)] : true,
+      [utils.asGridCoord(1,-1)] : true,
+      [utils.asGridCoord(0,-1)] : true,
 
     },//end of walls
 
@@ -353,27 +396,48 @@ window.OverworldMaps = {
       {
           events: [
             { type: "textMessage", text:"When text appears you can push enter or click next to proceed."},
-            { type: "textMessage", text:"Odvar can walk around the space using the arrow keys"},
-            { type: "textMessage", text:"and can interact with people and some objects by approaching them and pressing the Enter key"},
             { type: "textMessage", text:"There is an Access Panel on the top of the screen."},
             { type: "textMessage", text:"It feeds back the players position on the screen and objects of interest or spaces that are blocked"},
             { type: "textMessage", text:"The \"X\" tile is the position on the horizontal axis, with 0 beginning at the left of the space"},
             { type: "textMessage", text:"The \"Y\" tile is the position on the horizontal axis, with 0 beginning at the top of the space"},
+            { type: "textMessage", text:"Odvar can walk around the space using the arrow keys"},
+                       
           ]
       },
     ],//end of roomDescription
 
     cutsceneSpaces: {
-      [utils.asGridCoord(1,4)]: [
+      [utils.asGridCoord(4,7)]: [
         {
           events: [
+            
+            { type: "textMessage", text:"[beep beep beep beep beep]"},
+            { type: "textMessage", text:"Odvar: ...is that the lemon trying to communicate?"},
+            { who: "hero", type: "walk",  direction: "up" },
+            { who: "hero", type: "walk",  direction: "up" },
+            { type: "textMessage", text:"[beep beep beep beep beep]"},
+            { who: "hero", type: "walk",  direction: "up" },
+            { who: "hero", type: "walk",  direction: "up" },
+            { who: "hero", type: "stand",  direction: "left", time: 1000 },
+            { type: "textMessage", text:"[beep beep beep beep beep]"},
+            { who: "hero", type: "stand",  direction: "down", time: 2000 },
             { 
               type: "changeMap", 
-              map: "Livingroom",
-              x: utils.withGrid(1),
+              map: "Bedroom",
+              x: utils.withGrid(0),
               y: utils.withGrid(1),
               direction:"down"
             }
+          ]
+        }
+      ],
+      [utils.asGridCoord(4,2)]: [
+        {
+          events: [
+            { type: "textMessage", text:"Odvar: Hmmm...kind of like the matrix or something, but a bit more banal."},
+            { type: "textMessage", text:"Odvar: Maybe some kind of waiting room? Beckett would love it here!"},
+            { type: "textMessage", text:"Odvar can interact with people and objects by approaching them and pressing the Enter key"},
+            
           ]
         }
       ],
@@ -994,6 +1058,22 @@ Nans: {
         }
       ]
     },
+    Table: {
+      type: "Person",
+      x: utils.withGrid(2),
+      y: utils.withGrid(4),
+      visible1: true,
+      Atag: "Table",
+      src: "./images/objects/empty.png",
+      useShadow: false,
+      talking: [
+        {
+          events: [
+            { type: "textMessage", text: "A recipe for courgetti" },
+          ]
+        }
+      ]
+    },
    
   
   
@@ -1113,24 +1193,8 @@ Garden: {
       visible1: true,
       Atag: "hero",
       x: utils.withGrid(0),
-      y: utils.withGrid(3),
+      y: utils.withGrid(17),
     },
-    /* Plant1: {
-      type: "Person",
-      x: utils.withGrid(5),
-      y: utils.withGrid(2),
-      src: "./images/objects/Plant1.png",
-      visible1: true,
-      talking: [
-        {
-          events: [
-            { type: "textMessage", text: "...if it isn't old Mount Jenga! Someday I'll say something...for now I'll just quietly seethe..." },
-            { type: "objectCollected", id: "Plant1"},
-           
-          ]
-        }
-      ]
-    }, */
 
     Thyme3: {
       type: "collectible3",
@@ -1141,7 +1205,27 @@ Garden: {
       src: "images/objects/Plant1.png",
       storyFlag:"USED_collectibleObjectA",
       plants: "s001",
-    },   
+    },  
+    Thyme2: {
+      type: "collectible3",
+      x: utils.withGrid(6),
+      y: utils.withGrid(14),
+      visible1: true,
+      Atag:"Thyme",
+      src: "images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectA1",
+      plants: "s001",
+    },  
+    Thyme1: {
+      type: "collectible3",
+      x: utils.withGrid(6),
+      y: utils.withGrid(16),
+      visible1: true,
+      Atag:"Thyme",
+      src: "images/objects/Plant1.png",
+      storyFlag:"USED_collectibleObjectA2",
+      plants: "s001",
+    }, 
     Rosemary1: {
       type: "collectible3",
       x: utils.withGrid(3),
@@ -1164,8 +1248,8 @@ Garden: {
     }, 
     Echinacea1: {
       type: "collectible3",
-      x: utils.withGrid(7),
-      y: utils.withGrid(18),
+      x: utils.withGrid(8),
+      y: utils.withGrid(17),
       Atag: "Echinacea",
       visible1: true,
       src: "images/objects/Plant1.png",
@@ -1174,8 +1258,8 @@ Garden: {
     },
     Echinacea2: {
       type: "collectible3",
-      x: utils.withGrid(8),
-      y: utils.withGrid(18),
+      x: utils.withGrid(6),
+      y: utils.withGrid(8),
       Atag: "Echinacea",
       visible1: true,
       src: "images/objects/Plant1.png",
@@ -1184,7 +1268,7 @@ Garden: {
     },
     Chamomile1: {
       type: "collectible3",
-      x: utils.withGrid(9),
+      x: utils.withGrid(18),
       y: utils.withGrid(18),
       Atag: "Chamomile",
       visible1: true,
@@ -1194,7 +1278,7 @@ Garden: {
     },
     Chamomile2: {
       type: "collectible3",
-      x: utils.withGrid(4),
+      x: utils.withGrid(4),//the one in the building site
       y: utils.withGrid(12),
       Atag: "Chamomile",
       visible1: true,
