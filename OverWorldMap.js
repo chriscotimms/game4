@@ -505,6 +505,10 @@ Livingroom: {
             { type: "textMessage", text: "Const: back so soon?" },
           ]
         },
+        {
+          required:["LIVINGROOM_1A"],
+          events:[ ]
+        },
 
         {
           events: [
@@ -521,6 +525,7 @@ Livingroom: {
             { type: "textMessage", text: "Odvar: What a relief! ...I mean, uh, no problem!" },
             { type: "textMessage", text: "Odvar: ...actually, my mother always said I was a genius!" },
             { type: "textMessage", text: "Odvar: I'm headed out for the day. Good luck!" },
+            { type: "addStoryFlag", flag:"LIVINGROOM_1A"},
           ]
         }
       ],
